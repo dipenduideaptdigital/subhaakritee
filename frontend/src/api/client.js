@@ -31,6 +31,15 @@ apiClient.interceptors.request.use(
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
     }
+
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const bypassToken = urlParams.get('maintenance_bypass');
+      if (bypassToken) {
+        config.params = { ...config.params, maintenance_bypass: bypassToken };
+      }
+    }
+
     return config;
   },
   (error) => Promise.reject(error)
@@ -42,6 +51,16 @@ apiClient.interceptors.response.use(
     if (!error || !error.config) {
       return Promise.reject(error);
     }
+
+    if (error.response?.status === 503 && error.response?.data?.isMaintenance) {
+      window.dispatchEvent(
+        new CustomEvent('system:maintenance', {
+          detail: error.response.data
+        })
+      );
+      return Promise.reject(error);
+    }
+
     const originalRequest = error.config;
 
     // Reject immediately if error is not 401, or if it's already retried, or if it's an auth endpoint

@@ -19,7 +19,7 @@ import roleRoutes from "../modules/roles/roles.routes.js";
 import projectAdminRoutes from "../modules/projects/projects.admin.routes.js";
 import projectPublicRoutes from "../modules/projects/projects.public.routes.js";
 import dashboardRoutes from "../modules/dashboard/dashboard.routes.js";
-
+import systemStateRoutes from "../modules/system-state/systemState.routes.js";
 const router = Router();
 
 router.use("/auth", authRoutes);
@@ -41,7 +41,7 @@ router.use("/admin/roles", roleRoutes);
 router.use("/admin/projects", projectAdminRoutes);
 router.use("/projects", projectPublicRoutes);
 router.use("/admin/dashboard", dashboardRoutes);
-
+router.use("/admin/system-state", systemStateRoutes);
 router.get("/health", (req, res) => {
   res.status(200).json({
     success: true,

@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
@@ -7,6 +7,7 @@ import LandingLayout from './components/layout/LandingLayout';
 import AdminLayout from './components/layout/AdminLayout';
 import SettingsLayout from './components/layout/SettingsLayout';
 import LandingContainer from './pages/LandingContainer';
+import MaintenancePage from './components/shared/MaintenancePage';
 
 // Auth Pages
 const Login = lazy(() => import('./pages/Login'));
@@ -44,6 +45,7 @@ const TaxonomyManager = lazy(() => import('./pages/admin/blogs/TaxonomyManager')
 const GeneralSettings = lazy(() => import('./pages/admin/settings/GeneralSettings'));
 const CmsSettings = lazy(() => import('./pages/admin/settings/CmsSettings'));
 const WhatsAppSettings = lazy(() => import('./pages/admin/settings/WhatsAppSettings'));
+const SystemStateSettings = lazy(() => import('./pages/admin/settings/SystemStateSettings'));
 const RolesList = lazy(() => import('./pages/admin/roles/RolesList'));
 const RoleEditor = lazy(() => import('./pages/admin/roles/RoleEditor'));
 const UsersList = lazy(() => import('./pages/admin/users/UsersList'));
@@ -56,6 +58,30 @@ const GlobalSuspenseFallback = () => (
 );
 
 function App() {
+  const [maintenanceData, setMaintenanceData] = useState(null);
+
+  useEffect(() => {
+    const handleMaintenance = (e) => {
+      const currentPath = window.location.pathname;
+      
+      if (
+        !currentPath.startsWith('/admin') && 
+        !currentPath.startsWith('/login') && 
+        !currentPath.startsWith('/admin-setup')
+      ) {
+        setMaintenanceData(e.detail?.meta);
+      }
+    };
+
+    window.addEventListener('system:maintenance', handleMaintenance);
+    return () => window.removeEventListener('system:maintenance', handleMaintenance);
+  }, []);
+
+  // If maintenance mode is active, render ONLY the maintenance page
+  if (maintenanceData) {
+    return <MaintenancePage data={maintenanceData} />;
+  }
+
   return (
     <HelmetProvider>
       <BrowserRouter>
@@ -103,6 +129,7 @@ function App() {
                 <Route path="roles/edit/:id" element={<RoleEditor />} />
                 <Route path="cms" element={<CmsSettings />} />
                 <Route path="whatsapp" element={<WhatsAppSettings />} />
+                <Route path="system" element={<SystemStateSettings />} />
               </Route>
             </Route>
 

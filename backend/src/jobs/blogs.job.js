@@ -5,10 +5,16 @@ import {
   publishScheduledBlogs 
 } from "../modules/blogs/blogs.repository.js";
 import { logger } from "../config/logger.js";
+import { systemStateStore } from "../shared/core/systemStateStore.js";
 
 export const initBlogJobs = () => {
   
   cron.schedule("* * * * *", async () => {
+    const currentState = systemStateStore.get();
+    if (!currentState || currentState.state !== "ACTIVE") {
+      return; 
+    }
+
     try {
       const result = await publishScheduledBlogs();
       if (result.count > 0) {
@@ -20,6 +26,11 @@ export const initBlogJobs = () => {
   });
 
   cron.schedule("0 3 * * *", async () => {
+    const currentState = systemStateStore.get();
+    if (!currentState || currentState.state !== "ACTIVE") {
+      return;
+    }
+
     logger.info("Blog Housekeeping: Starting daily data pruning cycle...");
     try {
       const slidingRetentionThreshold = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000); 
