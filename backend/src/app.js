@@ -21,15 +21,7 @@ const app = express();
 
 const parsedClientUrl = env.CLIENT_URL ? env.CLIENT_URL.trim().replace(/\/$/, "") : "";
 
-const trustProxyConfigurationSetting = env.TRUST_PROXY === "true" 
-  ? true 
-  : env.TRUST_PROXY === "false" 
-    ? false 
-    : isNaN(Number(env.TRUST_PROXY)) 
-      ? env.TRUST_PROXY || "loopback" 
-      : Number(env.TRUST_PROXY);
-
-app.set("trust proxy", trustProxyConfigurationSetting);
+app.set("trust proxy", 1);
 
 app.use((req, res, next) => {
   req.id = crypto.randomUUID(); 
