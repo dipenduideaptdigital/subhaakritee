@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link, useSearchParams } from 'react-router-dom';
 import { Mail, Lock, Eye, EyeOff, ArrowRight, AlertCircle, CheckCircle } from 'lucide-react';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
@@ -6,6 +6,17 @@ import heroback from '../assets/homepage/banner_back.png';
 import logo from '../assets/logos/logo2.svg';
 import apiClient from '../api/client';
 import { useAuth } from '../context/AuthContext';
+
+const getAssetUrl = (path) => {
+  if (!path) return '';
+  if (path.startsWith('http') || path.startsWith('data:')) return path;
+  let baseUrl = import.meta.env.VITE_API_URL 
+    ? import.meta.env.VITE_API_URL.replace('/api/v1', '') 
+    : 'http://localhost:5000';
+  if (baseUrl.endsWith('/')) baseUrl = baseUrl.slice(0, -1);
+  const safePath = path.startsWith('/') ? path : `/${path}`;
+  return `${baseUrl}${safePath}`;
+};
 
 const Login = () => {
   const navigate = useNavigate();
@@ -23,6 +34,16 @@ const Login = () => {
   const [success, setSuccess] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [customLogo, setCustomLogo] = useState(logo);
+
+  useEffect(() => {
+    apiClient.get('/cms/section/global_general_settings')
+      .then(res => {
+        const dbLogo = res.data?.data?.content?.adminLoginLogo;
+        if (dbLogo) setCustomLogo(getAssetUrl(dbLogo));
+      })
+      .catch(err => console.error('Failed to load custom logo', err));
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -108,11 +129,11 @@ const Login = () => {
           boxShadow: `0 0 50px ${shadowColor}, inset 0 0 20px rgba(255, 255, 255, 0.02)`,
         }}
       >
-        {/* Logo Section  */}
+        {/* Logo Section */}
         <div className="flex flex-col items-center mb-8 cursor-pointer select-none">
           <Link to="/" className="flex items-center justify-center hover:opacity-90 transition-opacity">
             <img 
-              src={logo} 
+              src={customLogo} 
               alt="Subhaakritee Logo" 
               className="h-10 md:h-12 w-auto object-contain brightness-0 invert" 
             />
@@ -238,7 +259,6 @@ const Login = () => {
           </Link>
         </div>
 
-        {/*  Google reCAPTCHA Compliance Text */}
         <div className="mt-8 pt-6 border-t border-white/10 w-full text-center space-y-3">
           <p className="text-[10px] text-zinc-500 leading-relaxed max-w-[280px] mx-auto">
             This site is protected by reCAPTCHA and the Google{' '}

@@ -137,7 +137,6 @@ const MediaLibrary = () => {
 
       {/* Main Content Area */}
       <div className="flex-1 flex gap-4 overflow-hidden">
-        {/* Left Side: Grid View & Pagination */}
         <div className={`flex-1 bg-white rounded-2xl shadow-sm border border-zinc-100 overflow-y-auto flex flex-col transition-all duration-300 ${selectedMedia ? 'w-2/3' : 'w-full'}`}>
           <div className="flex-1 p-4">
             {loading ? (

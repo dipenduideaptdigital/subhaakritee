@@ -1,4 +1,5 @@
 import React, { Suspense, lazy, useState, useEffect } from 'react';
+import { useDynamicHead } from './hooks/useDynamicHead';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 
@@ -58,6 +59,7 @@ const GlobalSuspenseFallback = () => (
 );
 
 function App() {
+  useDynamicHead();
   const [maintenanceData, setMaintenanceData] = useState(null);
 
   useEffect(() => {

@@ -256,3 +256,16 @@ export const footerSchema = z.object({
     ).optional(),
   }).optional(),
 });
+
+export const globalGeneralSettingsSchema = z.object({
+  content: z.object({
+    websiteName: z.string().max(100).optional(),
+    supportEmail: z.string().email().optional().or(z.literal('')),
+    faviconImage: z.string().optional().nullable(),
+    adminLoginLogo: z.string().optional().nullable(),
+    errorPageImage: z.string().optional().nullable(),
+    errorPageTitle: z.string().max(150).optional(),
+    errorPageDescription: z.string().max(500).optional(),
+    errorPageButtonText: z.string().max(50).optional(),
+  })
+});

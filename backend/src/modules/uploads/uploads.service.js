@@ -131,8 +131,7 @@ export const deleteMediaItem = async (id) => {
   } catch (error) {
     logger.error(`Failed to delete media ${id} from Cloudinary. Proceeding to delete from DB.`, error);
   }
-
-  // Hard delete from database
+  
   await prisma.media.delete({ where: { id } });
   
   return { message: "Media deleted successfully" };
