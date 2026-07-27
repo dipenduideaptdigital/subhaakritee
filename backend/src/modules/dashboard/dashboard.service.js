@@ -2,7 +2,6 @@ import { StatusCodes } from "http-status-codes";
 import { AppError } from "../../shared/errors/AppError.js";
 import { prisma } from "../../config/db.js";
 import { env } from "../../config/env.js";
-import axios from "axios";
 
 const calculateGrowth = async (model, whereCondition = {}) => {
   const now = new Date();
@@ -183,66 +182,4 @@ export const exportLeadsToCSV = async () => {
   ].join("\n");
 
   return csvContent;
-};
-
-export const getRealTimeIndianVisitors = async () => {
-  if (!env.MATOMO_URL || !env.MATOMO_SITE_ID || !env.MATOMO_TOKEN) {
-    console.log("Matomo ENV variables are missing. Please check your .env file or server settings.");
-    return [];
-  }
-
-  const cleanUrl = env.MATOMO_URL.replace("MATOMO_URL=", "");
-
-  try {
-    const matomoApiUrl = `${cleanUrl}/index.php?module=API&method=Live.getLastVisitsDetails&idSite=${env.MATOMO_SITE_ID}&period=day&date=today&format=JSON&token_auth=${env.MATOMO_TOKEN}&filter_limit=20`;
-    
-    console.log("Fetching Live Visitors from:", matomoApiUrl.replace(env.MATOMO_TOKEN, "HIDDEN_TOKEN"));
-    
-    const response = await axios.get(matomoApiUrl, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Accept': 'application/json'
-      },
-      timeout: 10000 
-    });
-    
-    const visits = response.data;
-
-    if (visits.result === 'error') {
-      console.error("Matomo API Error Message:", visits.message);
-      return [];
-    }
-
-    if (!Array.isArray(visits)) {
-      console.log("Matomo returned unexpected format, likely an HTML block page.");
-      return [];
-    }
-
-    console.log(`Successfully fetched ${visits.length} total recent visits from Matomo Cloud.`);
-
-    const indianVisitors = visits
-      .filter(visit => {
-        const countryCode = visit.countryCode ? visit.countryCode.toLowerCase() : "";
-        const countryName = visit.country ? visit.country.toLowerCase() : "";
-        return countryCode === "in" || countryName === "india";
-      })
-      .map(visit => {
-        const lat = parseFloat(visit.location_lat || visit.location_latitude) || (22 + (Math.random() * 2 - 1));
-        const lng = parseFloat(visit.location_long || visit.location_longitude) || (80 + (Math.random() * 2 - 1));
-
-        return {
-          name: visit.city || 'India',
-          coordinates: [lng, lat],
-          device: visit.deviceType,
-          time: visit.serverTimePretty
-        };
-      });
-
-    console.log(`Filtered ${indianVisitors.length} visitors exactly from India.`);
-    
-    return indianVisitors;
-  } catch (error) {
-    console.error("Matomo Live Tracking Axios Error:", error.response ? error.response.data : error.message);
-    return []; 
-  }
 };

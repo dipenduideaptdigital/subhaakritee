@@ -50,14 +50,3 @@ export const exportLeadsController = asyncHandler(async (req, res) => {
   
   res.status(StatusCodes.OK).send(csvData);
 });
-
-export const getLiveVisitorsController = asyncHandler(async (req, res) => {
-  const visitors = await dashboardService.getRealTimeIndianVisitors();
-  
-  sendResponse({
-    res,
-    statusCode: StatusCodes.OK,
-    message: "Live telemetry retrieved.",
-    data: visitors
-  });
-});

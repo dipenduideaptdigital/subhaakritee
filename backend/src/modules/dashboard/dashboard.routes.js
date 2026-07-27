@@ -11,7 +11,6 @@ router.use(authenticate, authorizeSystemRoles("SUPER_ADMIN", "ADMIN"));
 
 router.get("/metrics", controller.getDashboardStatsController);
 
-
 router.get(
   "/chart", 
   validate(dashboardChartQuerySchema, "query"), 
@@ -20,6 +19,5 @@ router.get(
 
 router.get("/activity", controller.getDashboardActivityController);
 router.get("/export-leads", controller.exportLeadsController);
-router.get("/live-visitors", controller.getLiveVisitorsController);
 
 export default router;

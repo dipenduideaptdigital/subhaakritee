@@ -14,7 +14,6 @@ import LeadChart from '../../components/admin/dashboard/LeadChart';
 import RecentInquiries from '../../components/admin/dashboard/RecentInquiries';
 import ActivityTimeline from '../../components/admin/dashboard/ActivityTimeline';
 import QuickActions from '../../components/admin/dashboard/QuickActions';
-import LiveIndiaMap from '../../components/admin/dashboard/LiveIndiaMap';
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -90,12 +89,11 @@ const Dashboard = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 flex flex-col h-full">
-          <LiveIndiaMap />
+          <ActivityTimeline activities={dashboardData.activities} />
         </div>
         
-        <div className="flex flex-col gap-6 h-full">
+        <div className="flex flex-col h-full">
           <QuickActions />
-          <ActivityTimeline activities={dashboardData.activities} />
         </div>
       </div>
     </div>
