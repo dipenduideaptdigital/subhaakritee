@@ -76,7 +76,8 @@ export const systemStateGatekeeper = (req, res, next) => {
       estimatedCompletion: config.estimatedCompletion,
       supportEmail: config.supportEmail,
       supportPhone: config.supportPhone,
-      showSocialLinks: config.showSocialLinks
+      showSocialLinks: config.showSocialLinks,
+      backgroundImage: config.backgroundImage
     }
   });
 };

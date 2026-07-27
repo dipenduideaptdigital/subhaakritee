@@ -8,10 +8,10 @@ async function recoverImages() {
         deletedAt: { not: null }
       },
       data: {
-        deletedAt: null
+        deletedAt: null 
       }
     });
-    console.log(`Successfully recovered ${result.count} images.`);
+    console.log(`Successfully recovered ${result.count} images!`);
   } catch (error) {
     console.error("Failed to recover images:", error);
   } finally {

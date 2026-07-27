@@ -11,7 +11,7 @@ export const updateSystemStateSchema = z.object({
   supportPhone: z.string().max(25).optional().nullable(),
   showSocialLinks: z.boolean().default(true),
   allowSearchEngine: z.boolean().default(true),
-  reason: z.string().trim().min(5, "A valid administrative reason is required for audit logs.").max(500),
   version: z.number().int().min(1, "Version matrix tracking integer is required for concurrency safety."),
-  bypassToken: z.string().trim().max(64).optional().nullable()
+  bypassToken: z.string().trim().max(64).optional().nullable(),
+  backgroundImage: z.string().trim().max(2000).optional().nullable()
 }).strict();

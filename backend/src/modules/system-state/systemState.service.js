@@ -39,7 +39,6 @@ export const updateSystemStateConfig = async (payload, actorId, actorName) => {
       ...payload,
       title: payload.title ? xss(payload.title) : currentConfig.title,
       description: payload.description ? xss(payload.description) : currentConfig.description,
-      reason: xss(payload.reason),
       version: currentConfig.version + 1,
       enabledBy: payload.state !== "ACTIVE" ? actorName : null,
       enabledAt: isActivatingMaintenance ? now.toISOString() : (payload.state !== "ACTIVE" ? currentConfig.enabledAt : null),

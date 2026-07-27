@@ -15,7 +15,7 @@ const SettingsLayout = () => {
     { name: 'Access Roles', path: '/admin/settings/roles', icon: Shield, permission: 'role.view' },
     { name: 'CMS Settings', path: '/admin/settings/cms', icon: Layout, permission: 'settings.manage' },
     { name: 'WhatsApp Settings', path: '/admin/settings/whatsapp', icon: MessageSquare, permission: 'settings.manage' },
-    { name: 'System State', path: '/admin/settings/system', icon: ShieldAlert, superAdminOnly: true },
+    { name: 'Maintenance Mode', path: '/admin/settings/system', icon: ShieldAlert, superAdminOnly: true },
   ];
 
   const visibleTabs = tabs.filter(tab => {

@@ -7,7 +7,6 @@ import { systemStateStore } from "./shared/core/systemStateStore.js";
 
 // all jobs
 import { cleanupExpiredTokens } from "./jobs/cleanupExpiredTokens.job.js";
-// import { initMediaCleanupJob } from "./jobs/cleanupOrphanMedia.job.js";
 import { initPreviewCleanupJob } from "./jobs/cleanupPreviewTokens.job.js";
 import { initBlogJobs } from "./jobs/blogs.job.js";
 
@@ -29,7 +28,6 @@ const startServer = async () => {
     await systemStateStore.initialize();
     logger.info("Starting background jobs...");
     cleanupExpiredTokens();
-    // initMediaCleanupJob();
     initPreviewCleanupJob();
     initBlogJobs();
     logger.info("Background jobs initialized.");
