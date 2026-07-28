@@ -188,23 +188,23 @@ const UsersList = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto text-zinc-900 font-sans">
+    <div className="max-w-6xl mx-auto text-zinc-900 dark:text-zinc-100 font-sans transition-colors duration-300">
 
       {/* Masthead */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-6 rounded-2xl shadow-sm border border-zinc-100 mb-8 animate-in fade-in duration-500">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-zinc-900 p-6 rounded-2xl shadow-sm border border-zinc-100 dark:border-zinc-800 mb-8 animate-in fade-in duration-500 transition-colors">
         <div>
-          <p className="text-xs font-semibold text-zinc-400 uppercase tracking-wider mb-1">Personnel Register</p>
-          <h1 className="text-2xl font-bold text-zinc-900 flex items-center gap-2">
-            <Users className="w-6 h-6 text-zinc-900" />
+          <p className="text-xs font-semibold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider mb-1">Personnel Register</p>
+          <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+            <Users className="w-6 h-6 text-zinc-900 dark:text-zinc-100" />
             Team &amp; Users
           </h1>
-          <p className="text-zinc-500 text-sm mt-1">Manage staff accounts, invites, and system access.</p>
+          <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-1">Manage staff accounts, invites, and system access.</p>
         </div>
 
         <Can permission="user.create">
           <button
             onClick={() => setIsInviteModalOpen(true)}
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-zinc-900 text-white rounded-xl font-medium hover:bg-zinc-800 transition-colors shadow-sm focus:ring-2 focus:ring-zinc-900/20 flex-shrink-0 cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 rounded-xl font-medium hover:bg-zinc-800 dark:hover:bg-white transition-colors shadow-sm focus:ring-2 focus:ring-zinc-900/20 dark:focus:ring-zinc-100/20 flex-shrink-0 cursor-pointer"
           >
             <UserPlus className="w-4 h-4" /> Invite Staff
           </button>
@@ -212,18 +212,18 @@ const UsersList = () => {
       </div>
 
       {/* Main Content Area */}
-      <div className="bg-white rounded-2xl shadow-sm border border-zinc-100 overflow-hidden">
+      <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-sm border border-zinc-100 dark:border-zinc-800 overflow-hidden transition-colors">
 
         {/* TABS NAVIGATION */}
-        <div className="flex border-b border-zinc-100 px-6 gap-6 bg-zinc-50/50 overflow-x-auto">
+        <div className="flex border-b border-zinc-100 dark:border-zinc-800 px-6 gap-6 bg-zinc-50/50 dark:bg-zinc-900/50 overflow-x-auto transition-colors">
           {TABS.map(tab => (
             <button 
               key={tab.id}
               onClick={() => { setActiveTab(tab.id); setCurrentPage(1); }}
               className={`py-3.5 text-xs font-semibold uppercase tracking-wider border-b-2 transition-all whitespace-nowrap cursor-pointer ${
                 activeTab === tab.id 
-                  ? 'border-zinc-950 text-zinc-950 font-bold' 
-                  : 'border-transparent text-zinc-400 hover:text-zinc-600'
+                  ? 'border-zinc-950 dark:border-white text-zinc-950 dark:text-white font-bold' 
+                  : 'border-transparent text-zinc-400 dark:text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300'
               }`}
             >
               {tab.label}
@@ -232,15 +232,15 @@ const UsersList = () => {
         </div>
 
         {/* Search Toolbar */}
-        <div className="p-6 flex items-center justify-between border-b border-zinc-100">
+        <div className="p-6 flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 transition-colors">
           <div className="relative w-full max-w-sm">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 w-4 h-4" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 dark:text-zinc-500 w-4 h-4" />
             <input
               type="text"
               placeholder="Search by name or email…"
               value={searchTerm}
               onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}
-              className="block w-full pl-10 pr-4 py-2.5 border border-zinc-200 rounded-xl leading-5 bg-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-950/10 focus:border-zinc-950 transition-colors text-sm font-medium text-zinc-800"
+              className="block w-full pl-10 pr-4 py-2.5 border border-zinc-200 dark:border-zinc-700 rounded-xl leading-5 bg-white dark:bg-zinc-950 placeholder-zinc-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-950/10 dark:focus:ring-zinc-100/10 focus:border-zinc-950 dark:focus:border-zinc-100 transition-colors text-sm font-medium text-zinc-800 dark:text-zinc-100"
             />
           </div>
         </div>
@@ -248,24 +248,24 @@ const UsersList = () => {
         {/* Table */}
         <div className="overflow-x-auto">
           <table className="min-w-full text-left border-collapse">
-            <thead className="bg-zinc-50/70 border-b border-zinc-100">
+            <thead className="bg-zinc-50/70 dark:bg-zinc-800/50 border-b border-zinc-100 dark:border-zinc-800 transition-colors">
               <tr>
-                <th className="px-6 py-3.5 text-left text-xs font-semibold text-zinc-500 uppercase tracking-wider">User</th>
-                {activeTab !== 'pending' && <th className="px-6 py-3.5 text-left text-xs font-semibold text-zinc-500 uppercase tracking-wider">Roles</th>}
-                <th className="px-6 py-3.5 text-left text-xs font-semibold text-zinc-500 uppercase tracking-wider">Status</th>
-                <th className="px-6 py-3.5 text-right text-xs font-semibold text-zinc-500 uppercase tracking-wider">Actions</th>
+                <th className="px-6 py-3.5 text-left text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">User</th>
+                {activeTab !== 'pending' && <th className="px-6 py-3.5 text-left text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Roles</th>}
+                <th className="px-6 py-3.5 text-left text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Status</th>
+                <th className="px-6 py-3.5 text-right text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-zinc-100 bg-white">
+            <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800 bg-white dark:bg-zinc-900 transition-colors">
               {loading ? (
                 <tr>
                   <td colSpan="4" className="text-center py-12">
-                    <Loader2 className="w-6 h-6 animate-spin mx-auto text-zinc-400" />
+                    <Loader2 className="w-6 h-6 animate-spin mx-auto text-zinc-400 dark:text-zinc-500" />
                   </td>
                 </tr>
               ) : users.length === 0 ? (
                 <tr>
-                  <td colSpan="4" className="text-center py-12 text-zinc-400 font-medium italic text-sm">
+                  <td colSpan="4" className="text-center py-12 text-zinc-400 dark:text-zinc-500 font-medium italic text-sm">
                     No users found in this category.
                   </td>
                 </tr>
@@ -275,25 +275,25 @@ const UsersList = () => {
                   const isSuperAdmin = u.systemRole.slug === 'SUPER_ADMIN';
 
                   return (
-                    <tr key={u.id} className="hover:bg-zinc-50/50 transition-colors group">
+                    <tr key={u.id} className="hover:bg-zinc-50/50 dark:hover:bg-zinc-800/50 transition-colors group">
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
-                          <span className="font-mono text-xs text-zinc-400 tabular-nums w-8 flex-shrink-0">
+                          <span className="font-mono text-xs text-zinc-400 dark:text-zinc-500 tabular-nums w-8 flex-shrink-0">
                             {String((currentPage - 1) * 10 + idx + 1).padStart(3, '0')}
                           </span>
-                          <div className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0 bg-zinc-100 text-zinc-700">
+                          <div className="w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0 bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300">
                             {u.name.charAt(0).toUpperCase()}
                           </div>
                           <div className="min-w-0">
-                            <div className="font-semibold text-[15px] text-zinc-900 flex items-center gap-2">
+                            <div className="font-semibold text-[15px] text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
                               {u.name}
                               {isSelf && (
-                                <span className="bg-zinc-800 text-white text-[9px] px-2 py-0.5 rounded font-semibold uppercase tracking-wider">
+                                <span className="bg-zinc-800 dark:bg-zinc-200 text-white dark:text-zinc-900 text-[9px] px-2 py-0.5 rounded font-semibold uppercase tracking-wider">
                                   You
                                 </span>
                               )}
                             </div>
-                            <div className="text-xs text-zinc-500 mt-0.5 font-medium truncate">{u.email}</div>
+                            <div className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5 font-medium truncate">{u.email}</div>
                           </div>
                         </div>
                       </td>
@@ -303,14 +303,14 @@ const UsersList = () => {
                           <div className="flex flex-col gap-1.5 items-start">
                             <span className={`px-2.5 py-0.5 text-[10px] font-bold rounded-full tracking-wider border ${
                               isSuperAdmin 
-                                ? 'border-purple-200 text-purple-700 bg-purple-50' 
-                                : 'border-zinc-200 text-zinc-700 bg-zinc-50'
+                                ? 'border-purple-200 dark:border-purple-500/30 text-purple-700 dark:text-purple-400 bg-purple-50 dark:bg-purple-500/10' 
+                                : 'border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 bg-zinc-50 dark:bg-zinc-800'
                             }`}>
                               {u.systemRole.name.toUpperCase()}
                             </span>
                             <div className="flex flex-wrap gap-1 mt-1">
                               {u.functionalRoles?.map(fr => (
-                                <span key={fr.functionalRole.slug} className="text-[10px] font-semibold text-zinc-500 bg-zinc-100/80 px-2 py-0.5 rounded">
+                                <span key={fr.functionalRole.slug} className="text-[10px] font-semibold text-zinc-500 dark:text-zinc-400 bg-zinc-100/80 dark:bg-zinc-800 px-2 py-0.5 rounded">
                                   {fr.functionalRole.name}
                                 </span>
                               ))}
@@ -321,17 +321,17 @@ const UsersList = () => {
 
                       <td className="px-6 py-4">
                         {u.status === 'ACTIVE' && (
-                          <span className="inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100/80">
+                          <span className="inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-100/80 dark:border-emerald-500/20">
                             <CheckCircle className="w-3.5 h-3.5" /> Active
                           </span>
                         )}
                         {u.status === 'PENDING' && (
-                          <span className="inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-100/80">
+                          <span className="inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-full bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-100/80 dark:border-amber-500/20">
                             <Clock className="w-3.5 h-3.5" /> Pending
                           </span>
                         )}
                         {u.status === 'SUSPENDED' && (
-                          <span className="inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-full bg-red-50 text-red-700 border border-red-100/80">
+                          <span className="inline-flex items-center gap-1.5 text-[11px] font-bold px-2.5 py-1 rounded-full bg-red-50 dark:bg-red-500/10 text-red-700 dark:text-red-400 border border-red-100/80 dark:border-red-500/20">
                             <PowerOff className="w-3.5 h-3.5" /> Suspended
                           </span>
                         )}
@@ -343,7 +343,7 @@ const UsersList = () => {
                           {/* Cancel Invite Button (Only for Pending) */}
                           {activeTab === 'pending' && (
                             <Can permission="user.delete">
-                              <button onClick={() => handleCancelInvite(u.email)} className="p-2 text-red-600 hover:bg-red-50 hover:text-red-700 rounded-lg transition-colors cursor-pointer" title="Cancel Invite">
+                              <button onClick={() => handleCancelInvite(u.email)} className="p-2 text-red-600 dark:text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 hover:text-red-700 dark:hover:text-red-400 rounded-lg transition-colors cursor-pointer" title="Cancel Invite">
                                 <Trash2 className="w-4 h-4" />
                               </button>
                             </Can>
@@ -352,7 +352,7 @@ const UsersList = () => {
                           {/* View Profile / Settings (For Active/Suspended) */}
                           {activeTab !== 'pending' && (
                             <Can permission="user.view">
-                              <button onClick={() => handleOpenDetails(u.id)} className="p-2 text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 rounded-lg transition-colors cursor-pointer" title="View Profile">
+                              <button onClick={() => handleOpenDetails(u.id)} className="p-2 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 rounded-lg transition-colors cursor-pointer" title="View Profile">
                                 <Eye className="w-4 h-4" />
                               </button>
                             </Can>
@@ -361,7 +361,7 @@ const UsersList = () => {
                           {/* Edit Roles (Manage Access) */}
                           {!isSelf && (!isSuperAdmin || currentUser.systemRole === 'SUPER_ADMIN') && activeTab !== 'pending' && (
                             <Can permission="user.edit">
-                              <button onClick={() => openEditRolesModal(u)} className="p-2 text-blue-600 hover:bg-blue-50 hover:text-blue-700 rounded-lg transition-colors cursor-pointer" title="Manage Access">
+                              <button onClick={() => openEditRolesModal(u)} className="p-2 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-500/10 hover:text-blue-700 dark:hover:text-blue-300 rounded-lg transition-colors cursor-pointer" title="Manage Access">
                                 <Shield className="w-4 h-4" />
                               </button>
                             </Can>
@@ -384,17 +384,17 @@ const UsersList = () => {
           <button 
             onClick={() => setCurrentPage(p => Math.max(1, p - 1))} 
             disabled={currentPage === 1} 
-            className="inline-flex items-center justify-center px-4 py-2 border border-zinc-200 hover:bg-zinc-50 text-zinc-700 rounded-xl text-xs font-semibold uppercase tracking-wider transition-colors disabled:opacity-40 disabled:hover:bg-transparent cursor-pointer disabled:cursor-not-allowed"
+            className="inline-flex items-center justify-center px-4 py-2 border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-xl text-xs font-semibold uppercase tracking-wider transition-colors disabled:opacity-40 disabled:hover:bg-transparent dark:disabled:hover:bg-transparent cursor-pointer disabled:cursor-not-allowed"
           >
             Prev
           </button>
-          <span className="text-zinc-500 font-semibold tabular-nums">
+          <span className="text-zinc-500 dark:text-zinc-400 font-semibold tabular-nums">
             {String(currentPage).padStart(2, '0')} / {String(meta.totalPages).padStart(2, '0')}
           </span>
           <button 
             onClick={() => setCurrentPage(p => Math.min(meta.totalPages, p + 1))} 
             disabled={currentPage === meta.totalPages} 
-            className="inline-flex items-center justify-center px-4 py-2 border border-zinc-200 hover:bg-zinc-50 text-zinc-700 rounded-xl text-xs font-semibold uppercase tracking-wider transition-colors disabled:opacity-40 disabled:hover:bg-transparent cursor-pointer disabled:cursor-not-allowed"
+            className="inline-flex items-center justify-center px-4 py-2 border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 rounded-xl text-xs font-semibold uppercase tracking-wider transition-colors disabled:opacity-40 disabled:hover:bg-transparent dark:disabled:hover:bg-transparent cursor-pointer disabled:cursor-not-allowed"
           >
             Next
           </button>
@@ -403,68 +403,68 @@ const UsersList = () => {
 
       {/*DETAILS MODAL*/}
       {detailsModalUser && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-zinc-950/60 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-2xl border border-zinc-100 w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl font-sans">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-zinc-950/60 dark:bg-zinc-950/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+          <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800 w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl font-sans transition-colors duration-300">
             
             {detailsModalUser.isLoading ? (
               <div className="p-12 flex justify-center">
-                <Loader2 className="w-8 h-8 animate-spin text-zinc-600" />
+                <Loader2 className="w-8 h-8 animate-spin text-zinc-600 dark:text-zinc-400" />
               </div>
             ) : (
               <>
-                <div className="p-6 border-b border-zinc-100 flex justify-between items-center bg-zinc-50/50">
+                <div className="p-6 border-b border-zinc-100 dark:border-zinc-800 flex justify-between items-center bg-zinc-50/50 dark:bg-zinc-800/50">
                   <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 rounded-full bg-zinc-100 text-zinc-700 flex items-center justify-center text-2xl font-bold flex-shrink-0">
+                    <div className="w-16 h-16 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 flex items-center justify-center text-2xl font-bold flex-shrink-0">
                       {detailsModalUser.name?.charAt(0).toUpperCase()}
                     </div>
                     <div>
-                      <h2 className="text-xl font-bold text-zinc-900">{detailsModalUser.name}</h2>
-                      <p className="text-sm text-zinc-500 font-medium">{detailsModalUser.email}</p>
+                      <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100">{detailsModalUser.name}</h2>
+                      <p className="text-sm text-zinc-500 dark:text-zinc-400 font-medium">{detailsModalUser.email}</p>
                       <div className="mt-2 flex gap-2">
-                        <span className="px-2.5 py-0.5 border border-zinc-200 text-zinc-700 bg-zinc-50 rounded-full text-[10px] font-bold uppercase tracking-wider">
+                        <span className="px-2.5 py-0.5 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 bg-zinc-50 dark:bg-zinc-800 rounded-full text-[10px] font-bold uppercase tracking-wider">
                           {detailsModalUser.systemRole?.name}
                         </span>
                         {detailsModalUser.status === 'ACTIVE' ? (
-                          <span className="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full text-[10px] font-bold uppercase tracking-wider">Active</span>
+                          <span className="px-2.5 py-0.5 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-500/20 rounded-full text-[10px] font-bold uppercase tracking-wider">Active</span>
                         ) : (
-                          <span className="px-2.5 py-0.5 bg-red-50 text-red-700 border border-red-100 rounded-full text-[10px] font-bold uppercase tracking-wider">Suspended</span>
+                          <span className="px-2.5 py-0.5 bg-red-50 dark:bg-red-500/10 text-red-700 dark:text-red-400 border border-red-100 dark:border-red-500/20 rounded-full text-[10px] font-bold uppercase tracking-wider">Suspended</span>
                         )}
                       </div>
                     </div>
                   </div>
-                  <button onClick={() => setDetailsModalUser(null)} className="p-2 text-zinc-400 hover:text-zinc-600 transition-colors flex-shrink-0 cursor-pointer"><X className="w-5 h-5" /></button>
+                  <button onClick={() => setDetailsModalUser(null)} className="p-2 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors flex-shrink-0 cursor-pointer"><X className="w-5 h-5" /></button>
                 </div>
 
                 <div className="p-6 space-y-8">
                   <div>
-                    <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-3 flex items-center gap-2 border-b border-zinc-100 pb-2">
-                      <Key className="w-4 h-4 text-zinc-400" /> Granted Permissions
+                    <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-3 flex items-center gap-2 border-b border-zinc-100 dark:border-zinc-800 pb-2">
+                      <Key className="w-4 h-4 text-zinc-400 dark:text-zinc-500" /> Granted Permissions
                     </h3>
                     {detailsModalUser.permissionsList?.length > 0 ? (
                       <div className="flex flex-wrap gap-2">
                         {detailsModalUser.permissionsList.map(perm => (
-                          <span key={perm} className="px-2.5 py-1 bg-zinc-50 border border-zinc-200 text-zinc-600 text-xs font-semibold rounded-lg">
+                          <span key={perm} className="px-2.5 py-1 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 text-xs font-semibold rounded-lg transition-colors">
                             {perm}
                           </span>
                         ))}
                       </div>
                     ) : (
-                      <p className="text-sm text-zinc-400 font-medium italic">No specific functional permissions granted.</p>
+                      <p className="text-sm text-zinc-400 dark:text-zinc-500 font-medium italic">No specific functional permissions granted.</p>
                     )}
                   </div>
 
                   <div>
-                    <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-3 flex items-center gap-2 border-b border-zinc-100 pb-2">
-                      <Activity className="w-4 h-4 text-zinc-400" /> Recent Activity
+                    <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-3 flex items-center gap-2 border-b border-zinc-100 dark:border-zinc-800 pb-2">
+                      <Activity className="w-4 h-4 text-zinc-400 dark:text-zinc-500" /> Recent Activity
                     </h3>
                     {detailsModalUser.recentActivity?.length > 0 ? (
                       <div className="space-y-4 pt-1">
                         {detailsModalUser.recentActivity.map((activity, idx) => (
-                          <div key={activity.id || idx} className="flex flex-col gap-1 border-l-2 border-zinc-300 pl-3 py-0.5">
-                            <span className="text-sm text-zinc-800 font-medium">
-                              Updated blog: <span className="font-semibold text-zinc-900">{activity.blog?.title}</span>
+                          <div key={activity.id || idx} className="flex flex-col gap-1 border-l-2 border-zinc-300 dark:border-zinc-700 pl-3 py-0.5">
+                            <span className="text-sm text-zinc-800 dark:text-zinc-200 font-medium">
+                              Updated blog: <span className="font-semibold text-zinc-900 dark:text-white">{activity.blog?.title}</span>
                             </span>
-                            <span className="text-[10px] text-zinc-400 font-semibold tracking-wide">
+                            <span className="text-[10px] text-zinc-400 dark:text-zinc-500 font-semibold tracking-wide">
                               {new Date(activity.createdAt).toLocaleString(undefined, { 
                                 year: 'numeric', month: 'short', day: 'numeric', 
                                 hour: '2-digit', minute: '2-digit' 
@@ -474,13 +474,13 @@ const UsersList = () => {
                         ))}
                       </div>
                     ) : (
-                      <p className="text-sm text-zinc-400 font-medium italic">No recent system activity logged for this user.</p>
+                      <p className="text-sm text-zinc-400 dark:text-zinc-500 font-medium italic">No recent system activity logged for this user.</p>
                     )}
                   </div>
 
                   {currentUser.id !== detailsModalUser.id && (
                     <div>
-                      <h3 className="text-xs font-bold uppercase tracking-wider text-red-500 mb-3 flex items-center gap-2 border-b border-red-100 pb-2">
+                      <h3 className="text-xs font-bold uppercase tracking-wider text-red-500 dark:text-red-400 mb-3 flex items-center gap-2 border-b border-red-100 dark:border-red-500/20 pb-2">
                         <Shield className="w-4 h-4" /> Security Controls
                       </h3>
                       <div className="flex gap-3 flex-wrap pt-1">
@@ -489,8 +489,8 @@ const UsersList = () => {
                             onClick={() => handleToggleStatus(detailsModalUser.id, detailsModalUser.status)} 
                             className={`px-4 py-2 text-xs font-bold uppercase tracking-wider border rounded-xl transition-colors cursor-pointer ${
                               detailsModalUser.status === 'ACTIVE' 
-                                ? 'border-amber-200 text-amber-700 bg-amber-50 hover:bg-amber-100/50' 
-                                : 'border-emerald-200 text-emerald-700 bg-emerald-50 hover:bg-emerald-100/50'
+                                ? 'border-amber-200 dark:border-amber-500/30 text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-500/10 hover:bg-amber-100/50 dark:hover:bg-amber-500/20' 
+                                : 'border-emerald-200 dark:border-emerald-500/30 text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 hover:bg-emerald-100/50 dark:hover:bg-emerald-500/20'
                             }`}
                           >
                             {detailsModalUser.status === 'ACTIVE' ? 'Suspend Account' : 'Re-activate Account'}
@@ -498,7 +498,7 @@ const UsersList = () => {
                           
                           <button 
                             onClick={() => handleRevokeSessions(detailsModalUser.id)} 
-                            className="px-4 py-2 border border-red-200 text-red-700 bg-red-50 hover:bg-red-100/50 text-xs font-bold uppercase tracking-wider rounded-xl transition-colors cursor-pointer"
+                            className="px-4 py-2 border border-red-200 dark:border-red-500/30 text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-500/10 hover:bg-red-100/50 dark:hover:bg-red-500/20 text-xs font-bold uppercase tracking-wider rounded-xl transition-colors cursor-pointer"
                           >
                             Force Logout (All Devices)
                           </button>
@@ -515,42 +515,42 @@ const UsersList = () => {
 
       {/*INVITE MODAL*/}
       {isInviteModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-zinc-950/60 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-2xl border border-zinc-100 w-full max-w-lg shadow-2xl overflow-hidden font-sans">
-             <div className="flex justify-between items-center p-6 border-b border-zinc-100 bg-zinc-50/50">
-                <h2 className="text-lg font-bold flex items-center gap-2 text-zinc-900">
-                  <UserPlus className="w-5 h-5 text-zinc-600" /> Invite Staff
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-zinc-950/60 dark:bg-zinc-950/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+          <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800 w-full max-w-lg shadow-2xl overflow-hidden font-sans transition-colors duration-300">
+             <div className="flex justify-between items-center p-6 border-b border-zinc-100 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-800/50">
+                <h2 className="text-lg font-bold flex items-center gap-2 text-zinc-900 dark:text-zinc-100">
+                  <UserPlus className="w-5 h-5 text-zinc-600 dark:text-zinc-400" /> Invite Staff
                 </h2>
-                <button onClick={() => setIsInviteModalOpen(false)} className="text-zinc-400 hover:text-zinc-600 transition-colors cursor-pointer"><X className="w-5 h-5" /></button>
+                <button onClick={() => setIsInviteModalOpen(false)} className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors cursor-pointer"><X className="w-5 h-5" /></button>
              </div>
              <form onSubmit={handleInviteSubmit} className="p-6 space-y-5">
                <div>
-                 <label className="block text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-2">Full Name</label>
+                 <label className="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-2">Full Name</label>
                  <input 
                    required 
                    type="text" 
                    value={inviteData.name} 
                    onChange={e => setInviteData(p => ({ ...p, name: e.target.value }))} 
-                   className="block w-full px-4 py-2.5 border border-zinc-200 rounded-xl bg-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-950/10 focus:border-zinc-950 transition-colors text-sm font-medium text-zinc-800" 
+                   className="block w-full px-4 py-2.5 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-950 placeholder-zinc-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-950/10 dark:focus:ring-zinc-100/10 focus:border-zinc-950 dark:focus:border-zinc-100 transition-colors text-sm font-medium text-zinc-800 dark:text-zinc-100" 
                  />
                </div>
                <div>
-                 <label className="block text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-2">Email Address</label>
+                 <label className="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-2">Email Address</label>
                  <input 
                    required 
                    type="email" 
                    value={inviteData.email} 
                    onChange={e => setInviteData(p => ({ ...p, email: e.target.value }))} 
-                   className="block w-full px-4 py-2.5 border border-zinc-200 rounded-xl bg-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-950/10 focus:border-zinc-950 transition-colors text-sm font-medium text-zinc-800" 
+                   className="block w-full px-4 py-2.5 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-950 placeholder-zinc-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-950/10 dark:focus:ring-zinc-100/10 focus:border-zinc-950 dark:focus:border-zinc-100 transition-colors text-sm font-medium text-zinc-800 dark:text-zinc-100" 
                  />
                </div>
                
                <div>
-                 <label className="block text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-2">System Role</label>
+                 <label className="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-2">System Role</label>
                  <select 
                    value={inviteData.systemRoleSlug} 
                    onChange={e => setInviteData(p => ({ ...p, systemRoleSlug: e.target.value }))} 
-                   className="block w-full px-4 py-2.5 border border-zinc-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-zinc-950/10 focus:border-zinc-950 transition-colors text-sm font-semibold text-zinc-800"
+                   className="block w-full px-4 py-2.5 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-zinc-950/10 dark:focus:ring-zinc-100/10 focus:border-zinc-950 dark:focus:border-zinc-100 transition-colors text-sm font-semibold text-zinc-800 dark:text-zinc-100"
                  >
                    <option value="ADMIN">ADMIN (Standard)</option>
                    <option value="SUPER_ADMIN">SUPER ADMIN (Full Access)</option>
@@ -559,15 +559,15 @@ const UsersList = () => {
 
                {inviteData.systemRoleSlug !== 'SUPER_ADMIN' && (
                  <div>
-                   <label className="block text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-2">Functional Roles (Access Bundles)</label>
-                   <div className="flex flex-wrap gap-2 p-3 bg-zinc-50/50 border border-zinc-200 rounded-xl max-h-40 overflow-y-auto">
+                   <label className="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-2">Functional Roles (Access Bundles)</label>
+                   <div className="flex flex-wrap gap-2 p-3 bg-zinc-50/50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl max-h-40 overflow-y-auto">
                      {functionalRoles.map(role => (
                        <label 
                          key={role.id} 
                          className={`flex items-center gap-2 px-3 py-1.5 border rounded-lg cursor-pointer transition-colors ${
                            inviteData.functionalRoleIds.includes(role.id) 
-                             ? 'bg-zinc-900 border-zinc-900 text-white shadow-sm' 
-                             : 'bg-white border-zinc-200 hover:bg-zinc-50 text-zinc-700'
+                             ? 'bg-zinc-900 dark:bg-zinc-100 border-zinc-900 dark:border-zinc-100 text-white dark:text-zinc-900 shadow-sm' 
+                             : 'bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300'
                          }`}
                        >
                          <input type="checkbox" className="hidden" checked={inviteData.functionalRoleIds.includes(role.id)} onChange={() => toggleFunctionalRoleArray(inviteData, setInviteData, role.id)} />
@@ -578,18 +578,18 @@ const UsersList = () => {
                  </div>
                )}
 
-               <div className="flex justify-end gap-3 pt-6 border-t border-zinc-100">
+               <div className="flex justify-end gap-3 pt-6 border-t border-zinc-100 dark:border-zinc-800">
                  <button 
                    type="button" 
                    onClick={() => setIsInviteModalOpen(false)} 
-                   className="px-5 py-2.5 text-sm font-semibold text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50 rounded-xl transition-colors"
+                   className="px-5 py-2.5 text-sm font-semibold text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-800 rounded-xl transition-colors"
                  >
                    Cancel
                  </button>
                  <button 
                    type="submit" 
                    disabled={inviting} 
-                   className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-zinc-900 text-white rounded-xl font-medium hover:bg-zinc-800 transition-colors shadow-sm focus:ring-2 focus:ring-zinc-900/20 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                   className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 rounded-xl font-medium hover:bg-zinc-800 dark:hover:bg-white transition-colors shadow-sm focus:ring-2 focus:ring-zinc-900/20 dark:focus:ring-zinc-100/20 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                  >
                    {inviting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Mail className="w-4 h-4" />} Send Invite
                  </button>
@@ -601,31 +601,31 @@ const UsersList = () => {
 
       {/*EDIT ROLES MODAL*/}
       {editingUser && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-zinc-950/60 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-2xl border border-zinc-100 w-full max-w-lg shadow-2xl overflow-hidden font-sans">
-            <div className="flex justify-between items-center p-6 border-b border-zinc-100 bg-zinc-50/50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-zinc-950/60 dark:bg-zinc-950/80 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+          <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800 w-full max-w-lg shadow-2xl overflow-hidden font-sans transition-colors duration-300">
+            <div className="flex justify-between items-center p-6 border-b border-zinc-100 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-800/50">
               <div>
-                <h2 className="text-lg font-bold flex items-center gap-2 text-zinc-900">
-                  <Shield className="w-5 h-5 text-blue-600" /> Manage Access
+                <h2 className="text-lg font-bold flex items-center gap-2 text-zinc-900 dark:text-zinc-100">
+                  <Shield className="w-5 h-5 text-blue-600 dark:text-blue-400" /> Manage Access
                 </h2>
-                <p className="text-sm text-zinc-500 mt-1 font-medium">
-                  Modifying roles for <span className="font-semibold text-zinc-900">{editingUser.name}</span>
+                <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1 font-medium">
+                  Modifying roles for <span className="font-semibold text-zinc-900 dark:text-zinc-100">{editingUser.name}</span>
                 </p>
               </div>
-              <button onClick={() => setEditingUser(null)} className="text-zinc-400 hover:text-zinc-600 transition-colors cursor-pointer"><X className="w-5 h-5" /></button>
+              <button onClick={() => setEditingUser(null)} className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors cursor-pointer"><X className="w-5 h-5" /></button>
             </div>
             
             <form onSubmit={handleUpdateUserRoles} className="p-6 space-y-5">
-              <div className="border border-amber-200 bg-amber-50/65 rounded-xl p-3 flex gap-2 text-amber-800 text-sm font-medium">
-                <AlertTriangle className="w-5 h-5 shrink-0 text-amber-600" /> The user's active sessions will be terminated automatically to apply these changes securely.
+              <div className="border border-amber-200 dark:border-amber-500/30 bg-amber-50/65 dark:bg-amber-500/10 rounded-xl p-3 flex gap-2 text-amber-800 dark:text-amber-300 text-sm font-medium transition-colors">
+                <AlertTriangle className="w-5 h-5 shrink-0 text-amber-600 dark:text-amber-400" /> The user's active sessions will be terminated automatically to apply these changes securely.
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-2">System Role</label>
+                <label className="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-2">System Role</label>
                 <select 
                   value={editRoleData.systemRoleSlug} 
                   onChange={e => setEditRoleData(p => ({ ...p, systemRoleSlug: e.target.value }))} 
-                  className="block w-full px-4 py-2.5 border border-zinc-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-zinc-950/10 focus:border-zinc-950 transition-colors text-sm font-semibold text-zinc-800"
+                  className="block w-full px-4 py-2.5 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-zinc-950/10 dark:focus:ring-zinc-100/10 focus:border-zinc-950 dark:focus:border-zinc-100 transition-colors text-sm font-semibold text-zinc-800 dark:text-zinc-100"
                 >
                   <option value="ADMIN">ADMIN (Standard)</option>
                   <option value="SUPER_ADMIN">SUPER ADMIN (Full Access)</option>
@@ -634,15 +634,15 @@ const UsersList = () => {
 
               {editRoleData.systemRoleSlug !== 'SUPER_ADMIN' && (
                 <div>
-                  <label className="block text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-2">Functional Roles (Access Bundles)</label>
-                  <div className="flex flex-wrap gap-2 p-3 bg-zinc-50/50 border border-zinc-200 rounded-xl max-h-48 overflow-y-auto">
+                  <label className="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-2">Functional Roles (Access Bundles)</label>
+                  <div className="flex flex-wrap gap-2 p-3 bg-zinc-50/50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 rounded-xl max-h-48 overflow-y-auto">
                     {functionalRoles.map(role => (
                       <label 
                         key={role.id} 
                         className={`flex items-center gap-2 px-3 py-1.5 border rounded-lg cursor-pointer transition-colors ${
                           editRoleData.functionalRoleIds.includes(role.id) 
-                            ? 'bg-blue-600 border-blue-600 text-white shadow-sm' 
-                            : 'bg-white border-zinc-200 hover:bg-zinc-50 text-zinc-700'
+                            ? 'bg-blue-600 dark:bg-blue-600 border-blue-600 dark:border-blue-600 text-white shadow-sm' 
+                            : 'bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300'
                         }`}
                       >
                         <input type="checkbox" className="hidden" checked={editRoleData.functionalRoleIds.includes(role.id)} onChange={() => toggleFunctionalRoleArray(editRoleData, setEditRoleData, role.id)} />
@@ -653,11 +653,11 @@ const UsersList = () => {
                 </div>
               )}
 
-              <div className="flex justify-end gap-3 pt-6 border-t border-zinc-100">
+              <div className="flex justify-end gap-3 pt-6 border-t border-zinc-100 dark:border-zinc-800">
                 <button 
                   type="button" 
                   onClick={() => setEditingUser(null)} 
-                  className="px-5 py-2.5 text-sm font-semibold text-zinc-600 hover:text-zinc-900 hover:bg-zinc-50 rounded-xl transition-colors"
+                  className="px-5 py-2.5 text-sm font-semibold text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-800 rounded-xl transition-colors"
                 >
                   Cancel
                 </button>

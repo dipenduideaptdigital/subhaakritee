@@ -64,8 +64,8 @@ const Dashboard = () => {
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center h-[70vh] animate-in fade-in">
-        <Loader2 className="w-8 h-8 text-blue-600 animate-spin mb-4" />
-        <p className="text-zinc-500 font-medium">Aggregating telemetry data...</p>
+        <Loader2 className="w-8 h-8 text-blue-600 dark:text-blue-500 animate-spin mb-4" />
+        <p className="text-zinc-500 dark:text-zinc-400 font-medium">Aggregating telemetry data...</p>
       </div>
     );
   }

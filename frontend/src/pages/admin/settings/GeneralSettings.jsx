@@ -93,22 +93,22 @@ const GeneralSettings = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[300px]">
-        <Loader2 className="w-8 h-8 text-zinc-900 animate-spin" />
+        <Loader2 className="w-8 h-8 text-zinc-900 dark:text-zinc-100 animate-spin" />
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSave} className="space-y-6 animate-in fade-in duration-500 text-zinc-900 font-sans pb-10">
+    <form onSubmit={handleSave} className="space-y-6 animate-in fade-in duration-500 text-zinc-900 dark:text-zinc-100 font-sans pb-10 transition-colors duration-300">
       
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-5 rounded-2xl shadow-sm border border-zinc-100">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-zinc-900 p-5 rounded-2xl shadow-sm border border-zinc-100 dark:border-zinc-800 transition-colors duration-300">
         <div>
-          <h1 className="text-xl font-bold text-zinc-900 flex items-center gap-2">
-            <SlidersHorizontal className="w-5 h-5 text-zinc-900" />
+          <h1 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+            <SlidersHorizontal className="w-5 h-5 text-zinc-900 dark:text-zinc-100" />
             General Settings
           </h1>
-          <p className="text-zinc-500 text-sm mt-1">
+          <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-1">
             Manage global configurations, branding, and fallback pages.
           </p>
         </div>
@@ -116,7 +116,7 @@ const GeneralSettings = () => {
         <button 
           type="submit" 
           disabled={isSaving}
-          className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-zinc-900 text-white rounded-xl font-medium hover:bg-zinc-800 transition-colors shadow-sm focus:ring-2 focus:ring-zinc-900/20 flex-shrink-0 disabled:opacity-70 text-sm"
+          className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 rounded-xl font-medium hover:bg-zinc-800 dark:hover:bg-white transition-colors shadow-sm focus:ring-2 focus:ring-zinc-900/20 dark:focus:ring-zinc-100/20 flex-shrink-0 disabled:opacity-70 text-sm"
         >
           {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />} 
           {isSaving ? 'Saving...' : 'Save Settings'}
@@ -124,8 +124,8 @@ const GeneralSettings = () => {
       </div>
 
       {message && (
-        <div className={`p-4 rounded-xl flex items-center gap-3 text-sm font-medium border ${message.type === 'success' ? 'bg-emerald-50 text-emerald-800 border-emerald-200' : 'bg-red-50 text-red-800 border-red-200'}`}>
-          {message.type === 'success' ? <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0" /> : <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0" />}
+        <div className={`p-4 rounded-xl flex items-center gap-3 text-sm font-medium border transition-colors duration-300 ${message.type === 'success' ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-800 dark:text-emerald-400 border-emerald-200 dark:border-emerald-500/20' : 'bg-red-50 dark:bg-red-500/10 text-red-800 dark:text-red-400 border-red-200 dark:border-red-500/20'}`}>
+          {message.type === 'success' ? <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0" /> : <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0" />}
           <span>{message.text}</span>
         </div>
       )}
@@ -135,39 +135,39 @@ const GeneralSettings = () => {
         {/* Left Column */}
         <div className="space-y-6">
           {/* Website Identity */}
-          <div className="bg-white rounded-2xl shadow-sm border border-zinc-100 overflow-hidden">
-            <div className="px-5 py-3 border-b border-zinc-100 bg-zinc-50/50">
-              <h2 className="text-sm font-bold text-zinc-900">Website Identity</h2>
+          <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-sm border border-zinc-100 dark:border-zinc-800 overflow-hidden transition-colors duration-300">
+            <div className="px-5 py-3 border-b border-zinc-100 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-800/50">
+              <h2 className="text-sm font-bold text-zinc-900 dark:text-zinc-100">Website Identity</h2>
             </div>
             <div className="p-5 space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-1.5">Website Name</label>
+                <label className="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-1.5">Website Name</label>
                 <input
                   type="text"
                   name="websiteName"
                   value={formData.websiteName}
                   onChange={handleChange}
-                  className="block w-full px-4 py-2 border border-zinc-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-900 transition-colors text-sm font-medium"
+                  className="block w-full px-4 py-2 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-zinc-100/10 focus:border-zinc-900 dark:focus:border-zinc-100 transition-colors text-sm font-medium text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 dark:placeholder-zinc-500"
                 />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-1.5">Support Email</label>
+                <label className="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-1.5">Support Email</label>
                 <input
                   type="email"
                   name="supportEmail"
                   value={formData.supportEmail}
                   onChange={handleChange}
-                  className="block w-full px-4 py-2 border border-zinc-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-900 transition-colors text-sm font-medium"
+                  className="block w-full px-4 py-2 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-zinc-100/10 focus:border-zinc-900 dark:focus:border-zinc-100 transition-colors text-sm font-medium text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 dark:placeholder-zinc-500"
                 />
               </div>
               
               {/* Favicon Upload Section*/}
-              <div className="pt-3 border-t border-zinc-100">
-                <label className="block text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-3">Website Favicon (Browser Tab Icon)</label>
+              <div className="pt-3 border-t border-zinc-100 dark:border-zinc-800 transition-colors duration-300">
+                <label className="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-3">Website Favicon (Browser Tab Icon)</label>
                 <div className="flex items-center gap-4">
                   <div 
                     onClick={() => openMediaPicker('faviconImage')}
-                    className="w-20 h-20 bg-zinc-50 border border-zinc-200 rounded-xl flex items-center justify-center overflow-hidden cursor-pointer hover:ring-2 hover:ring-blue-500/50 transition-all shrink-0 group relative"
+                    className="w-20 h-20 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl flex items-center justify-center overflow-hidden cursor-pointer hover:ring-2 hover:ring-blue-500/50 transition-all shrink-0 group relative"
                   >
                     {formData.faviconImage ? (
                       <>
@@ -177,14 +177,14 @@ const GeneralSettings = () => {
                         </div>
                       </>
                     ) : (
-                      <ImageIcon className="w-6 h-6 text-zinc-400 group-hover:text-zinc-500 transition-colors" />
+                      <ImageIcon className="w-6 h-6 text-zinc-400 dark:text-zinc-600 group-hover:text-zinc-500 dark:group-hover:text-zinc-400 transition-colors" />
                     )}
                   </div>
                   <div className="flex flex-col gap-2">
                     <button 
                       type="button"
                       onClick={() => openMediaPicker('faviconImage')}
-                      className="px-4 py-2 bg-white border border-zinc-200 hover:bg-zinc-50 text-zinc-700 rounded-lg text-xs font-semibold flex items-center gap-2 transition-colors w-max"
+                      className="px-4 py-2 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-200 rounded-lg text-xs font-semibold flex items-center gap-2 transition-colors w-max"
                     >
                       <FolderOpen className="w-3.5 h-3.5" /> Browse Media
                     </button>
@@ -192,7 +192,7 @@ const GeneralSettings = () => {
                       <button 
                         type="button"
                         onClick={() => removeImage('faviconImage')}
-                        className="px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg text-xs font-semibold flex items-center gap-2 transition-colors w-max"
+                        className="px-4 py-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-lg text-xs font-semibold flex items-center gap-2 transition-colors w-max"
                       >
                         <X className="w-3.5 h-3.5" /> Remove
                       </button>
@@ -204,16 +204,16 @@ const GeneralSettings = () => {
           </div>
 
           {/* Admin Login Customization */}
-          <div className="bg-white rounded-2xl shadow-sm border border-zinc-100 overflow-hidden">
-            <div className="px-5 py-3 border-b border-zinc-100 bg-zinc-50/50">
-              <h2 className="text-sm font-bold text-zinc-900">Admin Login Page</h2>
+          <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-sm border border-zinc-100 dark:border-zinc-800 overflow-hidden transition-colors duration-300">
+            <div className="px-5 py-3 border-b border-zinc-100 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-800/50">
+              <h2 className="text-sm font-bold text-zinc-900 dark:text-zinc-100">Admin Login Page</h2>
             </div>
             <div className="p-5">
-              <label className="block text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-3">Custom Login Logo</label>
+              <label className="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-3">Custom Login Logo</label>
               <div className="flex items-center gap-4">
                 <div 
                   onClick={() => openMediaPicker('adminLoginLogo')}
-                  className="w-24 h-24 bg-zinc-50 border border-zinc-200 rounded-xl flex items-center justify-center overflow-hidden cursor-pointer hover:ring-2 hover:ring-blue-500/50 transition-all shrink-0 group relative"
+                  className="w-24 h-24 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl flex items-center justify-center overflow-hidden cursor-pointer hover:ring-2 hover:ring-blue-500/50 transition-all shrink-0 group relative"
                 >
                   {formData.adminLoginLogo ? (
                     <>
@@ -223,14 +223,14 @@ const GeneralSettings = () => {
                       </div>
                     </>
                   ) : (
-                    <ImageIcon className="w-8 h-8 text-zinc-400 group-hover:text-zinc-500 transition-colors" />
+                    <ImageIcon className="w-8 h-8 text-zinc-400 dark:text-zinc-600 group-hover:text-zinc-500 dark:group-hover:text-zinc-400 transition-colors" />
                   )}
                 </div>
                 <div className="flex flex-col gap-2">
                   <button 
                     type="button"
                     onClick={() => openMediaPicker('adminLoginLogo')}
-                    className="px-4 py-2 bg-white border border-zinc-200 hover:bg-zinc-50 text-zinc-700 rounded-lg text-xs font-semibold flex items-center gap-2 transition-colors w-max"
+                    className="px-4 py-2 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-200 rounded-lg text-xs font-semibold flex items-center gap-2 transition-colors w-max"
                   >
                     <FolderOpen className="w-3.5 h-3.5" /> Browse Media
                   </button>
@@ -238,12 +238,12 @@ const GeneralSettings = () => {
                     <button 
                       type="button"
                       onClick={() => removeImage('adminLoginLogo')}
-                      className="px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg text-xs font-semibold flex items-center gap-2 transition-colors w-max"
+                      className="px-4 py-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-lg text-xs font-semibold flex items-center gap-2 transition-colors w-max"
                     >
                       <X className="w-3.5 h-3.5" /> Remove
                     </button>
                   )}
-                  <p className="text-[10px] text-zinc-400 leading-tight max-w-[200px] mt-1">
+                  <p className="text-[10px] text-zinc-400 dark:text-zinc-500 leading-tight max-w-[200px] mt-1">
                     Appears on the login screen. Leave blank for default logo.
                   </p>
                 </div>
@@ -253,52 +253,52 @@ const GeneralSettings = () => {
         </div>
 
         {/* Right Column: 404 Settings */}
-        <div className="bg-white rounded-2xl shadow-sm border border-zinc-100 overflow-hidden h-fit">
-          <div className="px-5 py-3 border-b border-zinc-100 bg-zinc-50/50">
-            <h2 className="text-sm font-bold text-zinc-900">404 Error Page (Not Found)</h2>
+        <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-sm border border-zinc-100 dark:border-zinc-800 overflow-hidden h-fit transition-colors duration-300">
+          <div className="px-5 py-3 border-b border-zinc-100 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-800/50">
+            <h2 className="text-sm font-bold text-zinc-900 dark:text-zinc-100">404 Error Page (Not Found)</h2>
           </div>
 
           <div className="p-5 space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-1.5">Page Title</label>
+                <label className="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-1.5">Page Title</label>
                 <input
                   type="text"
                   name="errorPageTitle"
                   value={formData.errorPageTitle}
                   onChange={handleChange}
-                  className="block w-full px-4 py-2 border border-zinc-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-900 transition-colors text-sm font-medium"
+                  className="block w-full px-4 py-2 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-zinc-100/10 focus:border-zinc-900 dark:focus:border-zinc-100 transition-colors text-sm font-medium text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 dark:placeholder-zinc-500"
                 />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-1.5">Button Text</label>
+                <label className="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-1.5">Button Text</label>
                 <input
                   type="text"
                   name="errorPageButtonText"
                   value={formData.errorPageButtonText}
                   onChange={handleChange}
-                  className="block w-full px-4 py-2 border border-zinc-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-900 transition-colors text-sm font-medium"
+                  className="block w-full px-4 py-2 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-zinc-100/10 focus:border-zinc-900 dark:focus:border-zinc-100 transition-colors text-sm font-medium text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 dark:placeholder-zinc-500"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-1.5">Description</label>
+              <label className="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-1.5">Description</label>
               <textarea
                 name="errorPageDescription"
                 rows="2"
                 value={formData.errorPageDescription}
                 onChange={handleChange}
-                className="block w-full px-4 py-2 border border-zinc-200 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-900 transition-colors text-sm font-medium resize-none"
+                className="block w-full px-4 py-2 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-zinc-100/10 focus:border-zinc-900 dark:focus:border-zinc-100 transition-colors text-sm font-medium resize-none text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 dark:placeholder-zinc-500"
               ></textarea>
             </div>
 
-            <div className="pt-2 border-t border-zinc-100">
-              <label className="block text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-3">404 Graphic / Illustration</label>
+            <div className="pt-2 border-t border-zinc-100 dark:border-zinc-800 transition-colors duration-300">
+              <label className="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-3">404 Graphic / Illustration</label>
               <div className="flex items-center gap-4">
                 <div 
                   onClick={() => openMediaPicker('errorPageImage')}
-                  className="w-24 h-24 bg-zinc-50 border border-zinc-200 rounded-xl flex items-center justify-center overflow-hidden cursor-pointer hover:ring-2 hover:ring-blue-500/50 transition-all shrink-0 group relative"
+                  className="w-24 h-24 bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl flex items-center justify-center overflow-hidden cursor-pointer hover:ring-2 hover:ring-blue-500/50 transition-all shrink-0 group relative"
                 >
                   {formData.errorPageImage ? (
                     <>
@@ -308,14 +308,14 @@ const GeneralSettings = () => {
                       </div>
                     </>
                   ) : (
-                    <ImageIcon className="w-8 h-8 text-zinc-300 group-hover:text-zinc-400 transition-colors" />
+                    <ImageIcon className="w-8 h-8 text-zinc-300 dark:text-zinc-600 group-hover:text-zinc-400 dark:group-hover:text-zinc-500 transition-colors" />
                   )}
                 </div>
                 <div className="flex flex-col gap-2">
                   <button 
                     type="button"
                     onClick={() => openMediaPicker('errorPageImage')}
-                    className="px-4 py-2 bg-white border border-zinc-200 hover:bg-zinc-50 text-zinc-700 rounded-lg text-xs font-semibold flex items-center gap-2 transition-colors w-max"
+                    className="px-4 py-2 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-200 rounded-lg text-xs font-semibold flex items-center gap-2 transition-colors w-max"
                   >
                     <FolderOpen className="w-3.5 h-3.5" /> Browse Media
                   </button>
@@ -323,7 +323,7 @@ const GeneralSettings = () => {
                     <button 
                       type="button"
                       onClick={() => removeImage('errorPageImage')}
-                      className="px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg text-xs font-semibold flex items-center gap-2 transition-colors w-max"
+                      className="px-4 py-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-lg text-xs font-semibold flex items-center gap-2 transition-colors w-max"
                     >
                       <X className="w-3.5 h-3.5" /> Remove
                     </button>

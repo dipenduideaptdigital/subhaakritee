@@ -35,14 +35,14 @@ const SettingsLayout = () => {
   }
 
   return (
-    <div className="flex flex-col lg:flex-row gap-10 max-w-6xl mx-auto text-zinc-900 font-sans">
+    <div className="flex flex-col lg:flex-row gap-10 max-w-6xl mx-auto text-zinc-900 dark:text-zinc-100 font-sans transition-colors duration-300">
       {/* Settings Navigation Sidebar */}
       <div className="lg:w-60 flex-shrink-0">
-        <div className="sticky top-6 border-r border-zinc-200 lg:pr-6">
-          <div className="border-b border-zinc-200 pb-4 mb-6">
-            <p className="text-xs uppercase tracking-widest text-zinc-500 font-bold mb-1">Workspace</p>
-            <h2 className="text-xl font-bold text-zinc-900 flex items-center gap-2">
-              <Settings className="w-5 h-5 text-zinc-700" strokeWidth={2} />
+        <div className="sticky top-6 border-r border-zinc-200 dark:border-zinc-800 lg:pr-6 transition-colors duration-300">
+          <div className="border-b border-zinc-200 dark:border-zinc-800 pb-4 mb-6 transition-colors duration-300">
+            <p className="text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400 font-bold mb-1">Workspace</p>
+            <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
+              <Settings className="w-5 h-5 text-zinc-700 dark:text-zinc-300" strokeWidth={2} />
               Settings
             </h2>
           </div>
@@ -53,10 +53,10 @@ const SettingsLayout = () => {
                 key={tab.name}
                 to={tab.path}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 px-4 py-3 rounded-xl transition-all text-sm font-semibold group ${
+                  `flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 text-sm font-semibold group ${
                     isActive
-                      ? 'bg-zinc-900 text-white shadow-sm'
-                      : 'text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100'
+                      ? 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 shadow-sm'
+                      : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/50'
                   }`
                 }
               >

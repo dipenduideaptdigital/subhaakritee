@@ -29,12 +29,12 @@ const WelcomeHeader = ({ user, currentDate }) => {
   };
 
   return (
-    <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+    <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 transition-colors duration-300">
       <div>
-        <h1 className="text-3xl font-bold text-zinc-900 tracking-tight">
+        <h1 className="text-3xl font-bold text-zinc-900 dark:text-white tracking-tight transition-colors duration-300">
           Welcome back, {user?.name?.split(' ')[0] || 'Admin'}!
         </h1>
-        <p className="text-sm text-zinc-500 mt-1 font-medium tracking-wide">
+        <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1 font-medium tracking-wide transition-colors duration-300">
           {currentDate}
         </p>
       </div>
@@ -42,10 +42,10 @@ const WelcomeHeader = ({ user, currentDate }) => {
       <button 
         onClick={handleExport}
         disabled={isExporting}
-        className="inline-flex items-center gap-2 bg-white border border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50 text-zinc-800 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
+        className="inline-flex items-center gap-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-600 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-800 dark:text-zinc-200 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isExporting ? (
-          <Loader2 className="w-4 h-4 animate-spin text-zinc-500" />
+          <Loader2 className="w-4 h-4 animate-spin text-zinc-500 dark:text-zinc-400" />
         ) : (
           <DownloadCloud className="w-4 h-4" />
         )}

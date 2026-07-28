@@ -1181,19 +1181,19 @@ const HomeCustomization = () => {
   if (loading) {
     return (
       <div className="h-64 flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-zinc-900" />
+        <Loader2 className="w-8 h-8 animate-spin text-zinc-900 dark:text-zinc-100" />
       </div>
     );
   }
 
   return (
-    <div className="space-y-8 pb-10 animation-fade-in">
+    <div className="space-y-8 pb-10 animation-fade-in text-zinc-900 dark:text-zinc-100 font-sans transition-colors duration-300">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-zinc-900 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
             {activeTab === 'footer' ? 'Footer Settings Customization' : 'Home Page Customization'}
           </h1>
-          <p className="text-zinc-500 mt-1 text-sm sm:text-base">
+          <p className="text-zinc-500 dark:text-zinc-400 mt-1 text-sm sm:text-base">
             {activeTab === 'footer'
               ? 'Manage the navigation links, contact info, and copyright settings for the website footer.'
               : 'Manage the content and images for your main landing page.'}
@@ -1203,7 +1203,7 @@ const HomeCustomization = () => {
         <button 
           onClick={handleSave}
           disabled={saving}
-          className="bg-zinc-900 hover:bg-zinc-800 text-white px-6 py-2.5 rounded-xl font-medium tracking-wide flex items-center justify-center gap-2 transition-all shadow-lg shadow-zinc-900/20 disabled:opacity-70 text-sm w-full sm:w-auto"
+          className="bg-zinc-900 dark:bg-zinc-100 hover:bg-zinc-800 dark:hover:bg-white text-white dark:text-zinc-900 px-6 py-2.5 rounded-xl font-medium tracking-wide flex items-center justify-center gap-2 transition-all shadow-lg shadow-zinc-900/20 dark:shadow-none disabled:opacity-70 text-sm w-full sm:w-auto"
         >
           {saving ? <Loader2 className="w-5 h-5 animate-spin" /> : <Save className="w-5 h-5" />}
           {saving ? 'Saving...' : 'Save Changes'}
@@ -1211,14 +1211,15 @@ const HomeCustomization = () => {
       </div>
 
       {success && (
-        <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-xl flex items-center gap-3 animate-fade-in-down">
-          <CheckCircle className="w-5 h-5" />
+        <div className="bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 text-emerald-700 dark:text-emerald-400 px-4 py-3 rounded-xl flex items-center gap-3 animate-fade-in-down transition-colors duration-300">
+          <CheckCircle className="w-5 h-5 flex-shrink-0" />
           <span className="font-medium">Changes saved successfully! The homepage has been updated.</span>
         </div>
       )}
 
       {errorMsg && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl flex items-center gap-3 animate-fade-in-down">
+        <div className="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 text-red-700 dark:text-red-400 px-4 py-3 rounded-xl flex items-center gap-3 animate-fade-in-down transition-colors duration-300">
+          <AlertCircle className="w-5 h-5 flex-shrink-0" />
           <span className="font-medium">{errorMsg}</span>
         </div>
       )}
@@ -1226,27 +1227,27 @@ const HomeCustomization = () => {
       {/* Component Selector Dropdown */}
       {activeTab !== 'footer' && (
         <div className="relative mb-6 z-40" ref={dropdownRef}>
-          <label className="block text-sm font-medium text-zinc-700 mb-2">Select Component to Edit</label>
+          <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2 transition-colors">Select Component to Edit</label>
           <button
             onClick={() => setDropdownOpen(!dropdownOpen)}
-            className="w-full sm:max-w-md flex items-center justify-between bg-white border border-zinc-200 px-4 py-3 rounded-xl shadow-sm hover:border-zinc-300 transition-all focus:outline-none focus:ring-2 focus:ring-zinc-900/10"
+            className="w-full sm:max-w-md flex items-center justify-between bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 px-4 py-3 rounded-xl shadow-sm hover:border-zinc-300 dark:hover:border-zinc-600 transition-all focus:outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-zinc-100/10"
           >
             <div className="flex items-center gap-3">
-              <div className="bg-zinc-100 p-2 rounded-lg">
+              <div className="bg-zinc-100 dark:bg-zinc-800 p-2 rounded-lg transition-colors">
                 {(() => {
                   const ActiveIcon = TABS.find(t => t.key === activeTab)?.icon || ImageIcon;
-                  return <ActiveIcon className="w-5 h-5 text-zinc-700" />;
+                  return <ActiveIcon className="w-5 h-5 text-zinc-700 dark:text-zinc-300" />;
                 })()}
               </div>
-              <span className="font-semibold text-zinc-900">
+              <span className="font-semibold text-zinc-900 dark:text-zinc-100 transition-colors">
                 {TABS.find(t => t.key === activeTab)?.label || 'Select Component'}
               </span>
             </div>
-            <ChevronDown className={`w-5 h-5 text-zinc-400 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
+            <ChevronDown className={`w-5 h-5 text-zinc-400 dark:text-zinc-500 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
           </button>
 
           {dropdownOpen && (
-            <div className="absolute left-0 mt-2 w-full sm:max-w-md bg-white border border-zinc-200 rounded-xl shadow-xl max-h-80 overflow-y-auto animate-in fade-in slide-in-from-top-2">
+            <div className="absolute left-0 mt-2 w-full sm:max-w-md bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl shadow-xl max-h-80 overflow-y-auto animate-in fade-in slide-in-from-top-2 transition-colors">
               <div className="p-2 grid gap-1">
                 {TABS.map((tab) => (
                   <button
@@ -1258,14 +1259,14 @@ const HomeCustomization = () => {
                     }}
                     className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all w-full text-left group ${
                       activeTab === tab.key 
-                        ? 'bg-zinc-900 text-white shadow-md' 
-                        : 'hover:bg-zinc-100 text-zinc-700'
+                        ? 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 shadow-md' 
+                        : 'hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200'
                     }`}
                   >
-                    <tab.icon className={`w-4 h-4 ${activeTab === tab.key ? 'text-zinc-300' : 'text-zinc-500 group-hover:text-zinc-700'}`} />
+                    <tab.icon className={`w-4 h-4 ${activeTab === tab.key ? 'text-zinc-300 dark:text-zinc-600' : 'text-zinc-500 dark:text-zinc-500 group-hover:text-zinc-700 dark:group-hover:text-zinc-300'}`} />
                     <span className="font-medium text-sm">{tab.label}</span>
                     {activeTab === tab.key && (
-                      <CheckCircle className="w-4 h-4 text-green-400 ml-auto" />
+                      <CheckCircle className="w-4 h-4 text-emerald-400 dark:text-emerald-600 ml-auto" />
                     )}
                   </button>
                 ))}

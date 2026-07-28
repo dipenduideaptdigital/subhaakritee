@@ -26,46 +26,45 @@ const getAssetUrl = (path) => {
   return `${baseUrl}${path}`;
 };
 
- // Collapsible Tiptap Wrapper Component
-  const CollapsibleTiptap = ({ value, onChange }) => {
-    const [isOpen, setIsOpen] = useState(false);
+const CollapsibleTiptap = ({ value, onChange }) => {
+  const [isOpen, setIsOpen] = useState(false);
 
-    const getPreviewText = (html) => {
-      if (!html) return 'No content added...';
-      const temp = document.createElement('div');
-      temp.innerHTML = html;
-      const text = temp.textContent || temp.innerText || '';
-      return text.length > 60 ? text.substring(0, 60) + '...' : text || 'No content added...';
-    };
-
-    return (
-      <div className="border border-zinc-200 rounded-xl overflow-hidden bg-white shadow-sm transition-all duration-200">
-        <button
-          type="button"
-          onClick={() => setIsOpen(!isOpen)}
-          className="w-full px-4 py-3 flex items-center justify-between bg-zinc-50/50 hover:bg-zinc-100 transition-colors outline-none"
-        >
-          <div className="flex items-center gap-3 overflow-hidden">
-            <Edit2 className="w-4 h-4 text-zinc-500 shrink-0" />
-            <span className="text-sm font-medium text-zinc-700 truncate">
-              {isOpen ? 'Close Text Editor' : getPreviewText(value)}
-            </span>
-          </div>
-          {isOpen ? (
-            <ChevronUp className="w-4 h-4 text-zinc-500 shrink-0" />
-          ) : (
-            <ChevronDown className="w-4 h-4 text-zinc-500 shrink-0" />
-          )}
-        </button>
-        
-        {isOpen && (
-          <div className="p-4 border-t border-zinc-200 bg-white">
-            <TipTapEditor value={value} onChange={onChange} />
-          </div>
-        )}
-      </div>
-    );
+  const getPreviewText = (html) => {
+    if (!html) return 'No content added...';
+    const temp = document.createElement('div');
+    temp.innerHTML = html;
+    const text = temp.textContent || temp.innerText || '';
+    return text.length > 60 ? text.substring(0, 60) + '...' : text || 'No content added...';
   };
+
+  return (
+    <div className="border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden bg-white dark:bg-zinc-900 shadow-sm transition-colors duration-300">
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full px-4 py-3 flex items-center justify-between bg-zinc-50/50 dark:bg-zinc-900/50 hover:bg-zinc-100 dark:hover:bg-zinc-800/80 transition-colors outline-none"
+      >
+        <div className="flex items-center gap-3 overflow-hidden">
+          <Edit2 className="w-4 h-4 text-zinc-500 dark:text-indigo-400 shrink-0" />
+          <span className="text-sm font-medium text-zinc-700 dark:text-zinc-200 truncate">
+            {isOpen ? 'Close Text Editor' : getPreviewText(value)}
+          </span>
+        </div>
+        {isOpen ? (
+          <ChevronUp className="w-4 h-4 text-zinc-500 dark:text-zinc-400 shrink-0" />
+        ) : (
+          <ChevronDown className="w-4 h-4 text-zinc-500 dark:text-zinc-400 shrink-0" />
+        )}
+      </button>
+      
+      {isOpen && (
+        <div className="p-4 border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 transition-colors duration-300">
+          <TipTapEditor value={value} onChange={onChange} />
+        </div>
+      )}
+    </div>
+  );
+};
   
 const DynamicBlockEditor = ({ block, index, updateBlockData }) => {
   const { type, data } = block;
@@ -116,17 +115,16 @@ const DynamicBlockEditor = ({ block, index, updateBlockData }) => {
     updateBlockData(index, arrayField, newArray);
   };
 
-
   const renderGenericFields = (fieldsConfig) => (
-    <div className="bg-white rounded-2xl shadow-sm border border-zinc-200 overflow-hidden">
-      <div className="px-8 py-4 border-b border-zinc-100 flex items-center gap-3 bg-zinc-50/50">
-        <Type className="w-5 h-5 text-zinc-700" />
-        <h2 className="text-lg font-semibold text-zinc-800">Customize Block</h2>
+    <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-sm border border-zinc-200 dark:border-zinc-800 overflow-hidden transition-colors duration-300">
+      <div className="px-8 py-4 border-b border-zinc-100 dark:border-zinc-800 flex items-center gap-3 bg-zinc-50/50 dark:bg-zinc-950/50 transition-colors duration-300">
+        <Type className="w-5 h-5 text-zinc-700 dark:text-indigo-400" />
+        <h2 className="text-lg font-semibold text-zinc-800 dark:text-zinc-100">Customize Block</h2>
       </div>
       <div className="p-8 space-y-4">
         {fieldsConfig.map((field, i) => (
           <div key={i} className="flex flex-col gap-1.5">
-            <label className="text-sm font-medium text-zinc-700 capitalize">
+            <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300 capitalize">
               {field.name.replace(/([A-Z])/g, ' $1').trim()}
             </label>
             
@@ -142,7 +140,7 @@ const DynamicBlockEditor = ({ block, index, updateBlockData }) => {
                 value={data[field.name] !== undefined ? data[field.name] : (field.defaultValue || '')}
                 onChange={handleChange}
                 placeholder={field.placeholder || ''}
-                className="w-full px-4 py-3 border border-zinc-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-900 transition-colors text-sm bg-zinc-50/50"
+                className="w-full px-4 py-3 border border-zinc-200 dark:border-zinc-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-indigo-500/30 focus:border-zinc-900 dark:focus:border-indigo-500 transition-colors text-sm bg-zinc-50/50 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder-zinc-600"
               />
             ) : field.type === 'image' ? (
               <ImageField 
@@ -150,9 +148,9 @@ const DynamicBlockEditor = ({ block, index, updateBlockData }) => {
                 onChange={(url) => updateBlockData(index, field.name, url)} 
               />
             ) : field.type === 'array' ? (
-              <div className="space-y-4 border border-zinc-200 rounded-xl p-4 bg-zinc-50/50">
+              <div className="space-y-4 border border-zinc-200 dark:border-zinc-800/60 rounded-xl p-4 bg-zinc-50/50 dark:bg-zinc-950/30 transition-colors duration-300">
                 {((data[field.name] === undefined ? field.defaultArray : data[field.name]) || []).map((item, itemIdx) => (
-                  <div key={itemIdx} className="p-4 border border-zinc-200 rounded-lg bg-white relative">
+                  <div key={itemIdx} className="p-4 border border-zinc-200 dark:border-zinc-700/80 rounded-lg bg-white dark:bg-zinc-900 relative transition-colors duration-300">
                     <button 
                       type="button" 
                       onClick={() => {
@@ -160,14 +158,14 @@ const DynamicBlockEditor = ({ block, index, updateBlockData }) => {
                         newArr.splice(itemIdx, 1);
                         updateBlockData(index, field.name, newArr);
                       }}
-                      className="absolute top-2 right-2 p-1.5 text-red-500 hover:bg-red-50 rounded-md transition-colors z-10"
+                      className="absolute top-2 right-2 p-1.5 text-red-500 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-md transition-colors z-10"
                     >
                       <Trash className="w-4 h-4" />
                     </button>
                     <div className="space-y-3 mt-4">
                       {field.itemFields.map((subField, subIdx) => (
                         <div key={subIdx} className="flex flex-col gap-1.5">
-                          <label className="text-xs font-medium text-zinc-600 capitalize">
+                          <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400 capitalize">
                             {subField.name.replace(/([A-Z])/g, ' $1').trim()}
                           </label>
 
@@ -182,7 +180,7 @@ const DynamicBlockEditor = ({ block, index, updateBlockData }) => {
                               value={item[subField.name] || ''}
                               onChange={(e) => handleArrayItemChange(field.name, itemIdx, subField.name, e.target.value)}
                               placeholder={subField.placeholder || ''}
-                              className="w-full px-3 py-2 border border-zinc-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-zinc-900/10 text-sm bg-zinc-50"
+                              className="w-full px-3 py-2 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-indigo-500/30 dark:focus:border-indigo-500 text-sm bg-zinc-50 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder-zinc-600 transition-colors"
                             />
                           ) : subField.type === 'image' ? (
                             <div className="flex-1">
@@ -197,7 +195,7 @@ const DynamicBlockEditor = ({ block, index, updateBlockData }) => {
                               value={item[subField.name] || ''}
                               onChange={(e) => handleArrayItemChange(field.name, itemIdx, subField.name, e.target.value)}
                               placeholder={subField.placeholder || ''}
-                              className="w-full px-3 py-2 border border-zinc-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-zinc-900/10 text-sm bg-zinc-50"
+                              className="w-full px-3 py-2 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-indigo-500/30 dark:focus:border-indigo-500 text-sm bg-zinc-50 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder-zinc-600 transition-colors"
                             />
                           )}
                         </div>
@@ -211,15 +209,15 @@ const DynamicBlockEditor = ({ block, index, updateBlockData }) => {
                     const newArr = [...(data[field.name] || []), field.defaultItem || {}];
                     updateBlockData(index, field.name, newArr);
                   }}
-                  className="w-full py-2.5 border border-dashed border-zinc-300 rounded-lg text-sm text-zinc-600 hover:bg-zinc-100 flex items-center justify-center gap-2 transition-colors font-medium"
+                  className="w-full py-2.5 border border-dashed border-zinc-300 dark:border-indigo-500/40 rounded-lg text-sm text-zinc-600 dark:text-indigo-400 hover:bg-zinc-100 dark:hover:bg-indigo-500/10 flex items-center justify-center gap-2 transition-colors font-medium"
                 >
                   <Plus className="w-4 h-4" /> Add Item
                 </button>
               </div>
             ) : field.type === 'arrayString' ? (
-              <div className="space-y-4 border border-zinc-200 rounded-xl p-4 bg-zinc-50/50">
+              <div className="space-y-4 border border-zinc-200 dark:border-zinc-800/60 rounded-xl p-4 bg-zinc-50/50 dark:bg-zinc-950/30 transition-colors duration-300">
                 {((data[field.name] === undefined ? field.defaultArray : data[field.name]) || []).map((itemStr, itemIdx) => (
-                  <div key={itemIdx} className="p-3 border border-zinc-200 rounded-lg bg-white relative flex gap-4 items-start">
+                  <div key={itemIdx} className="p-3 border border-zinc-200 dark:border-zinc-700/80 rounded-lg bg-white dark:bg-zinc-900 relative flex gap-4 items-start transition-colors duration-300">
                     {field.isImage ? (
                       <div className="flex-1">
                         <ImageField 
@@ -232,7 +230,7 @@ const DynamicBlockEditor = ({ block, index, updateBlockData }) => {
                         type="text"
                         value={itemStr || ''}
                         onChange={(e) => handleArrayStringChange(field.name, itemIdx, e.target.value)}
-                        className="flex-1 px-3 py-2 border border-zinc-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-zinc-900/10 text-sm bg-zinc-50"
+                        className="flex-1 px-3 py-2 border border-zinc-200 dark:border-zinc-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-indigo-500/30 dark:focus:border-indigo-500 text-sm bg-zinc-50 dark:bg-zinc-950 dark:text-zinc-100 transition-colors"
                       />
                     )}
                     <button 
@@ -242,7 +240,7 @@ const DynamicBlockEditor = ({ block, index, updateBlockData }) => {
                         newArr.splice(itemIdx, 1);
                         updateBlockData(index, field.name, newArr);
                       }}
-                      className="p-1.5 text-red-500 hover:bg-red-50 rounded-md transition-colors shrink-0"
+                      className="p-1.5 text-red-500 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-md transition-colors shrink-0"
                     >
                       <Trash className="w-4 h-4" />
                     </button>
@@ -254,7 +252,7 @@ const DynamicBlockEditor = ({ block, index, updateBlockData }) => {
                     const newArr = [...(data[field.name] || []), ''];
                     updateBlockData(index, field.name, newArr);
                   }}
-                  className="w-full py-2.5 border border-dashed border-zinc-300 rounded-lg text-sm text-zinc-600 hover:bg-zinc-100 flex items-center justify-center gap-2 transition-colors font-medium"
+                  className="w-full py-2.5 border border-dashed border-zinc-300 dark:border-indigo-500/40 rounded-lg text-sm text-zinc-600 dark:text-indigo-400 hover:bg-zinc-100 dark:hover:bg-indigo-500/10 flex items-center justify-center gap-2 transition-colors font-medium"
                 >
                   <Plus className="w-4 h-4" /> Add Item
                 </button>
@@ -266,7 +264,7 @@ const DynamicBlockEditor = ({ block, index, updateBlockData }) => {
                 value={data[field.name] !== undefined ? data[field.name] : (field.defaultValue || '')}
                 onChange={handleChange}
                 placeholder={field.placeholder || ''}
-                className="w-full px-4 py-3 border border-zinc-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-900 transition-colors text-sm bg-zinc-50/50"
+                className="w-full px-4 py-3 border border-zinc-200 dark:border-zinc-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-indigo-500/30 focus:border-zinc-900 dark:focus:border-indigo-500 transition-colors text-sm bg-zinc-50/50 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder-zinc-600"
               />
             )}
           </div>
@@ -453,10 +451,10 @@ const DynamicBlockEditor = ({ block, index, updateBlockData }) => {
       ]);
     case 'richText':
       return (
-        <div className="bg-white rounded-2xl shadow-sm border border-zinc-200 overflow-hidden">
-          <div className="px-8 py-4 border-b border-zinc-100 flex items-center gap-3 bg-zinc-50/50">
-            <Type className="w-5 h-5 text-zinc-700" />
-            <h2 className="text-lg font-semibold text-zinc-800">Rich Text Editor</h2>
+        <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-sm border border-zinc-200 dark:border-zinc-800 overflow-hidden transition-colors duration-300">
+          <div className="px-8 py-4 border-b border-zinc-100 dark:border-zinc-800 flex items-center gap-3 bg-zinc-50/50 dark:bg-zinc-950/50 transition-colors duration-300">
+            <Type className="w-5 h-5 text-zinc-700 dark:text-indigo-400" />
+            <h2 className="text-lg font-semibold text-zinc-800 dark:text-zinc-100">Rich Text Editor</h2>
           </div>
           <div className="p-8">
             <CollapsibleTiptap 
@@ -469,71 +467,71 @@ const DynamicBlockEditor = ({ block, index, updateBlockData }) => {
 
     case 'contactForm':
       return (
-        <div className="bg-white rounded-2xl shadow-sm border border-zinc-200 overflow-hidden">
-          <div className="px-8 py-4 border-b border-zinc-100 flex items-center gap-3 bg-zinc-50/50">
-            <Type className="w-5 h-5 text-zinc-700" />
-            <h2 className="text-lg font-semibold text-zinc-800">Contact Form Module</h2>
+        <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-sm border border-zinc-200 dark:border-zinc-800 overflow-hidden transition-colors duration-300">
+          <div className="px-8 py-4 border-b border-zinc-100 dark:border-zinc-800 flex items-center gap-3 bg-zinc-50/50 dark:bg-zinc-950/50 transition-colors duration-300">
+            <Type className="w-5 h-5 text-zinc-700 dark:text-indigo-400" />
+            <h2 className="text-lg font-semibold text-zinc-800 dark:text-zinc-100">Contact Form Module</h2>
           </div>
           <div className="p-8 space-y-6">
             <div>
-              <label className="block text-sm font-medium text-zinc-700 mb-2">Target Form *</label>
+              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">Target Form *</label>
               {loadingForms ? (
-                <div className="w-full px-4 py-3 border border-zinc-200 rounded-xl bg-zinc-50 text-sm text-zinc-500 animate-pulse">
+                <div className="w-full px-4 py-3 border border-zinc-200 dark:border-zinc-700/50 rounded-xl bg-zinc-50 dark:bg-zinc-900 text-sm text-zinc-500 dark:text-zinc-400 animate-pulse transition-colors">
                   Loading available forms from database...
                 </div>
               ) : (
                 <select
                   value={data.formId || ''}
                   onChange={(e) => updateBlockData(index, 'formId', e.target.value)}
-                  className="w-full px-4 py-3 border border-zinc-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-900 transition-colors bg-zinc-50/50 text-sm cursor-pointer"
+                  className="w-full px-4 py-3 border border-zinc-200 dark:border-zinc-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-indigo-500/30 focus:border-zinc-900 dark:focus:border-indigo-500 transition-colors bg-zinc-50/50 dark:bg-zinc-950 dark:text-zinc-100 text-sm cursor-pointer"
                 >
-                  <option value="" disabled>-- Select a Contact Form --</option>
+                  <option value="" disabled className="dark:bg-zinc-900">-- Select a Contact Form --</option>
                   {availableForms.map((form) => (
-                    <option key={form.id} value={form.id}>
+                    <option key={form.id} value={form.id} className="dark:bg-zinc-900">
                       {form.name} ({form.slug}) - {form.isActive ? 'Active' : 'Inactive'}
                     </option>
                   ))}
                 </select>
               )}
-              <p className="text-xs text-zinc-400 mt-1.5">
+              <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-1.5">
                 Select the form you want to display. You can create new forms from the Contact Forms module.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-zinc-100">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-zinc-100 dark:border-zinc-800 transition-colors duration-300">
               <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-2">Form Override Title</label>
+                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">Form Override Title</label>
                 <input 
                   type="text" 
                   value={data.formTitle || ''} 
                   onChange={(e) => updateBlockData(index, 'formTitle', e.target.value)}
                   placeholder="e.g. Reach Out Today"
-                  className="w-full px-4 py-3 border border-zinc-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-900 transition-colors bg-zinc-50/50 text-sm"
+                  className="w-full px-4 py-3 border border-zinc-200 dark:border-zinc-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-indigo-500/30 focus:border-zinc-900 dark:focus:border-indigo-500 transition-colors bg-zinc-50/50 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder-zinc-600 text-sm"
                 />
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-zinc-700 mb-2">Submit Button Text</label>
+                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">Submit Button Text</label>
                 <input 
                   type="text" 
                   value={data.submitButtonText || ''} 
                   onChange={(e) => updateBlockData(index, 'submitButtonText', e.target.value)}
                   placeholder="e.g. Send Application"
-                  className="w-full px-4 py-3 border border-zinc-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-900 transition-colors bg-zinc-50/50 text-sm"
+                  className="w-full px-4 py-3 border border-zinc-200 dark:border-zinc-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-indigo-500/30 focus:border-zinc-900 dark:focus:border-indigo-500 transition-colors bg-zinc-50/50 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder-zinc-600 text-sm"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-zinc-700 mb-2">Redirect Path *</label>
+              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">Redirect Path *</label>
               <input 
                 type="text" 
                 value={data.redirectPath || ''} 
                 onChange={(e) => updateBlockData(index, 'redirectPath', e.target.value)}
                 placeholder="e.g. /thank-you"
-                className="w-full px-4 py-3 border border-zinc-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-900 transition-colors bg-zinc-50/50 text-sm"
+                className="w-full px-4 py-3 border border-zinc-200 dark:border-zinc-700 rounded-xl focus:outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-indigo-500/30 focus:border-zinc-900 dark:focus:border-indigo-500 transition-colors bg-zinc-50/50 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder-zinc-600 text-sm"
               />
-              <p className="text-xs text-zinc-400 mt-1.5">
+              <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-1.5">
                 Leave blank to stay on the same page. Must start with a forward slash (/).
               </p>
             </div>
@@ -580,9 +578,9 @@ const DynamicBlockEditor = ({ block, index, updateBlockData }) => {
 
     case 'divider':
       return (
-        <div className="bg-white rounded-2xl shadow-sm border border-zinc-200 overflow-hidden p-6 text-center">
-          <div className="w-full h-px bg-zinc-200 my-4"></div>
-          <p className="text-sm text-zinc-500 font-medium">Line Divider (No settings required)</p>
+        <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-sm border border-zinc-200 dark:border-zinc-800 overflow-hidden p-6 text-center transition-colors duration-300">
+          <div className="w-full h-px bg-zinc-200 dark:bg-zinc-800 my-4 transition-colors"></div>
+          <p className="text-sm text-zinc-500 dark:text-zinc-400 font-medium">Line Divider (No settings required)</p>
         </div>
         );
         
@@ -750,7 +748,7 @@ const DynamicBlockEditor = ({ block, index, updateBlockData }) => {
 
     default:
       return (
-        <div className="p-4 bg-yellow-50 border border-yellow-200 rounded-xl text-yellow-800 text-sm">
+        <div className="p-4 bg-yellow-50 dark:bg-yellow-500/10 border border-yellow-200 dark:border-yellow-500/30 rounded-xl text-yellow-800 dark:text-yellow-400 text-sm transition-colors duration-300">
           Unknown block type: {type}
         </div>
       );

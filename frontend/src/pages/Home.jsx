@@ -1,5 +1,6 @@
-import React, { useEffect, Suspense, lazy } from 'react';
+import React, { useEffect, Suspense, lazy, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { ArrowUp } from 'lucide-react';
 import useScrollAnimation from '../hooks/useScrollAnimation';
 import Hero from '../components/home/Hero';
 import Services from '../components/home/Services';
@@ -25,6 +26,24 @@ const SectionFallback = () => (
 const Home = () => {
   useScrollAnimation();
   const location = useLocation();
+  const [showTopBtn, setShowTopBtn] = useState(false);
+
+  // Scroll Track Logic
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 1000) {
+        setShowTopBtn(true);
+      } else {
+        setShowTopBtn(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   useEffect(() => {
     if (location.hash) {
@@ -81,6 +100,21 @@ const Home = () => {
         <Gallery />
         <CtaSection />
       </Suspense>
+
+      {/* Back to Top Button */}
+      <div
+        className={`fixed bottom-10 left-1/2 -translate-x-1/2 z-[90] transition-all duration-500 ${
+          showTopBtn ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-10 invisible'
+        }`}
+      >
+        <button
+          onClick={scrollToTop}
+          className="flex items-center justify-center p-3.5 rounded-full bg-white/10 backdrop-blur-lg border border-white/40 text-[#3B82F6] shadow-[0_0_20px_rgba(59,130,246,0.4)] hover:shadow-[0_0_30px_rgba(59,130,246,0.6)] hover:bg-white/20 transition-all duration-300 cursor-pointer animate-bounce"
+          aria-label="Back to top"
+        >
+          <ArrowUp className="w-6 h-6" strokeWidth={2.5} />
+        </button>
+      </div>
     </>
   );
 };

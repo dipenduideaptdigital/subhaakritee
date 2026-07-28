@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Outlet, NavLink, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { 
-  LayoutDashboard, Image as ImageIcon, Settings, LogOut, FileText, 
+  LayoutDashboard, Image as ImageIcon, Settings, LogOut, FileText, Sun, Moon,
   Globe, Inbox, Menu, X, BookOpen, Tag, Layers, Briefcase, Wrench, ChevronDown, FolderOpen, AlertTriangle
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext'; 
 import { usePermission } from '../../hooks/usePermission'; 
+import { useTheme } from '../../context/ThemeContext';
 import apiClient from '../../api/client';
 
 const AdminLayout = () => {
@@ -13,6 +14,7 @@ const AdminLayout = () => {
   const location = useLocation();
   const { user, isAuthenticated, logoutContext } = useAuth(); 
   const { hasPermission } = usePermission(); 
+  const { isDarkMode, toggleTheme } = useTheme();
   
   const roleSlug = user?.systemRole?.slug?.toUpperCase();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -200,11 +202,11 @@ const AdminLayout = () => {
     } 
     
     return (
-      <div className="h-screen w-full flex items-center justify-center bg-zinc-50 flex-col font-sans">
-        <div className="bg-white p-8 rounded-2xl border border-red-100 shadow-sm text-center max-w-md">
-          <h2 className="text-xl font-bold text-red-600 mb-2">Access Restricted</h2>
-          <p className="text-sm text-zinc-500 mb-6">Your staff account is active, but you have 0 functional permissions assigned. Please ask a Super Admin to assign you a role.</p>
-          <button onClick={handleLogout} className="w-full py-2.5 bg-zinc-900 hover:bg-zinc-800 text-white font-bold rounded-xl text-sm transition-colors">
+      <div className="h-screen w-full flex items-center justify-center bg-zinc-50 dark:bg-zinc-950 flex-col font-sans transition-colors duration-300">
+        <div className="bg-white dark:bg-zinc-900 p-8 rounded-2xl border border-red-100 dark:border-red-900/30 shadow-sm text-center max-w-md transition-colors duration-300">
+          <h2 className="text-xl font-bold text-red-600 dark:text-red-500 mb-2">Access Restricted</h2>
+          <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-6">Your staff account is active, but you have 0 functional permissions assigned. Please ask a Super Admin to assign you a role.</p>
+          <button onClick={handleLogout} className="w-full py-2.5 bg-zinc-900 dark:bg-zinc-100 hover:bg-zinc-800 dark:hover:bg-white text-white dark:text-zinc-900 font-bold rounded-xl text-sm transition-colors">
             Sign Out
           </button>
         </div>
@@ -213,11 +215,11 @@ const AdminLayout = () => {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-[#f8f9fa] text-zinc-900 overflow-hidden font-sans relative">
+    <div className="flex flex-col h-screen bg-[#f8f9fa] dark:bg-[#09090b] text-zinc-900 dark:text-zinc-100 overflow-hidden font-sans relative transition-colors duration-300">
       
       {/* GLOBAL MAINTENANCE BANNER */}
       {systemStateInfo && systemStateInfo.state !== "ACTIVE" && (
-        <div className="w-full bg-red-600 text-white px-4 py-2 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 text-xs font-bold tracking-wide z-[100] shadow-md relative shrink-0">
+        <div className="w-full bg-red-600 dark:bg-red-700 text-white px-4 py-2 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 text-xs font-bold tracking-wide z-[100] shadow-md relative shrink-0">
           <span className="flex items-center gap-2 uppercase">
             <AlertTriangle className="w-4 h-4" /> 
             WEBSITE IS UNDER {systemStateInfo.state} MODE
@@ -232,21 +234,23 @@ const AdminLayout = () => {
       {/* Main Layout Wrapper */}
       <div className="flex flex-1 overflow-hidden relative w-full">
         {isMobileMenuOpen && (
-          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-20 md:hidden" onClick={() => setIsMobileMenuOpen(false)} />
+          <div className="fixed inset-0 bg-black/50 dark:bg-black/70 backdrop-blur-sm z-20 md:hidden transition-opacity" onClick={() => setIsMobileMenuOpen(false)} />
         )}
 
         {/* Sidebar */}
-        <aside className={`fixed md:relative w-72 h-full bg-blue-900 text-white flex flex-col transition-transform duration-300 ease-in-out border-r border-blue-800/50 shadow-2xl z-30 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}>
-          <div className="p-3 mt-2 flex flex-col items-center justify-center border-b border-blue-800/50 relative">
-            <div className="text-2xl font-sans font-extrabold tracking-wider mt-1.5 uppercase text-white text-center">
+        <aside className={`fixed md:relative w-72 h-full bg-blue-900 dark:bg-zinc-950 text-white flex flex-col transition-all duration-300 ease-in-out border-r border-blue-800/50 dark:border-zinc-800 shadow-2xl z-30 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}>
+          <div className="p-3 mt-2 flex flex-col items-center justify-center border-b border-blue-800/50 dark:border-zinc-800 relative">
+            <div className="text-2xl font-sans font-extrabold tracking-wider mt-1.5 uppercase text-white dark:text-zinc-100 text-center">
               {cmsName}
             </div>
             {cmsTagline && (
-              <div className="text-xs text-blue-200 tracking-wide mt-0.5 font-medium text-center">
+              <div className="text-xs text-blue-200 dark:text-zinc-400 tracking-wide mt-0.5 font-medium text-center">
                 {cmsTagline}
               </div>
             )}
-            <button className="absolute right-8 md:hidden text-white hover:bg-blue-800 p-2 rounded-lg" onClick={() => setIsMobileMenuOpen(false)}><X className="w-6 h-6" /></button>
+            <button className="absolute right-8 md:hidden text-white dark:text-zinc-400 hover:bg-blue-800 dark:hover:bg-zinc-800 p-2 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+              <X className="w-6 h-6" />
+            </button>
           </div>
 
           <nav 
@@ -255,9 +259,9 @@ const AdminLayout = () => {
           >
             <NavLink 
               to="/" 
-              className="flex items-center gap-4 px-4 py-3.5 rounded-xl border border-blue-800/40 bg-blue-950/40 text-white transition-all duration-300 group shadow-inner mb-4 hover:bg-blue-800 hover:border-blue-500/30 hover:shadow-lg hover:shadow-blue-950/30"
+              className="flex items-center gap-4 px-4 py-3.5 rounded-xl border border-blue-800/40 dark:border-zinc-800 bg-blue-950/40 dark:bg-zinc-900/50 text-white dark:text-zinc-200 transition-all duration-300 group shadow-inner mb-4 hover:bg-blue-800 dark:hover:bg-zinc-800 hover:border-blue-500/30 dark:hover:border-zinc-700 hover:shadow-lg hover:shadow-blue-950/30 dark:hover:shadow-black/50"
             >
-              <Globe className="w-5 h-5 text-white group-hover:rotate-12 group-hover:scale-110 transition-all duration-500" strokeWidth={1.5} />
+              <Globe className="w-5 h-5 text-white dark:text-zinc-300 group-hover:rotate-12 group-hover:scale-110 transition-all duration-500" strokeWidth={1.5} />
               <span className="font-semibold tracking-wide text-sm">Subhaakritee</span>
             </NavLink>
             
@@ -272,22 +276,22 @@ const AdminLayout = () => {
                       onClick={() => toggleMenu(item.name)}
                       className={`flex items-center justify-between px-4 py-3.5 rounded-xl transition-all duration-300 group w-full ${
                         isChildActive && !isOpen
-                          ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/50 border border-blue-500/50'
+                          ? 'bg-blue-600 dark:bg-blue-600/20 text-white dark:text-blue-400 shadow-lg shadow-blue-900/50 dark:shadow-none border border-blue-500/50 dark:border-blue-500/30'
                           : isOpen
-                          ? 'text-white bg-blue-800/30'
-                          : 'text-blue-100 hover:bg-blue-800 hover:text-white'
+                          ? 'text-white dark:text-zinc-100 bg-blue-800/30 dark:bg-zinc-800/50'
+                          : 'text-blue-100 dark:text-zinc-400 hover:bg-blue-800 dark:hover:bg-zinc-900 hover:text-white dark:hover:text-zinc-200'
                       }`}
                     >
                       <div className="flex items-center gap-4">
-                        <item.icon className={`w-5 h-5 transition-transform ${isOpen ? 'scale-110 text-white' : 'group-hover:scale-110'}`} strokeWidth={1.5} />
+                        <item.icon className={`w-5 h-5 transition-transform ${isOpen ? 'scale-110 text-white dark:text-zinc-200' : 'group-hover:scale-110'}`} strokeWidth={1.5} />
                         <span className="font-medium tracking-wide text-sm">{item.name}</span>
                       </div>
-                      <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isOpen ? 'rotate-180 text-white' : 'text-blue-300'}`} />
+                      <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isOpen ? 'rotate-180 text-white dark:text-zinc-200' : 'text-blue-300 dark:text-zinc-500'}`} />
                     </button>
                     
                     {/* Dropdown*/}
                     <div className={`flex flex-col overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-40 opacity-100 mt-1' : 'max-h-0 opacity-0'}`}>
-                      <div className="pl-5 pr-2 py-1 space-y-1 border-l-2 border-blue-800/50 ml-6">
+                      <div className="pl-5 pr-2 py-1 space-y-1 border-l-2 border-blue-800/50 dark:border-zinc-800 ml-6">
                         {item.children.map(child => (
                           <NavLink
                             key={child.name}
@@ -297,8 +301,8 @@ const AdminLayout = () => {
                             className={() =>
                               `flex items-center gap-3 px-4 py-2.5 rounded-lg transition-all duration-200 ${
                                 isPathActive(child.path) 
-                                  ? 'bg-blue-500/20 text-white font-semibold' 
-                                  : 'text-blue-200/70 hover:text-white hover:bg-blue-800/40'
+                                  ? 'bg-blue-500/20 dark:bg-blue-500/10 text-white dark:text-blue-400 font-semibold' 
+                                  : 'text-blue-200/70 dark:text-zinc-500 hover:text-white dark:hover:text-zinc-300 hover:bg-blue-800/40 dark:hover:bg-zinc-800/50'
                               }`
                             }
                           >
@@ -319,7 +323,9 @@ const AdminLayout = () => {
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={({ isActive }) =>
                     `flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all duration-300 group ${
-                      isActive ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/50 border border-blue-500/50' : 'text-blue-100 hover:bg-blue-800 hover:text-white'
+                      isActive 
+                        ? 'bg-blue-600 dark:bg-blue-600/20 text-white dark:text-blue-400 shadow-lg shadow-blue-900/50 dark:shadow-none border border-blue-500/50 dark:border-blue-500/30' 
+                        : 'text-blue-100 dark:text-zinc-400 hover:bg-blue-800 dark:hover:bg-zinc-900 hover:text-white dark:hover:text-zinc-200'
                     }`
                   }
                 >
@@ -335,7 +341,9 @@ const AdminLayout = () => {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className={() =>
                   `flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all duration-300 group ${
-                    location.pathname.includes('/admin/settings') ? 'bg-blue-600 text-white shadow-lg shadow-blue-900/50 border border-blue-500/50' : 'text-blue-100 hover:bg-blue-800 hover:text-white'
+                    location.pathname.includes('/admin/settings') 
+                      ? 'bg-blue-600 dark:bg-blue-600/20 text-white dark:text-blue-400 shadow-lg shadow-blue-900/50 dark:shadow-none border border-blue-500/50 dark:border-blue-500/30' 
+                      : 'text-blue-100 dark:text-zinc-400 hover:bg-blue-800 dark:hover:bg-zinc-900 hover:text-white dark:hover:text-zinc-200'
                   }`
                 }
               >
@@ -347,35 +355,46 @@ const AdminLayout = () => {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 flex flex-col relative overflow-hidden bg-[#f4f4f5] w-full">
-          <header className="h-20 bg-white/80 backdrop-blur-md border-b border-zinc-200 flex items-center justify-between px-4 sm:px-10 z-10 shadow-sm shrink-0">
+        <main className="flex-1 flex flex-col relative overflow-hidden bg-[#f4f4f5] dark:bg-[#09090b] w-full transition-colors duration-300">
+          <header className="h-20 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between px-4 sm:px-10 z-10 shadow-sm shrink-0 transition-colors duration-300">
             <div className="flex items-center gap-4">
-              <button className="md:hidden p-2 -ml-2 rounded-xl text-zinc-600 hover:bg-zinc-100" onClick={() => setIsMobileMenuOpen(true)}><Menu className="w-6 h-6" /></button>
-              <h2 className="text-lg sm:text-xl font-semibold text-zinc-800 tracking-tight">Admin Portal</h2>
+              <button className="md:hidden p-2 -ml-2 rounded-xl text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" onClick={() => setIsMobileMenuOpen(true)}>
+                <Menu className="w-6 h-6" />
+              </button>
+              <h2 className="text-lg sm:text-xl font-semibold text-zinc-800 dark:text-zinc-100 tracking-tight">Admin Portal</h2>
             </div>
             <div className="flex items-center gap-4">
+              {/* Theme Toggle Button */}
+              <button 
+                onClick={toggleTheme}
+                className="p-2 rounded-xl text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
+                title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+              >
+                {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              </button>
+              
               <div className="relative" ref={profileDropdownRef}>
                 <button 
                   onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
-                  className="flex items-center gap-3 p-1.5 rounded-xl hover:bg-zinc-100 active:bg-zinc-200/70 transition-all duration-200 cursor-pointer focus:outline-none select-none border border-transparent hover:border-zinc-200/50"
+                  className="flex items-center gap-3 p-1.5 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-800 active:bg-zinc-200/70 dark:active:bg-zinc-700 transition-all duration-200 cursor-pointer focus:outline-none select-none border border-transparent hover:border-zinc-200/50 dark:hover:border-zinc-700/50"
                 >
                   <div className="text-right hidden sm:block">
-                    <p className="text-sm font-semibold text-zinc-800 leading-tight">{user?.name || 'Staff'}</p>
-                    <p className="text-[10px] font-medium text-zinc-500 uppercase tracking-wider mt-0.5">{user?.systemRole?.name || 'Admin'}</p>
+                    <p className="text-sm font-semibold text-zinc-800 dark:text-zinc-100 leading-tight">{user?.name || 'Staff'}</p>
+                    <p className="text-[10px] font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mt-0.5">{user?.systemRole?.name || 'Admin'}</p>
                   </div>
                   <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold shadow-md uppercase shrink-0 hover:scale-105 transition-transform duration-200">
                     {user?.name ? user.name.charAt(0) : 'S'}
                   </div>
-                  <ChevronDown className={`w-4 h-4 text-zinc-500 transition-transform duration-300 ${isProfileDropdownOpen ? 'rotate-180' : ''}`} />
+                  <ChevronDown className={`w-4 h-4 text-zinc-500 dark:text-zinc-400 transition-transform duration-300 ${isProfileDropdownOpen ? 'rotate-180' : ''}`} />
                 </button>
 
                 {/* Dropdown Menu */}
                 {isProfileDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-56 bg-white border border-zinc-200/80 rounded-xl shadow-xl py-1.5 z-50 transform origin-top-right transition-all duration-200 divide-y divide-zinc-100">
+                  <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 rounded-xl shadow-xl py-1.5 z-50 transform origin-top-right transition-all duration-200 divide-y divide-zinc-100 dark:divide-zinc-800">
                     <div className="px-4 py-2.5">
-                      <p className="text-xs text-zinc-500">Signed in as</p>
-                      <p className="text-sm font-semibold text-zinc-800 truncate">{user?.name || 'Staff'}</p>
-                      <p className="text-[10px] font-medium text-blue-600 uppercase tracking-wider mt-0.5">{user?.systemRole?.name || 'Admin'}</p>
+                      <p className="text-xs text-zinc-500 dark:text-zinc-400">Signed in as</p>
+                      <p className="text-sm font-semibold text-zinc-800 dark:text-zinc-100 truncate">{user?.name || 'Staff'}</p>
+                      <p className="text-[10px] font-medium text-blue-600 dark:text-blue-400 uppercase tracking-wider mt-0.5">{user?.systemRole?.name || 'Admin'}</p>
                     </div>
                     <div className="py-1">
                       <button
@@ -383,7 +402,7 @@ const AdminLayout = () => {
                           setIsProfileDropdownOpen(false);
                           handleLogout();
                         }}
-                        className="flex items-center gap-3 w-full px-4 py-2.5 text-red-600 hover:bg-red-50/70 transition-all duration-200 font-semibold text-sm text-left cursor-pointer"
+                        className="flex items-center gap-3 w-full px-4 py-2.5 text-red-600 dark:text-red-500 hover:bg-red-50/70 dark:hover:bg-red-500/10 transition-all duration-200 font-semibold text-sm text-left cursor-pointer"
                       >
                         <LogOut className="w-4 h-4 text-red-500" strokeWidth={2} />
                         <span>Logout</span>

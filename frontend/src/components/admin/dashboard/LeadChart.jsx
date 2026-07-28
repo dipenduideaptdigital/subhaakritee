@@ -46,20 +46,22 @@ const LeadChart = () => {
   const { line, fill } = generateChartPath(chartData);
 
   return (
-    <div className="bg-white rounded-3xl border border-zinc-200/80 shadow-sm p-6 flex flex-col relative overflow-hidden h-full min-h-[300px]">
+    <div className="bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200/80 dark:border-zinc-800 shadow-sm p-6 flex flex-col relative overflow-hidden h-full min-h-[300px] transition-colors duration-300">
       <div className="flex justify-between items-center mb-8 z-20 relative">
         <div>
-          <h2 className="text-lg font-bold text-zinc-900">Lead Generation</h2>
-          <p className="text-xs text-zinc-500 font-medium mt-1">Inquiries received over time</p>
+          <h2 className="text-lg font-bold text-zinc-900 dark:text-zinc-100 transition-colors">Lead Generation</h2>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400 font-medium mt-1 transition-colors">Inquiries received over time</p>
         </div>
-        <div className="flex items-center bg-zinc-100/80 p-1 rounded-lg border border-zinc-200/50">
+        <div className="flex items-center bg-zinc-100/80 dark:bg-zinc-800/80 p-1 rounded-lg border border-zinc-200/50 dark:border-zinc-700/50 transition-colors duration-300">
           {['7D', '30D', '1Y'].map(range => (
             <button 
               key={range}
               onClick={() => setChartRange(range)}
               disabled={loading}
               className={`px-3 py-1.5 text-xs font-bold rounded-md transition-all ${
-                chartRange === range ? 'bg-white text-zinc-900 shadow-sm' : 'text-zinc-500 hover:text-zinc-700 disabled:opacity-50'
+                chartRange === range 
+                  ? 'bg-white dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100 shadow-sm' 
+                  : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200 disabled:opacity-50'
               }`}
             >
               {range}
@@ -70,7 +72,7 @@ const LeadChart = () => {
       
       <div className="flex-1 w-full relative mt-auto z-10 flex items-end">
         {loading ? (
-          <div className="absolute inset-0 flex items-center justify-center bg-white/50 backdrop-blur-sm z-30">
+          <div className="absolute inset-0 flex items-center justify-center bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm z-30 transition-colors duration-300">
             <Loader2 className="w-6 h-6 text-amber-500 animate-spin" />
           </div>
         ) : chartData.length > 1 ? (
@@ -85,7 +87,7 @@ const LeadChart = () => {
             <path d={line} fill="none" stroke="#d97706" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" vectorEffect="non-scaling-stroke"/>
           </svg>
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-sm text-zinc-400 italic">
+          <div className="w-full h-full flex items-center justify-center text-sm text-zinc-400 dark:text-zinc-500 italic transition-colors">
             Not enough data to generate graph.
           </div>
         )}
