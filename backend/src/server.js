@@ -6,8 +6,7 @@ import { logger } from "./config/logger.js";
 import { systemStateStore } from "./shared/core/systemStateStore.js";
 
 // all jobs
-import { cleanupExpiredTokens } from "./jobs/cleanupExpiredTokens.job.js";
-import { initPreviewCleanupJob } from "./jobs/cleanupPreviewTokens.job.js";
+import { initSystemHousekeeping } from "./jobs/systemCleanup.job.js";
 import { initBlogJobs } from "./jobs/blogs.job.js";
 
 const server = http.createServer(app);
@@ -27,8 +26,8 @@ const startServer = async () => {
     logger.info("Initializing System State Engine...");
     await systemStateStore.initialize();
     logger.info("Starting background jobs...");
-    cleanupExpiredTokens();
-    initPreviewCleanupJob();
+    
+    initSystemHousekeeping();
     initBlogJobs();
     logger.info("Background jobs initialized.");
 
