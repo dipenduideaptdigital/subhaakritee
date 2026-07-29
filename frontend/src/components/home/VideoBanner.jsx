@@ -126,7 +126,7 @@ const VideoBanner = ({ data: externalData }) => {
             <h2 className="text-xl sm:text-3xl md:text-5xl lg:text-[80px] font-bold text-white leading-tight sm:leading-tight md:leading-[70px] lg:leading-[120px] ml-0 sm:ml-5 font-helvetica uppercase tracking-normal">
               {renderTitle(title)}
               <span className="block lg:inline-block align-middle lg:ml-6 mt-3 lg:mt-0 max-w-[280px] sm:max-w-sm md:max-w-[420px]">
-                <span className="block text-white text-xs sm:text-sm leading-relaxed font-normal font-helvetica opacity-90 normal-case tracking-normal lg:-translate-y-3">
+                <span className="block text-white text-xs sm:text-sm leading-relaxed font-normal font-helvetica opacity-90 normal-case tracking-normal whitespace-pre-line lg:-translate-y-3">
                   {description}
                 </span>
               </span>

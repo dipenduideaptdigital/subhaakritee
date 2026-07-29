@@ -407,7 +407,7 @@ const Testimonials = ({ data: externalData }) => {
                     <img 
                       src={logoUrl}
                       alt={`Client Partner Logo`}
-                      className="h-10 md:h-14 lg:h-16 w-auto object-contain opacity-60 hover:opacity-100 transition-all duration-300 grayscale hover:grayscale-0"
+                      className="h-10 md:h-14 lg:h-16 w-auto object-contain"
                       onError={(e) => {
                         if (!e.currentTarget.src.includes('logo2.svg')) {
                           e.currentTarget.src = defaultLogo;

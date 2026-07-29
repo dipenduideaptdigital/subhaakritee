@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import project1 from '../../assets/homepage/project1.png';
 import project2 from '../../assets/homepage/project2.png';
 import project3 from '../../assets/homepage/project3.png';
@@ -6,13 +7,15 @@ import project4 from '../../assets/homepage/project4.png';
 import project5 from '../../assets/homepage/project5.png';
 import defaultInterior from '../../assets/homepage/interior.png';
 import apiClient from '../../api/client';
+import { projectsApi } from '../../api/projects';
+import { resolveAssetUrl } from '../../utils/assetResolver';
 
 const defaultProjectsData = [
-  { id: 1, category: 'LANDSCAPE', title: 'Art Deco Revival', description: '<p>Improving homes with expert craftsmanship for years</p>', image: project1 },
-  { id: 2, category: 'RESIDENTIAL', title: 'Modern Minimalist', description: '<p>Improving homes with expert craftsmanship for years</p>', image: project2 },
-  { id: 3, category: 'SINGLE HOME', title: 'Urban Oasis', description: '<p>Improving homes with expert craftsmanship for years</p>', image: project3 },
-  { id: 4, category: 'OFFICE AREA', title: 'Corporate Elegance', description: '<p>Improving homes with expert craftsmanship for years</p>', image: project4 },
-  { id: 5, category: 'COMMERCIAL', title: 'Retail Experience', description: '<p>Improving homes with expert craftsmanship for years</p>', image: project5 }
+  { id: 1, slug: 'art-deco-revival', category: 'LANDSCAPE', title: 'Art Deco Revival', description: '<p>Improving homes with expert craftsmanship for years</p>', image: project1 },
+  { id: 2, slug: 'modern-minimalist', category: 'RESIDENTIAL', title: 'Modern Minimalist', description: '<p>Improving homes with expert craftsmanship for years</p>', image: project2 },
+  { id: 3, slug: 'urban-oasis', category: 'SINGLE HOME', title: 'Urban Oasis', description: '<p>Improving homes with expert craftsmanship for years</p>', image: project3 },
+  { id: 4, slug: 'corporate-elegance', category: 'OFFICE AREA', title: 'Corporate Elegance', description: '<p>Improving homes with expert craftsmanship for years</p>', image: project4 },
+  { id: 5, slug: 'retail-experience', category: 'COMMERCIAL', title: 'Retail Experience', description: '<p>Improving homes with expert craftsmanship for years</p>', image: project5 }
 ];
 
 const smoothScrollTo = (element, target, duration) => {
@@ -23,8 +26,6 @@ const smoothScrollTo = (element, target, duration) => {
   const animate = (currentTime) => {
     const elapsed = currentTime - startTime;
     const progress = Math.min(elapsed / duration, 1);
-    
-    // Cubic ease-in-out easing
     const ease = progress < 0.5 
       ? 4 * progress * progress * progress 
       : 1 - Math.pow(-2 * progress + 2, 3) / 2;
@@ -47,73 +48,106 @@ const OurProjects = ({ data: externalData }) => {
 
   // Mouse Drag States
   const [isDragging, setIsDragging] = useState(false);
+  const [hasDragged, setHasDragged] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeftPos, setScrollLeftPos] = useState(0);
 
   useEffect(() => {
     let isMounted = true;
 
-    const processContent = (fetchedContent) => {
-      if (isMounted) setContent(fetchedContent);
-      const serverUrl = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace('/api/v1', '') : 'http://localhost:5000';
-
-      if (fetchedContent.projects && fetchedContent.projects.length > 0) {
-        const mapped = fetchedContent.projects.map((p, idx) => {
-          const defaultImg = defaultProjectsData[idx % defaultProjectsData.length].image;
-          return {
-            ...p,
-            image: p.image ? (p.image.startsWith('http') ? p.image : `${serverUrl}${p.image}`) : defaultImg
-          };
-        });
-        if (isMounted) setProjectsList(mapped);
-      } else if (isMounted) {
-        setProjectsList(defaultProjectsData);
-      }
-
-      if (fetchedContent.bottomImage) {
-        const botUrl = fetchedContent.bottomImage.startsWith('http') ? fetchedContent.bottomImage : `${serverUrl}${fetchedContent.bottomImage}`;
-        const img = new Image();
-        img.src = botUrl;
-        img.onload = () => { if (isMounted) setInteriorImg(botUrl); };
-        img.onerror = () => { if (isMounted) setInteriorImg(defaultInterior); };
-      } else if (isMounted) {
-        setInteriorImg(defaultInterior);
-      }
-    };
-
-    if (externalData) {
-      processContent(externalData);
-      return () => { isMounted = false; };
-    }
-
-    const fetchProjectsData = async () => {
+    const fetchAllData = async () => {
       try {
-        const res = await apiClient.get('/cms/section/homepage_our_projects');
-        const { data } = res;
-        if (data.success && data.data?.content) {
-          processContent(data.data.content);
+        let fetchedContent = externalData;
+        if (!fetchedContent) {
+          const res = await apiClient.get('/cms/section/homepage_our_projects');
+          if (res.data?.success) {
+            fetchedContent = res.data.data.content;
+          }
+        }
+
+        if (isMounted && fetchedContent) {
+          setContent(fetchedContent);
+          const serverUrl = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace('/api/v1', '') : 'http://localhost:5000';
+          
+          if (fetchedContent.bottomImage) {
+            const botUrl = fetchedContent.bottomImage.startsWith('http') ? fetchedContent.bottomImage : `${serverUrl}${fetchedContent.bottomImage}`;
+            const img = new Image();
+            img.src = botUrl;
+            img.onload = () => { if (isMounted) setInteriorImg(botUrl); };
+            img.onerror = () => { if (isMounted) setInteriorImg(defaultInterior); };
+          } else if (isMounted) {
+            setInteriorImg(defaultInterior);
+          }
+        }
+
+        const dynamicProjectsRes = await projectsApi.getPublicProjects({ limit: 6 });
+        const dynamicProjects = dynamicProjectsRes.data || [];
+
+        if (isMounted) {
+          if (dynamicProjects.length > 0) {
+            const mappedDynamic = dynamicProjects.map((p, idx) => ({
+              id: p.id,
+              slug: p.slug || p.id,
+              category: p.category || 'PROJECT',
+              title: p.title,
+              description: p.description || '',
+              image: resolveAssetUrl(p.featuredImage?.url || p.featuredImageId, defaultProjectsData[idx % defaultProjectsData.length].image)
+            }));
+            setProjectsList(mappedDynamic);
+          } else if (fetchedContent?.projects?.length > 0) {
+            const serverUrl = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace('/api/v1', '') : 'http://localhost:5000';
+            const mappedCMS = fetchedContent.projects.map((p, idx) => ({
+              ...p,
+              image: p.image ? (p.image.startsWith('http') ? p.image : `${serverUrl}${p.image}`) : defaultProjectsData[idx % defaultProjectsData.length].image
+            }));
+            setProjectsList(mappedCMS);
+          } else {
+            setProjectsList(defaultProjectsData);
+          }
         }
       } catch (error) {
-        console.error('Failed to fetch our projects content:', error);
+        console.error('Failed to fetch projects data:', error);
+        if (isMounted) setProjectsList(defaultProjectsData);
       }
     };
 
-    fetchProjectsData();
+    fetchAllData();
 
     return () => {
       isMounted = false;
     };
   }, [externalData]);
 
-  const activeProjects = projectsList.slice(0, 3);
+  const activeProjects = projectsList;
+  
   const infiniteProjects = [
     ...activeProjects, ...activeProjects, ...activeProjects,
-    ...activeProjects, ...activeProjects, ...activeProjects, ...activeProjects
+    ...activeProjects, ...activeProjects, ...activeProjects,
+    ...activeProjects, ...activeProjects, ...activeProjects
   ];
 
   useEffect(() => {
-    if (carouselRef.current) {
-      carouselRef.current.scrollLeft = carouselRef.current.scrollWidth / 3;
+    if (carouselRef.current && projectsList.length > 0) {
+      setTimeout(() => {
+        if (!carouselRef.current) return;
+        const carousel = carouselRef.current;
+        const innerContainer = carousel.firstElementChild;
+        const firstCard = innerContainer ? innerContainer.firstElementChild : null;
+        
+        if (firstCard) {
+          const cardWidth = firstCard.getBoundingClientRect().width;
+          const gap = window.innerWidth >= 768 ? 40 : 24; 
+          const threeCardsWidth = (cardWidth * 3) + (gap * 2);
+          
+          const sideSpace = (window.innerWidth - threeCardsWidth) / 2;
+          
+          const startItemOffset = 9 * (cardWidth + gap);
+          
+          carousel.scrollLeft = startItemOffset - sideSpace;
+        } else {
+          carousel.scrollLeft = carousel.scrollWidth / 3;
+        }
+      }, 100);
     }
   }, [projectsList]);
 
@@ -153,6 +187,7 @@ const OurProjects = ({ data: externalData }) => {
 
   const handleMouseDown = (e) => {
     setIsDragging(true);
+    setHasDragged(false);
     setStartX(e.pageX - carouselRef.current.offsetLeft);
     setScrollLeftPos(carouselRef.current.scrollLeft);
   };
@@ -170,6 +205,11 @@ const OurProjects = ({ data: externalData }) => {
     e.preventDefault();
     const x = e.pageX - carouselRef.current.offsetLeft;
     const walk = (x - startX) * 1.5;
+    
+    if (Math.abs(walk) > 5) {
+      setHasDragged(true);
+    }
+    
     carouselRef.current.scrollLeft = scrollLeftPos - walk;
   };
 
@@ -222,7 +262,6 @@ const OurProjects = ({ data: externalData }) => {
               <h2 className="text-4xl md:text-5xl lg:text-[62px] font-bold tracking-tight text-gray-900 leading-[1.05] text-left">
                 {renderTitle(title)}
               </h2>
-              {/* Updated: Changed <p> to <div> and added dangerouslySetInnerHTML */}
               <div 
                 className="text-gray-500 text-sm md:text-[19px] font-normal leading-relaxed max-w-[750px] text-left mt-6 prose-p:m-0"
                 dangerouslySetInnerHTML={{ __html: description }}
@@ -232,8 +271,7 @@ const OurProjects = ({ data: externalData }) => {
         </div>
       </div>
       
-      {/* Carousel Section */}
-      <div className="container mx-auto w-full max-w-full px-6 md:px-0 md:max-w-[1050px] lg:max-w-[1172px] overflow-hidden">
+      <div className="w-full max-w-full overflow-hidden">
         <div
           className={`flex w-full overflow-x-auto hide-scrollbar opal-move-up select-none ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
           ref={carouselRef}
@@ -255,9 +293,16 @@ const OurProjects = ({ data: externalData }) => {
                   key={`${project.id}-${index}`}
                   className={`w-[250px] md:w-[320px] lg:w-[360px] shrink-0 flex flex-col ${marginTopClass}`}
                 >
-                  {/* Image Card */}
-                  <div className="relative w-full h-[380px] md:h-[500px] rounded-[2.5rem] overflow-hidden mb-6 shadow-sm group bg-zinc-100 pointer-events-none">
-                    <img
+                  <Link 
+                    to={`/projects/${project.slug || project.id}`}
+                    onClick={(e) => {
+                      if (hasDragged) e.preventDefault();
+                    }}
+                    className="flex flex-col group cursor-pointer"
+                  >
+                    {/* Image Card */}
+                    <div className="relative w-full h-[380px] md:h-[500px] rounded-[2.5rem] overflow-hidden mb-6 shadow-sm bg-zinc-100 pointer-events-none">
+                      <img
                       src={project.image}
                       alt={project.title}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -279,12 +324,12 @@ const OurProjects = ({ data: externalData }) => {
                   {/* Card Text */}
                   <div className="px-2">
                     <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">{project.title}</h3>
-                   
                     <div 
-                      className="text-sm text-gray-500 font-normal leading-relaxed prose-p:m-0"
+                      className="text-sm text-gray-500 font-normal leading-relaxed prose-p:m-0 line-clamp-2"
                       dangerouslySetInnerHTML={{ __html: project.description }}
                     />
                   </div>
+                  </Link>
                 </div>
               );
             })}
