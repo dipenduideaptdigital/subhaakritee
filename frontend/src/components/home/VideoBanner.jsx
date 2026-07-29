@@ -121,18 +121,16 @@ const VideoBanner = ({ data: externalData }) => {
         {/* Bottom Content Area */}
         <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-8 md:p-16 lg:pb-[70px] lg:pt-0 lg:px-[120px] z-20">
 
-          {/* Headlines */}
+          {/* Headlines & Description */}
           <div className="w-full lg:max-w-[1153px]">
             <h2 className="text-xl sm:text-3xl md:text-5xl lg:text-[80px] font-bold text-white leading-tight sm:leading-tight md:leading-[70px] lg:leading-[120px] ml-0 sm:ml-5 font-helvetica uppercase tracking-normal">
               {renderTitle(title)}
+              <span className="block lg:inline-block align-middle lg:ml-6 mt-3 lg:mt-0 max-w-[280px] sm:max-w-sm md:max-w-[420px]">
+                <span className="block text-white text-xs sm:text-sm leading-relaxed font-normal font-helvetica opacity-90 normal-case tracking-normal lg:-translate-y-3">
+                  {description}
+                </span>
+              </span>
             </h2>
-          </div>
-
-          {/* Description Paragraph */}
-          <div className="mt-2 sm:mt-4 lg:mt-0 mb-1 sm:mb-3 mr-0 sm:mr-5 lg:absolute lg:bottom-[70px] lg:right-[120px] lg:w-[510px] shrink-0">
-            <p className="text-white text-xs sm:text-sm md:text-[20px] leading-relaxed sm:leading-snug md:leading-[30px] font-normal font-helvetica opacity-90 sm:opacity-100">
-              {description}
-            </p>
           </div>
         </div>
       </section>

@@ -267,5 +267,6 @@ export const globalGeneralSettingsSchema = z.object({
     errorPageTitle: z.string().max(150).optional(),
     errorPageDescription: z.string().max(500).optional(),
     errorPageButtonText: z.string().max(50).optional(),
+    showBackToTop: z.union([z.boolean(), z.string()]).optional(),
   })
 });

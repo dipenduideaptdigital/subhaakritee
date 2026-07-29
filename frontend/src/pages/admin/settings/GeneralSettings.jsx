@@ -23,7 +23,8 @@ const GeneralSettings = () => {
     errorPageImage: '',
     errorPageTitle: 'Page Not Found',
     errorPageDescription: "The page you are looking for doesn't exist or has been moved.",
-    errorPageButtonText: 'Back to Home'
+    errorPageButtonText: 'Back to Home',
+    showBackToTop: true
   });
 
   const [isLoading, setIsLoading] = useState(true);
@@ -251,8 +252,9 @@ const GeneralSettings = () => {
             </div>
           </div>
         </div>
-
+                  
         {/* Right Column: 404 Settings */}
+        <div className="space-y-6">
         <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-sm border border-zinc-100 dark:border-zinc-800 overflow-hidden h-fit transition-colors duration-300">
           <div className="px-5 py-3 border-b border-zinc-100 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-800/50">
             <h2 className="text-sm font-bold text-zinc-900 dark:text-zinc-100">404 Error Page (Not Found)</h2>
@@ -332,6 +334,31 @@ const GeneralSettings = () => {
               </div>
             </div>
 
+          </div>
+        </div>
+          {/* UI Preferences Card */}
+          <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-sm border border-zinc-100 dark:border-zinc-800 overflow-hidden transition-colors duration-300">
+            <div className="px-5 py-3 border-b border-zinc-100 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-800/50">
+              <h2 className="text-sm font-bold text-zinc-900 dark:text-zinc-100">Global UI Preferences</h2>
+            </div>
+            <div className="p-5 flex items-center justify-between">
+              <div>
+                <h3 className="text-sm font-bold text-zinc-900 dark:text-zinc-100 mb-1">Back to Top Button</h3>
+                <p className="text-xs text-zinc-500 dark:text-zinc-400">Show a floating scroll-to-top button on the website.</p>
+              </div>
+              <label className="flex items-center cursor-pointer">
+                <div className="relative">
+                  <input 
+                    type="checkbox" 
+                    checked={formData.showBackToTop === false || formData.showBackToTop === 'false' ? false : true} 
+                    onChange={(e) => setFormData(prev => ({ ...prev, showBackToTop: e.target.checked }))} 
+                    className="sr-only" 
+                  />
+                  <div className={`block w-12 h-7 rounded-full transition-colors duration-300 ${formData.showBackToTop === false || formData.showBackToTop === 'false' ? 'bg-zinc-300 dark:bg-zinc-700' : 'bg-emerald-500'}`}></div>
+                  <div className={`absolute left-1 top-1 bg-white w-5 h-5 rounded-full transition-transform duration-300 ${formData.showBackToTop === false || formData.showBackToTop === 'false' ? '' : 'transform translate-x-5'}`}></div>
+                </div>
+              </label>
+            </div>
           </div>
         </div>
 
