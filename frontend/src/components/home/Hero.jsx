@@ -178,7 +178,7 @@ const Hero = ({ data: externalData }) => {
                   </div>
 
                   <div className="flex flex-row items-end justify-center lg:justify-end gap-6 shrink-0 w-full lg:w-auto mt-2 sm:mt-4 lg:mt-10 pb-1">
-                    <div className="w-[200px] h-[200px] md:w-[240px] md:h-[240px] bg-[#3a3532]/40 glass-dark rounded-[24px] p-6 shadow-2xl z-20 flex flex-col justify-between shrink-0">
+                    <div className="w-[200px] h-[200px] md:w-[240px] md:h-[240px] bg-[#3a3532]/40 backdrop-blur-[32px] border border-white/10 rounded-[24px] p-6 shadow-2xl z-20 flex flex-col justify-between shrink-0">
                       <div>
                         <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">{slide.data?.glassCardNumber || slide.fallback.glassCardNumber}</h2>
                         <p className="text-xs text-gray-200 font-normal leading-relaxed">{slide.data?.glassCardText1 || slide.fallback.glassCardText1}</p>
