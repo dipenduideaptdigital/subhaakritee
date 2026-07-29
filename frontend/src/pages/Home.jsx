@@ -127,10 +127,10 @@ const Home = () => {
         >
         <button
           onClick={scrollToTop}
-          className="flex items-center justify-center p-3.5 rounded-full bg-white/10 backdrop-blur-lg border border-white/40 text-[#3B82F6] shadow-[0_0_20px_rgba(59,130,246,0.4)] hover:shadow-[0_0_30px_rgba(59,130,246,0.6)] hover:bg-white/20 transition-all duration-300 cursor-pointer animate-bounce"
+          className="flex items-center justify-center p-3 rounded-full bg-white/10 backdrop-blur-lg border border-white/40 text-[#3B82F6] shadow-[0_0_20px_rgba(59,130,246,0.4)] hover:shadow-[0_0_30px_rgba(59,130,246,0.6)] hover:bg-white/20 transition-all duration-300 cursor-pointer"
           aria-label="Back to top"
         >
-          <ArrowUp className="w-6 h-6" strokeWidth={2.5} />
+          <ArrowUp className="w-5 h-5" strokeWidth={2.5} />
         </button>
       </div>
       )}

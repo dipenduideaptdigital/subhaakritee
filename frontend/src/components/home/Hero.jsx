@@ -150,7 +150,7 @@ const Hero = ({ data: externalData }) => {
               <div className="w-full max-w-[1440px] mx-auto px-6 md:px-8 lg:px-12 pt-28 sm:pt-32 lg:pt-0 pb-12 lg:pb-0">
                 <div className="flex flex-col lg:flex-row justify-between items-center w-full gap-8 lg:gap-8 pt-4 sm:pt-6 lg:pt-0">
                   
-                  <div className="text-white max-w-xl lg:max-w-2xl xl:max-w-3xl flex flex-col items-start text-left w-full lg:w-auto">
+                  <div className="text-white max-w-xl lg:max-w-2xl xl:max-w-[700px] flex flex-col items-start text-left w-full lg:w-auto lg:-mt-20">
                     <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-white/30 backdrop-blur-sm mt-2 sm:mt-0 mb-4 sm:mb-6 shadow-sm">
                       <span className="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(249,115,22,0.8)]"></span>
                       <span className="text-[10px] uppercase tracking-wider font-medium text-white/90">
@@ -177,6 +177,7 @@ const Hero = ({ data: externalData }) => {
                     </Link>
                   </div>
 
+                  {/* CARDS CONTAINER */}
                   <div className="flex flex-row items-end justify-center lg:justify-end gap-6 shrink-0 w-full lg:w-auto mt-2 sm:mt-4 lg:mt-10 pb-1">
                     <div className="w-[200px] h-[200px] md:w-[240px] md:h-[240px] bg-[#3a3532]/40 backdrop-blur-[28px] border border-white/10 rounded-[24px] p-6 shadow-2xl z-20 flex flex-col justify-between shrink-0">
                       <div>
