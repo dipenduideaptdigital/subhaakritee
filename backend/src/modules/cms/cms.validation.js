@@ -213,6 +213,8 @@ export const cmsSettingsSchema = z.object({
   content: z.object({
     cmsName: z.string().max(100).optional(),
     cmsTagline: z.string().max(200).optional(),
+    useLogo: z.boolean().default(false).optional(),
+    logoImage: z.string().optional().nullable(),
   })
 });
 

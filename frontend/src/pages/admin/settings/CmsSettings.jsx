@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Layout, Save, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 import apiClient from '../../../api/client';
+import ImageField from '../../../components/admin/ImageField';
 
 const CmsSettings = () => {
   const [cmsName, setCmsName] = useState('IDPL CMS');
   const [cmsTagline, setCmsTagline] = useState('');
+  const [useLogo, setUseLogo] = useState(false);
+  const [logoImage, setLogoImage] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [message, setMessage] = useState(null);
@@ -21,6 +24,8 @@ const CmsSettings = () => {
       if (content) {
         if (content.cmsName) setCmsName(content.cmsName);
         if (content.cmsTagline) setCmsTagline(content.cmsTagline);
+        if (content.useLogo !== undefined) setUseLogo(content.useLogo);
+        if (content.logoImage) setLogoImage(content.logoImage);
       }
     } catch (error) {
       console.error('Failed to load CMS settings:', error);
@@ -39,18 +44,25 @@ const CmsSettings = () => {
         content: {
           cmsName: cmsName.trim() || 'IDPL CMS',
           cmsTagline: cmsTagline.trim(),
+          useLogo,
+          logoImage
         },
       };
       await apiClient.put('/cms/section/cms_settings', payload);
 
-      // Store in localStorage as instant cache for snappy page loads
       localStorage.setItem('idpl_cms_name', cmsName.trim() || 'IDPL CMS');
       localStorage.setItem('idpl_cms_tagline', cmsTagline.trim());
+      localStorage.setItem('idpl_cms_use_logo', useLogo);
+      localStorage.setItem('idpl_cms_logo_image', logoImage);
 
-      // Dispatch event to update AdminLayout sidebar immediately
       window.dispatchEvent(
         new CustomEvent('cms_settings_updated', {
-          detail: { cmsName: cmsName.trim() || 'IDPL CMS', cmsTagline: cmsTagline.trim() },
+          detail: { 
+            cmsName: cmsName.trim() || 'IDPL CMS', 
+            cmsTagline: cmsTagline.trim(),
+            useLogo,
+            logoImage
+          },
         })
       );
 
@@ -130,11 +142,38 @@ const CmsSettings = () => {
           </div>
 
           <form onSubmit={handleSave} className="p-6 space-y-6">
-            <div>
-              <label className="block text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-2">
-                CMS Name
-              </label>
-              <input
+            {/* Toggle Switch */}
+            <div className="flex items-center justify-between bg-zinc-50 dark:bg-zinc-800/50 p-4 rounded-xl border border-zinc-200 dark:border-zinc-700">
+              <div>
+                <h3 className="text-sm font-bold text-zinc-900 dark:text-zinc-100">Use Image Logo</h3>
+                <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">Switch to upload a logo instead of using text branding.</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setUseLogo(!useLogo)}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none ${useLogo ? 'bg-emerald-500' : 'bg-zinc-300 dark:bg-zinc-600'}`}
+              >
+                <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${useLogo ? 'translate-x-6' : 'translate-x-1'}`} />
+              </button>
+            </div>
+
+            {useLogo ? (
+              <div className="animate-in fade-in duration-300">
+                <label className="block text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-2">
+                  Upload Logo
+                </label>
+                <ImageField value={logoImage} onChange={(val) => setLogoImage(val)} />
+                <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-2">
+                  Recommended format: Transparent PNG or SVG. Max height will be constrained to fit the sidebar.
+                </p>
+              </div>
+            ) : (
+              <div className="space-y-6 animate-in fade-in duration-300">
+                <div>
+                  <label className="block text-xs font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-2">
+                    CMS Name
+                  </label>
+                  <input
                 type="text"
                 value={cmsName}
                 onChange={(e) => setCmsName(e.target.value)}
@@ -159,6 +198,8 @@ const CmsSettings = () => {
                 className="block w-full px-4 py-3 border border-zinc-200 dark:border-zinc-700 rounded-xl leading-5 bg-white dark:bg-zinc-950 placeholder-zinc-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 dark:focus:ring-emerald-500/20 focus:border-emerald-600 dark:focus:border-emerald-500 transition-colors sm:text-sm font-medium text-zinc-900 dark:text-zinc-100"
               />
             </div>
+            </div>
+            )}
           </form>
         </div>
 
@@ -169,14 +210,20 @@ const CmsSettings = () => {
               Live Sidebar Preview
             </h3>
             <div className="bg-blue-900 dark:bg-zinc-950 text-white dark:text-zinc-100 rounded-2xl p-6 shadow-xl border border-blue-800 dark:border-zinc-800 transition-colors duration-300">
-              <div className="text-center py-4 border-b border-blue-800/50 dark:border-zinc-800">
-                <div className="text-2xl font-sans font-extrabold tracking-wider uppercase text-white dark:text-zinc-100">
-                  {cmsName.trim() || 'IDPL CMS'}
-                </div>
-                {cmsTagline.trim() && (
-                  <div className="text-xs text-blue-200 dark:text-zinc-400 tracking-wide mt-1 font-medium">
-                    {cmsTagline.trim()}
-                  </div>
+              <div className="flex flex-col items-center justify-center text-center py-4 border-b border-blue-800/50 dark:border-zinc-800 min-h-[85px]">
+                {useLogo && logoImage ? (
+                  <img src={logoImage} alt="CMS Preview Logo" className="h-12 w-auto object-contain" />
+                ) : (
+                  <>
+                    <div className="text-2xl font-sans font-extrabold tracking-wider uppercase text-white dark:text-zinc-100 leading-tight">
+                      {cmsName.trim() || 'IDPL CMS'}
+                    </div>
+                    {cmsTagline.trim() && (
+                      <div className="text-xs text-blue-200 dark:text-zinc-400 tracking-wide mt-1 font-medium">
+                        {cmsTagline.trim()}
+                      </div>
+                    )}
+                  </>
                 )}
               </div>
               <div className="mt-4 px-3 py-2 bg-blue-950/40 dark:bg-zinc-900/50 rounded-xl text-xs text-blue-200 dark:text-zinc-400 border border-blue-800/40 dark:border-zinc-700 text-center font-medium transition-colors duration-300">

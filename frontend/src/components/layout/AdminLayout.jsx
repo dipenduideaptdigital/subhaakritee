@@ -23,6 +23,8 @@ const AdminLayout = () => {
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [cmsName, setCmsName] = useState(() => localStorage.getItem('idpl_cms_name') || 'IDPL CMS');
   const [cmsTagline, setCmsTagline] = useState(() => localStorage.getItem('idpl_cms_tagline') || '');
+  const [useLogo, setUseLogo] = useState(() => localStorage.getItem('idpl_cms_use_logo') === 'true');
+  const [logoImage, setLogoImage] = useState(() => localStorage.getItem('idpl_cms_logo_image') || '');
   const [systemStateInfo, setSystemStateInfo] = useState(null);
 
   useEffect(() => {
@@ -39,6 +41,14 @@ const AdminLayout = () => {
             setCmsTagline(content.cmsTagline);
             localStorage.setItem('idpl_cms_tagline', content.cmsTagline);
           }
+          if (content.useLogo !== undefined) {
+            setUseLogo(content.useLogo);
+            localStorage.setItem('idpl_cms_use_logo', content.useLogo);
+          }
+          if (content.logoImage !== undefined) {
+            setLogoImage(content.logoImage);
+            localStorage.setItem('idpl_cms_logo_image', content.logoImage);
+          }
         }
       } catch (err) {
         console.error('Failed to fetch CMS settings in AdminLayout:', err);
@@ -52,6 +62,12 @@ const AdminLayout = () => {
       }
       if (e.detail?.cmsTagline !== undefined) {
         setCmsTagline(e.detail.cmsTagline);
+      }
+      if (e.detail?.useLogo !== undefined) {
+        setUseLogo(e.detail.useLogo);
+      }
+      if (e.detail?.logoImage !== undefined) {
+        setLogoImage(e.detail.logoImage);
       }
     };
     window.addEventListener('cms_settings_updated', handleSettingsUpdated);
@@ -239,16 +255,22 @@ const AdminLayout = () => {
 
         {/* Sidebar */}
         <aside className={`fixed md:relative w-72 h-full bg-blue-900 dark:bg-zinc-950 text-white flex flex-col transition-all duration-300 ease-in-out border-r border-blue-800/50 dark:border-zinc-800 shadow-2xl z-30 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}>
-          <div className="p-3 mt-2 flex flex-col items-center justify-center border-b border-blue-800/50 dark:border-zinc-800 relative">
-            <div className="text-2xl font-sans font-extrabold tracking-wider mt-1.5 uppercase text-white dark:text-zinc-100 text-center">
-              {cmsName}
-            </div>
-            {cmsTagline && (
-              <div className="text-xs text-blue-200 dark:text-zinc-400 tracking-wide mt-0.5 font-medium text-center">
-                {cmsTagline}
-              </div>
+          <div className="p-3 mt-2 flex flex-col items-center justify-center border-b border-blue-800/50 dark:border-zinc-800 relative min-h-[85px]">
+            {useLogo && logoImage ? (
+              <img src={logoImage} alt={cmsName || 'CMS Logo'} className="h-12 w-auto object-contain mt-1" />
+            ) : (
+              <>
+                <div className="text-2xl font-sans font-extrabold tracking-wider mt-1.5 uppercase text-white dark:text-zinc-100 text-center leading-tight">
+                  {cmsName}
+                </div>
+                {cmsTagline && (
+                  <div className="text-xs text-blue-200 dark:text-zinc-400 tracking-wide mt-1 font-medium text-center">
+                    {cmsTagline}
+                  </div>
+                )}
+              </>
             )}
-            <button className="absolute right-8 md:hidden text-white dark:text-zinc-400 hover:bg-blue-800 dark:hover:bg-zinc-800 p-2 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+            <button className="absolute right-4 md:hidden text-white dark:text-zinc-400 hover:bg-blue-800 dark:hover:bg-zinc-800 p-2 rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
               <X className="w-6 h-6" />
             </button>
           </div>
