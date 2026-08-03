@@ -300,11 +300,26 @@ const ServiceDetailsBlock = ({
                 </div>
 
                 <div className="hidden sm:flex sm:flex-col border-t border-gray-500">
-                  {faqs.map((faqItem, index) => (
-                    <div key={index} className="border-b border-gray-500 bg-transparent flex items-center justify-between py-3 md:py-5">
-                      <span className="text-[18px] md:text-[20px] font-bold text-gray-900 whitespace-pre-line">{faqItem.question}</span>
-                    </div>
-                  ))}
+                  {faqs.map((faqItem, index) => {
+                    const isOpen = openFaq === index;
+                    return (
+                      <div key={index} className="border-b border-gray-500 bg-transparent flex flex-col py-3 md:py-5">
+                        <button 
+                          type="button"
+                          onClick={() => setOpenFaq(isOpen ? -1 : index)}
+                          className="flex items-center justify-between w-full text-left cursor-pointer outline-none group"
+                        >
+                          <span className="text-[18px] md:text-[20px] font-bold text-gray-900 whitespace-pre-line group-hover:text-[#3B82F6] transition-colors">{faqItem.question}</span>
+                          <ChevronDown className={`w-5 h-5 text-[#3B82F6] shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} strokeWidth={2.5} />
+                        </button>
+                        <div className={`grid transition-all duration-300 ease-in-out ${isOpen ? 'grid-rows-[1fr] mt-4' : 'grid-rows-[0fr]'}`}>
+                          <div className="overflow-hidden">
+                            <p className="text-[15px] leading-7 text-gray-600 whitespace-pre-line pr-8 pb-2">{faqItem.answer}</p>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
 

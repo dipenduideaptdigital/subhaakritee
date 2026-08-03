@@ -548,7 +548,11 @@ export const puckConfig = {
         },
         faqs: {
           type: "array",
-          arrayFields: { question: { type: "text" } }
+          arrayFields: { 
+            question: { type: "text" },
+            answer: { type: "textarea" }
+          },
+          defaultItemProps: { question: 'Question?', answer: 'Answer goes here...' }
         }
       },
       defaultProps: {
@@ -567,7 +571,7 @@ export const puckConfig = {
         ],
         leftBullets: [{ text: "We provide high quality design services." }],
         rightBullets: [{ text: "Flexible with any structure of the building" }],
-        faqs: [{ question: "What Interior Design Services Do You Offer?" }]
+        faqs: [{ question: "What Interior Design Services Do You Offer?", answer: "We offer comprehensive residential and commercial interior design services tailored to your needs." }]
       },
       render: (props) => <ServiceDetailsBlock {...props} />
     },
