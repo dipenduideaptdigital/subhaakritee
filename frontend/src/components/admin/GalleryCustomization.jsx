@@ -4,11 +4,16 @@ import ImageField from './ImageField';
 
 const GalleryCustomization = ({
   galleryData,
-  onChange,
-  onImageSelect
+  onChange
 }) => {
   const images = Array.isArray(galleryData.images) ? galleryData.images : [];
   const paddedImages = [...images, ...Array(6)].slice(0, 6);
+
+  const handleImageChange = (index, url) => {
+    const newImages = [...paddedImages];
+    newImages[index] = url;
+    onChange({ target: { name: 'images', value: newImages } });
+  };
 
   return (
     <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-sm border border-zinc-200 dark:border-zinc-800 overflow-hidden transition-colors duration-300">
@@ -49,8 +54,8 @@ const GalleryCustomization = ({
                 </div>
 
                 <ImageField 
-                  value={imageUrl} 
-                  onChange={(url) => onImageSelect(index, url)} 
+                  value={imageUrl || ''} 
+                  onChange={(url) => handleImageChange(index, url)} 
                 />
               </div>
             ))}
