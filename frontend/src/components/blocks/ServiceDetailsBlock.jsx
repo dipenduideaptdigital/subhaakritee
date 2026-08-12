@@ -198,9 +198,10 @@ const ServiceDetailsBlock = ({
                     </div>
                     <div className="flex flex-col justify-center min-w-0">
                       <h3 className="text-[15px] sm:text-[20px] font-bold text-[#222] leading-tight mb-0.5 sm:mb-0">{item.title}</h3>
-                      <p className="text-[11.5px] sm:text-[13px] font-semibold leading-[16px] sm:leading-[20px] text-[#444] max-w-none sm:max-w-[230px] whitespace-pre-line">
-                        {item.description}
-                      </p>
+                      <div 
+                        className="text-[11.5px] sm:text-[13px] font-semibold leading-[16px] sm:leading-[20px] text-[#444] max-w-none sm:max-w-[230px] [&>p]:m-0"
+                        dangerouslySetInnerHTML={{ __html: item.description || '' }}
+                      />
                     </div>
                   </div>
                 ))}
