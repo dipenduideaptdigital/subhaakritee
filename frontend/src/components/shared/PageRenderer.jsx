@@ -40,6 +40,8 @@ import ProjectsHero from '../projects/ProjectsHero';
 const BlockMapper = memo(({ block, index }) => {
   const { type, data } = block;
   
+  if (data?.isVisible === false) return null;
+
   switch (type) {
     case 'hero': return <Hero key={index} data={data} />;
     case 'services': return <Services key={index} data={data} />;

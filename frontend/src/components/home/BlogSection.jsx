@@ -75,6 +75,8 @@ const BlogSection = ({ data: externalData }) => {
       ));
     });
   };
+  
+  if (content?.isVisible === false) return null;
 
   return (
     <section className="py-20 bg-white overflow-hidden">

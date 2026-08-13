@@ -1141,6 +1141,44 @@ const HomeCustomization = () => {
     });
   };
 
+  const getVisibilityState = () => {
+    switch (activeTab) {
+      case 'hero': return heroData.isVisible !== false;
+      case 'services': return servicesData.isVisible !== false;
+      case 'about': return aboutData.isVisible !== false;
+      case 'our_services': return ourServicesData.isVisible !== false;
+      case 'how_we_work': return howWeWorkData.isVisible !== false;
+      case 'our_projects': return ourProjectsData.isVisible !== false;
+      case 'panoramas': return panoramasData.isVisible !== false;
+      case 'team': return teamData.isVisible !== false;
+      case 'testimonials': return testimonialsData.isVisible !== false;
+      case 'video_banner': return videoBannerData.isVisible !== false;
+      case 'blog_section': return blogSectionData.isVisible !== false;
+      case 'gallery': return galleryData.isVisible !== false;
+      case 'cta': return ctaData.isVisible !== false;
+      default: return true;
+    }
+  };
+
+  const handleVisibilityToggle = (e) => {
+    const isVisible = e.target.checked;
+    switch (activeTab) {
+      case 'hero': setHeroData(p => ({...p, isVisible})); break;
+      case 'services': setServicesData(p => ({...p, isVisible})); break;
+      case 'about': setAboutData(p => ({...p, isVisible})); break;
+      case 'our_services': setOurServicesData(p => ({...p, isVisible})); break;
+      case 'how_we_work': setHowWeWorkData(p => ({...p, isVisible})); break;
+      case 'our_projects': setOurProjectsData(p => ({...p, isVisible})); break;
+      case 'panoramas': setPanoramasData(p => ({...p, isVisible})); break;
+      case 'team': setTeamData(p => ({...p, isVisible})); break;
+      case 'testimonials': setTestimonialsData(p => ({...p, isVisible})); break;
+      case 'video_banner': setVideoBannerData(p => ({...p, isVisible})); break;
+      case 'blog_section': setBlogSectionData(p => ({...p, isVisible})); break;
+      case 'gallery': setGalleryData(p => ({...p, isVisible})); break;
+      case 'cta': setCtaData(p => ({...p, isVisible})); break;
+    }
+  };
+
   const handleSave = async () => {
     try {
       setSaving(true);
@@ -1206,7 +1244,7 @@ const HomeCustomization = () => {
           className="bg-zinc-900 dark:bg-zinc-100 hover:bg-zinc-800 dark:hover:bg-white text-white dark:text-zinc-900 px-6 py-2.5 rounded-xl font-medium tracking-wide flex items-center justify-center gap-2 transition-all shadow-lg shadow-zinc-900/20 dark:shadow-none disabled:opacity-70 text-sm w-full sm:w-auto"
         >
           {saving ? <Loader2 className="w-5 h-5 animate-spin" /> : <Save className="w-5 h-5" />}
-          {saving ? 'Saving...' : 'Save Changes'}
+          {saving ? 'Saving...' : 'Save'}
         </button>
       </div>
 
@@ -1273,6 +1311,27 @@ const HomeCustomization = () => {
               </div>
             </div>
           )}
+        </div>
+      )}
+
+      {/* Section Visibility Master Toggle */}
+      {activeTab !== 'footer' && (
+        <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-6 flex items-center justify-between mb-6 transition-colors duration-300">
+          <div>
+            <h3 className="text-xl font-bold text-zinc-900 dark:text-zinc-100">Show on Homepage</h3>
+          </div>
+          <label className="flex items-center cursor-pointer">
+            <div className="relative">
+              <input 
+                type="checkbox" 
+                checked={getVisibilityState()} 
+                onChange={handleVisibilityToggle} 
+                className="sr-only" 
+              />
+              <div className={`block w-12 h-7 rounded-full transition-colors duration-300 ${getVisibilityState() ? 'bg-emerald-500' : 'bg-zinc-300 dark:bg-zinc-700'}`}></div>
+              <div className={`absolute left-1 top-1 bg-white w-5 h-5 rounded-full transition-transform duration-300 ${getVisibilityState() ? 'transform translate-x-5' : ''}`}></div>
+            </div>
+          </label>
         </div>
       )}
 
@@ -1436,7 +1495,7 @@ const HomeCustomization = () => {
           className="bg-zinc-900 hover:bg-zinc-800 text-white px-8 py-3 rounded-xl font-medium tracking-wide flex items-center justify-center gap-2 transition-all shadow-lg shadow-zinc-900/20 disabled:opacity-70 text-sm w-full sm:w-auto"
         >
           {saving ? <Loader2 className="w-5 h-5 animate-spin" /> : <Save className="w-5 h-5" />}
-          {saving ? 'Saving...' : 'Save Changes'}
+          {saving ? 'Saving...' : 'Save'}
         </button>
       </div>
     </div>

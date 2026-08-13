@@ -15,6 +15,7 @@ const singleHeroSlideSchema = z.object({
 
 export const heroSchema = z.object({
   content: z.object({
+    isVisible: z.boolean().optional(),
     slide1: singleHeroSlideSchema,
     slide2: singleHeroSlideSchema,
     slide3: singleHeroSlideSchema,
@@ -24,6 +25,7 @@ export const heroSchema = z.object({
 // Services Section
 export const servicesSchema = z.object({
   content: z.object({
+    isVisible: z.boolean().optional(),
     badgeText: z.string().max(50).optional(),
     title: z.string().max(150).optional(),
     description: z.string().max(500).optional(),
@@ -39,6 +41,7 @@ export const servicesSchema = z.object({
 // About Section
 export const aboutSchema = z.object({
   content: z.object({
+    isVisible: z.boolean().optional(),
     badgeText: z.string().max(50).optional(),
     title: z.string().max(150).optional(),
     description: z.string().max(1000).optional(),
@@ -51,6 +54,7 @@ export const aboutSchema = z.object({
 // Our Services Section
 export const ourServicesSchema = z.object({
   content: z.object({
+    isVisible: z.boolean().optional(),
     badgeText: z.string().max(50).optional(),
     title: z.string().max(150).optional(),
     description: z.string().max(1000).optional(),
@@ -76,6 +80,7 @@ export const ourServicesSchema = z.object({
 // How We Work Section
 export const howWeWorkSchema = z.object({
   content: z.object({
+    isVisible: z.boolean().optional(),
     badgeText: z.string().max(50).optional(),
     title: z.string().max(150).optional(),
     description: z.string().max(1000).optional(),
@@ -95,6 +100,7 @@ export const howWeWorkSchema = z.object({
 // Our Projects Section
 export const ourProjectsSchema = z.object({
   content: z.object({
+    isVisible: z.boolean().optional(),
     badgeText: z.string().max(50).optional(),
     title: z.string().max(150).optional(),
     description: z.string().max(1000).optional(),
@@ -114,6 +120,7 @@ export const ourProjectsSchema = z.object({
 // Panoramas Section
 export const panoramasSchema = z.object({
   content: z.object({
+    isVisible: z.boolean().optional(),
     badgeText: z.string().max(50).optional(),
     title: z.string().max(150).optional(),
     image: z.string().optional(),
@@ -123,10 +130,10 @@ export const panoramasSchema = z.object({
 // Team Section
 export const teamSchema = z.object({
   content: z.object({
+    isVisible: z.boolean().optional(),
     badgeText: z.string().max(50).optional(),
     title: z.string().max(150).optional(),
     description: z.string().max(1000).optional(),
-    
     members: z.array(
       z.object({
         id: z.union([z.string(), z.number()]).optional(),
@@ -141,6 +148,7 @@ export const teamSchema = z.object({
 // Testimonials Section
 export const testimonialsSchema = z.object({
   content: z.object({
+    isVisible: z.boolean().optional(),
     badgeText: z.string().max(50).optional(),
     title: z.string().max(150).optional(),
     description: z.string().max(1000).optional(),
@@ -160,6 +168,7 @@ export const testimonialsSchema = z.object({
 // Video Banner Section
 export const videoBannerSchema = z.object({
   content: z.object({
+    isVisible: z.boolean().optional(),
     videoId: z.string().max(255).optional(),
     image: z.string().optional(),
     title: z.string().max(150).optional(),
@@ -170,6 +179,7 @@ export const videoBannerSchema = z.object({
 // Blog Section
 export const blogSectionSchema = z.object({
   content: z.object({
+    isVisible: z.boolean().optional(),
     badgeText: z.string().max(50).optional(),
     title: z.string().max(150).optional(),
     posts: z.array(
@@ -187,6 +197,7 @@ export const blogSectionSchema = z.object({
 // Gallery Section
 export const gallerySchema = z.object({
   content: z.object({
+    isVisible: z.boolean().optional(),
     bgText: z.string().max(50).optional(),
     images: z.array(z.string()).max(10).optional(),
   }),
@@ -195,6 +206,7 @@ export const gallerySchema = z.object({
 // CTA Section
 export const ctaSchema = z.object({
   content: z.object({
+    isVisible: z.boolean().optional(),
     badgeText: z.string().max(50).optional(),
     title: z.string().max(150).optional(),
     buttonText: z.string().max(50).optional(),

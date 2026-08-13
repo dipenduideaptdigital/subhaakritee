@@ -62,6 +62,8 @@ const CtaSection = ({ data: externalData }) => {
     });
   };
 
+  if (content?.isVisible === false) return null;
+  
   return (
     <section className="py-14 sm:py-16 md:py-20 lg:py-24 bg-white border-t border-zinc-200 font-['Helvetica',sans-serif]">
       <div className="container mx-auto px-5 sm:px-6 md:px-8 max-w-7xl font-['Helvetica',sans-serif]">

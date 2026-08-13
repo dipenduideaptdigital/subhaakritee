@@ -41,7 +41,10 @@ const AboutProcessBlock = ({ backgroundImage, steps = [] }) => {
             </div>
             <div className="text-white font-['Outfit',sans-serif]">
               <h3 className="text-[18px] lg:text-[24px] font-bold mb-1 lg:mb-2">{item.title}</h3>
-              <p className="text-[12px] lg:text-[14px] text-white/80 italic">{item.desc}</p>
+              <div 
+                className="text-[12px] lg:text-[14px] text-white/80 italic [&_p]:m-0" 
+                dangerouslySetInnerHTML={{ __html: item.desc }}
+              />
             </div>
           </div>
         ))}

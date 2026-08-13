@@ -113,7 +113,7 @@ const ContactFormEditor = () => {
           </label>
           <Can permission={isEditMode ? 'contact_form.edit' : 'contact_form.create'}>
             <button type="submit" disabled={saving} className="flex items-center justify-center gap-2 px-6 py-2.5 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 rounded-xl font-medium hover:bg-zinc-800 dark:hover:bg-white transition-colors shadow-sm disabled:opacity-70 text-sm shrink-0">
-              {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />} {saving ? 'Saving...' : 'Save Form'}
+              {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />} {saving ? 'Saving...' : 'Save'}
             </button>
           </Can>
         </div>

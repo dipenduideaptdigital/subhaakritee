@@ -241,6 +241,8 @@ const OurProjects = ({ data: externalData }) => {
       ));
     });
   };
+  
+  if (content?.isVisible === false) return null;
 
   return (
     <section className="pt-16 md:pt-24 bg-white overflow-hidden">

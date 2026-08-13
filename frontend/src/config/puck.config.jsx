@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Edit2, ChevronUp, ChevronDown } from 'lucide-react';
+import { Edit2, ChevronUp, ChevronDown, Eye, EyeOff } from 'lucide-react';
 import TipTapEditor from '../components/admin/TipTapEditor';
 import HeroSectionTwo from '../components/landing-design-2/HeroSectionTwo';
 import AboutSectionTwo from '../components/landing-design-2/AboutSectionTwo';
@@ -66,6 +66,33 @@ const CollapsibleTiptap = ({ label, value, onChange }) => {
           </div>
         )}
       </div>
+    </div>
+  );
+};
+
+// Puck Custom Visibility Toggle
+const VisibilityToggle = ({ value, onChange }) => {
+  const isVisible = value !== false;
+  return (
+    <div className={`mb-4 p-2.5 rounded-lg border transition-colors duration-300 flex items-center justify-between ${isVisible ? 'bg-blue-50/50 border-blue-200/60' : 'bg-zinc-50 border-zinc-200/60'}`}>
+      <div className="flex items-center gap-2.5">
+        <div className={`p-1.5 rounded-md transition-colors duration-300 ${isVisible ? 'bg-blue-100 text-blue-600' : 'bg-zinc-200 text-zinc-500'}`}>
+          {isVisible ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
+        </div>
+        <span className={`text-sm font-semibold transition-colors duration-300 ${isVisible ? 'text-blue-900' : 'text-zinc-500'}`}>
+          Visible on Website
+        </span>
+      </div>
+      <label className="flex items-center cursor-pointer relative shrink-0 mr-1">
+        <input 
+          type="checkbox" 
+          checked={isVisible} 
+          onChange={(e) => onChange(e.target.checked)} 
+          className="sr-only" 
+        />
+        <div className={`w-9 h-5 rounded-full transition-colors duration-300 shadow-inner ${isVisible ? 'bg-blue-500' : 'bg-zinc-300'}`}></div>
+        <div className={`absolute left-0.5 top-0.5 bg-white w-4 h-4 rounded-full shadow-sm transition-transform duration-300 ${isVisible ? 'transform translate-x-4' : 'transform translate-x-0'}`}></div>
+      </label>
     </div>
   );
 };
@@ -453,6 +480,7 @@ export const puckConfig = {
     },
     serviceBanner: {
       fields: {
+        isVisible: { type: "custom", render: ({ value, onChange }) => <VisibilityToggle value={value} onChange={onChange} /> },
         title: { type: "text" },
         subTitle: { type: "text" },
         backgroundImage: { 
@@ -461,21 +489,25 @@ export const puckConfig = {
         }
       },
       defaultProps: {
+        isVisible: true,
         title: "Residential Interior",
         subTitle: "Services",
         backgroundImage: ""
       },
-      render: ({ title, subTitle, backgroundImage }) => (
+      render: (props) => props.isVisible === false ? (
+        <div className="p-6 bg-red-50 text-red-500 text-center font-bold border-2 border-red-200 border-dashed rounded-xl">Hidden: Service Banner Section</div>
+      ) : (
         <ServiceBannerBlock 
-          title={title} 
-          subTitle={subTitle} 
-          backgroundImage={backgroundImage} 
+          title={props.title} 
+          subTitle={props.subTitle} 
+          backgroundImage={props.backgroundImage} 
         />
       )
     },
 
     serviceDetails: {
       fields: {
+        isVisible: { type: "custom", render: ({ value, onChange }) => <VisibilityToggle value={value} onChange={onChange} /> },
         sidebarServices: {
           type: "array",
           arrayFields: {
@@ -556,6 +588,7 @@ export const puckConfig = {
         }
       },
       defaultProps: {
+        isVisible: true,
         aboutTitle: "About The Service",
         aboutDescription: "<p>Commercial interior design is constantly evolving...</p>",
         typesTitle: "Types Of Commercial Spaces",
@@ -573,8 +606,9 @@ export const puckConfig = {
         rightBullets: [{ text: "Flexible with any structure of the building" }],
         faqs: [{ question: "What Interior Design Services Do You Offer?", answer: "We offer comprehensive residential and commercial interior design services tailored to your needs." }]
       },
-      render: (props) => <ServiceDetailsBlock {...props} />
+      render: (props) => props.isVisible === false ? <div className="p-6 bg-red-50 text-red-500 text-center font-bold border-2 border-red-200 border-dashed rounded-xl">Hidden: Service Details Section</div> : <ServiceDetailsBlock {...props} />
     },
+
     ctaSection: {
       fields: {
         badgeText: { type: "text" },
@@ -588,8 +622,10 @@ export const puckConfig = {
       },
       render: (props) => <CtaSectionBlock {...props} />
     },
+
     contactBanner: {
       fields: {
+        isVisible: { type: "custom", render: ({ value, onChange }) => <VisibilityToggle value={value} onChange={onChange} /> },
         title: { type: "text" },
         breadcrumbText: { type: "text" },
         backgroundImage: { 
@@ -598,14 +634,17 @@ export const puckConfig = {
         }
       },
       defaultProps: {
+        isVisible: true,
         title: "Contact Us",
         breadcrumbText: "Contact Us",
         backgroundImage: ""
       },
-      render: (props) => <ContactBannerBlock {...props} />
+      render: (props) => props.isVisible === false ? <div className="p-6 bg-red-50 text-red-500 text-center font-bold border-2 border-red-200 border-dashed rounded-xl">Hidden: Contact Banner Section</div> : <ContactBannerBlock {...props} />
     },
+
     contactInfo: {
       fields: {
+        isVisible: { type: "custom", render: ({ value, onChange }) => <VisibilityToggle value={value} onChange={onChange} /> },
         badgeText: { type: "text" },
         title: { type: "textarea" },
         addressTitle: { type: "text" },
@@ -618,6 +657,7 @@ export const puckConfig = {
         formId: { type: "text" }
       },
       defaultProps: {
+        isVisible: true,
         badgeText: 'GET IN TOUCH',
         title: "Have a Project In [Mind? Let's]\n[Make] It Happen.",
         addressTitle: 'Address:',
@@ -629,11 +669,12 @@ export const puckConfig = {
         mapIframeUrl: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3684.2750390190535!2d88.4239845759714!3d22.568803433116515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0275adab7574c3%3A0xc34375b42d334df5!2sSubhaakritee!5e0!3m2!1sen!2sin!4v1709123456789!5m2!1sen!2sin', // Default Google Map URL
         formId: 'cmqzjpzfz0000t00s7pd31okk'
       },
-      render: (props) => <ContactInfoBlock {...props} />
+      render: (props) => props.isVisible === false ? <div className="p-6 bg-red-50 text-red-500 text-center font-bold border-2 border-red-200 border-dashed rounded-xl">Hidden: Contact Info Section</div> : <ContactInfoBlock {...props} />
     },
 
     aboutBanner: {
       fields: {
+        isVisible: { type: "custom", render: ({ value, onChange }) => <VisibilityToggle value={value} onChange={onChange} /> },
         title: { type: "text" },
         breadcrumbText: { type: "text" },
         backgroundImage: { 
@@ -641,12 +682,13 @@ export const puckConfig = {
           render: ({ onChange, value }) => <ImageField value={value} onChange={onChange} /> 
         }
       },
-      defaultProps: { title: "About Us", breadcrumbText: "About Us", backgroundImage: "" },
-      render: (props) => <AboutBannerBlock {...props} />
+      defaultProps: { isVisible: true, title: "About Us", breadcrumbText: "About Us", backgroundImage: "" },
+      render: (props) => props.isVisible === false ? <div className="p-6 bg-red-50 text-red-500 text-center font-bold border-2 border-red-200 border-dashed rounded-xl">Hidden: About Banner Section</div> : <AboutBannerBlock {...props} />
     },
-    
+
     aboutExperience: {
       fields: {
+        isVisible: { type: "custom", render: ({ value, onChange }) => <VisibilityToggle value={value} onChange={onChange} /> },
         badgeText: { type: "text" },
         title: { type: "textarea" },
         yearsOfExperience: { type: "text" },
@@ -661,13 +703,13 @@ export const puckConfig = {
             />
           )
         },
-        
         buttonText: { type: "text" },
         buttonLink: { type: "text" },
         image1: { type: "custom", render: ({ onChange, value }) => <ImageField value={value} onChange={onChange} /> },
         image2: { type: "custom", render: ({ onChange, value }) => <ImageField value={value} onChange={onChange} /> }
       },
       defaultProps: {
+        isVisible: true,
         badgeText: "Started in 1989",
         title: "We Shape [Interior Designs,]\n[Crafting Timeless] And Inspiring\nSpaces",
         yearsOfExperience: "26",
@@ -678,11 +720,12 @@ export const puckConfig = {
         image1: "",
         image2: ""
       },
-      render: (props) => <AboutExperienceBlock {...props} />
+      render: (props) => props.isVisible === false ? <div className="p-6 bg-red-50 text-red-500 text-center font-bold border-2 border-red-200 border-dashed rounded-xl">Hidden: About Experience Section</div> : <AboutExperienceBlock {...props} />
     },
 
     aboutProcess: {
       fields: {
+        isVisible: { type: "custom", render: ({ value, onChange }) => <VisibilityToggle value={value} onChange={onChange} /> },
         backgroundImage: { type: "custom", render: ({ onChange, value }) => <ImageField value={value} onChange={onChange} /> },
         steps: {
           type: "array",
@@ -695,6 +738,7 @@ export const puckConfig = {
         }
       },
       defaultProps: {
+        isVisible: true,
         backgroundImage: "",
         steps: [
           { number: '01', title: 'Concept Design', desc: 'Initial ideation and space planning.' },
@@ -703,11 +747,21 @@ export const puckConfig = {
           { number: '04', title: 'Final Finishing', desc: 'Polished results and handover.' }
         ]
       },
-      render: (props) => <AboutProcessBlock {...props} />
+      render: (props) => props.isVisible === false ? (
+        <div className="p-6 bg-red-50 text-red-500 text-center font-bold border-2 border-red-200 border-dashed rounded-xl">
+          Hidden: About Process Section
+        </div>
+      ) : (
+        <AboutProcessBlock {...props} />
+      )
     },
 
     timeline: {
       fields: {
+        isVisible: { 
+          type: "custom", 
+          render: ({ value, onChange }) => <VisibilityToggle value={value} onChange={onChange} /> 
+        },
         badgeText: { type: "text" },
         title: { type: "textarea" },
         items: {
@@ -715,12 +769,16 @@ export const puckConfig = {
           arrayFields: {
             year: { type: "text" },
             description: { type: "textarea" },
-            image: { type: "custom", render: ({ onChange, value }) => <ImageField value={value} onChange={onChange} /> }
+            image: { 
+              type: "custom", 
+              render: ({ onChange, value }) => <ImageField value={value} onChange={onChange} /> 
+            }
           },
           defaultItemProps: { year: '2025', description: 'Description here...', image: '' }
         }
       },
       defaultProps: {
+        isVisible: true,
         badgeText: "GET IN TOUCH",
         title: "Our History [Is Full Of]\n[Interesting] Stages And\nEvents.",
         items: [
@@ -728,11 +786,19 @@ export const puckConfig = {
           { year: '2010', description: 'Expanded our operations to new territories.', image: '' }
         ]
       },
-      render: (props) => <TimelineBlock {...props} />
+      render: (props) => 
+        props.isVisible === false ? (
+          <div className="p-6 bg-red-50 text-red-500 text-center font-bold border-2 border-red-200 border-dashed rounded-xl">
+            Hidden: Timeline Section
+          </div>
+        ) : (
+          <TimelineBlock {...props} />
+        )
     },
     
     aboutAwards: {
       fields: {
+        isVisible: { type: "custom", render: ({ value, onChange }) => <VisibilityToggle value={value} onChange={onChange} /> },
         badgeText: { type: "text" },
         title: { type: "textarea" },
         mainImage: { type: "custom", render: ({ onChange, value }) => <ImageField value={value} onChange={onChange} /> },
@@ -746,6 +812,7 @@ export const puckConfig = {
         }
       },
       defaultProps: {
+        isVisible: true,
         badgeText: "AWARD & ACHIEVEMENT",
         title: "Design That [Speaks Our]\n[Industry] Awards",
         mainImage: "",
@@ -754,11 +821,12 @@ export const puckConfig = {
           { year: '2021', title: 'Outdoor & Landscape Design' }
         ]
       },
-      render: (props) => <AboutAwardsBlock {...props} />
+      render: (props) => props.isVisible === false ? <div className="p-6 bg-red-50 text-red-500 text-center font-bold border-2 border-red-200 border-dashed rounded-xl">Hidden: Awards Section</div> : <AboutAwardsBlock {...props} />
     },
 
     aboutGallery: {
       fields: {
+        isVisible: { type: "custom", render: ({ value, onChange }) => <VisibilityToggle value={value} onChange={onChange} /> },
         backgroundImage: { type: "custom", render: ({ onChange, value }) => <ImageField value={value} onChange={onChange} /> },
         badgeText: { type: "text" },
         title: { type: "textarea" },
@@ -771,7 +839,7 @@ export const puckConfig = {
               onChange={onChange} 
             />
           ) 
-},
+        },
         galleryItems: {
           type: "array",
           arrayFields: {
@@ -782,6 +850,7 @@ export const puckConfig = {
         }
       },
       defaultProps: {
+        isVisible: true,
         backgroundImage: "",
         badgeText: "OUR GALLERY",
         title: "Interior \n Design",
@@ -793,7 +862,7 @@ export const puckConfig = {
           { title: 'Project 4', image: '' }
         ]
       },
-      render: (props) => <AboutGalleryBlock {...props} />
+      render: (props) => props.isVisible === false ? <div className="p-6 bg-red-50 text-red-500 text-center font-bold border-2 border-red-200 border-dashed rounded-xl">Hidden: About Gallery Section</div> : <AboutGalleryBlock {...props} />
     },
     
     projectsBanner: {

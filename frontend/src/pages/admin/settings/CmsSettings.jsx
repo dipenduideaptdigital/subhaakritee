@@ -110,7 +110,7 @@ const CmsSettings = () => {
           ) : (
             <>
               <Save className="w-4 h-4" />
-              Save Settings
+              Save
             </>
           )}
         </button>

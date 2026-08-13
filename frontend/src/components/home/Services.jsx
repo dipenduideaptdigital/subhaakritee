@@ -48,6 +48,8 @@ const Services = ({ data: externalData }) => {
   const description = content?.description || "<p>If you use this site regularly and would like consider donating a small sum to help pay for the hosting and bandwidth bill. There is no minimum donation, any sum is appreciated</p>";
   const servicesList = content?.services || defaultServicesData;
 
+  if (content?.isVisible === false) return null;
+  
   return (
     <section id="services-section" className="py-16 md:py-24 bg-white overflow-hidden">
       <div className="container mx-auto px-6 md:px-8 max-w-7xl">

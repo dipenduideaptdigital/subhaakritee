@@ -108,6 +108,8 @@ const Panoramas = ({ data: externalData }) => {
     });
   };
 
+  if (content?.isVisible === false) return null;
+  
   return (
     <section className="pt-6 md:pt-10 pb-16 md:pb-24 bg-white overflow-hidden">
       <div className="container mx-auto px-6 md:px-8 max-w-[1400px] flex flex-col items-center">

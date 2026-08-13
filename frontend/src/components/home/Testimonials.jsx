@@ -68,6 +68,7 @@ const Testimonials = ({ data: externalData }) => {
     if (externalData) {
       setTestimonialsList([{
         type: 'external',
+        isVisible: externalData.isVisible,
         badgeText: externalData.badgeText || "OUR CLIENTS SAY",
         title: externalData.title || "Here's What [Warm Words] \n [Our Clients] Say",
         description: externalData.description || "Our portfolio showcases a diverse range of projects...",
@@ -131,6 +132,7 @@ const Testimonials = ({ data: externalData }) => {
       const list = [
         {
           type: 'residential',
+          isVisible: residential?.isVisible,
           badgeText: residential?.badgeText || defaultTestimonials[0].badgeText,
           title: residential?.title || defaultTestimonials[0].title,
           description: residential?.description || defaultTestimonials[0].description,
@@ -257,6 +259,8 @@ const Testimonials = ({ data: externalData }) => {
       ));
     });
   };
+
+  if (testimonialsList[0]?.isVisible === false) return null;
 
   return (
     <section 

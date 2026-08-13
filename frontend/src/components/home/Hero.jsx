@@ -116,6 +116,8 @@ const Hero = ({ data: externalData }) => {
     { data: homeData?.slide3 || {}, fallback: defaultFallback }
   ];
 
+  if (homeData?.isVisible === false) return null;
+
   return (
     <div 
       className="relative w-full h-[700px] sm:h-[750px] lg:h-[750px] xl:h-[800px] bg-zinc-900 overflow-hidden group select-none animate-in fade-in duration-700"

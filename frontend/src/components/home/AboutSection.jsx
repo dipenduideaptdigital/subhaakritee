@@ -82,6 +82,8 @@ const AboutSection = ({ data: externalData }) => {
     });
   };
 
+  if (content?.isVisible === false) return null;
+  
   return (
     <section className="py-24 bg-[#121212] overflow-hidden">
       <div className="container mx-auto px-8 max-w-7xl">

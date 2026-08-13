@@ -71,9 +71,10 @@ const Team = ({ data: externalData }) => {
   const currentMemberData = teamMembers.find(m => (m.id || m.name) === activeMember) || teamMembers[0];
   const displayImage = currentMemberData?.image ? resolveAssetUrl(currentMemberData.image) : teamFallback;
 
+  if (content?.isVisible === false) return null;
+  
   return (
     <>
-      {/* 🚀 CSS Animation Block Refined for Slower, Smoother Frame Movement */}
       <style>
         {`
           @keyframes smoothFrameSlideBlur {
@@ -120,9 +121,8 @@ const Team = ({ data: externalData }) => {
 
           <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-center">
             
-            {/* 🚀 Dynamic Image Container - Animation and Key moved here! */}
             <div 
-              key={displayImage} // Forces the entire frame to re-render and trigger animation
+              key={displayImage}
               className="w-full lg:w-5/12 h-[400px] md:h-[500px] lg:h-[600px] rounded-[2.5rem] overflow-hidden shadow-sm shrink-0 relative bg-gray-100 animate-frame-slide-blur"
             >
                <img 

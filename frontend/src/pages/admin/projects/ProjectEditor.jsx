@@ -262,7 +262,7 @@ const ProjectEditor = () => {
             className="px-8 py-3 bg-zinc-900 dark:bg-indigo-600 hover:bg-zinc-800 dark:hover:bg-indigo-500 text-white rounded-xl flex items-center gap-2 transition-all shadow-lg shadow-zinc-900/20 dark:shadow-indigo-900/20 disabled:opacity-70 text-sm font-semibold cursor-pointer"
           >
             <Save className="w-5 h-5" /> 
-            {saving ? 'Saving...' : 'Save Project'}
+            {saving ? 'Saving...' : 'Save'}
           </button>
         </Can>
       </div>

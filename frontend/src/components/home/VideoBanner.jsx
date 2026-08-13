@@ -89,6 +89,8 @@ const VideoBanner = ({ data: externalData }) => {
     ));
   };
 
+  if (content?.isVisible === false) return null;
+  
   return (
     <>
       <section className="relative w-full h-[360px] sm:h-[480px] md:h-[600px] lg:h-[720px] overflow-hidden group opal-move-up">

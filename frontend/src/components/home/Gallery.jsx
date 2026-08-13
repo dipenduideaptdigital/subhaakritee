@@ -140,6 +140,8 @@ const Gallery = () => {
     return () => window.removeEventListener('scroll', handleVerticalScroll);
   }, []);
 
+  if (content?.isVisible === false) return null;
+  
   return (
     <section className="py-10 sm:py-16 md:py-32 bg-white relative overflow-hidden min-h-0 md:min-h-[700px]">
       <div className="absolute -top-8 sm:-top-16 md:-top-16 left-0 w-full flex justify-center pointer-events-none z-0">
