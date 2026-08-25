@@ -209,7 +209,7 @@ const TaxonomyManager = () => {
                       className="text-zinc-400 dark:text-zinc-500 hover:text-red-600 dark:hover:text-red-400 p-0.5 rounded-full hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors"
                     >
                       <Trash2 className="w-3 h-3" />
-                    </button>
+                    </button>e
                   </Can>
                 </div>
               ))}
