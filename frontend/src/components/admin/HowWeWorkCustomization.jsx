@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Settings, Edit2, ChevronUp, ChevronDown } from 'lucide-react';
+import { Settings, Edit2, ChevronUp, ChevronDown, ImageIcon } from 'lucide-react';
 import TipTapEditor from './TipTapEditor';
+import ImageField from './ImageField';
 
 const CollapsibleTiptap = ({ label, value, onChange }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -95,9 +96,21 @@ const HowWeWorkCustomization = ({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {(howWeWorkData.steps || []).map((step, index) => (
               <div key={index} className="p-6 bg-zinc-50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-700/50 rounded-2xl space-y-5 transition-colors duration-300 hover:border-zinc-300 dark:hover:border-zinc-600">
-                <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-zinc-900 dark:bg-blue-500/20 text-white dark:text-blue-400 border border-transparent dark:border-blue-500/30 text-xs font-bold transition-colors">
-                  {step.id || `0${index + 1}`}
-                </span>
+                <div className="flex items-center justify-between">
+                  <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-zinc-900 dark:bg-blue-500/20 text-white dark:text-blue-400 border border-transparent dark:border-blue-500/30 text-xs font-bold transition-colors">
+                    {step.id || `0${index + 1}`}
+                  </span>
+                </div>
+                
+                {/* Step Image Upload */}
+                <div>
+                  <label className="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 mb-1.5 transition-colors">Card Image</label>
+                  <ImageField 
+                    value={step.image || ''} 
+                    onChange={(url) => onStepItemChange(index, 'image', url)} 
+                  />
+                </div>
+
                 <div>
                   <label className="block text-xs font-semibold text-zinc-500 dark:text-zinc-400 mb-1.5 transition-colors">Step Title</label>
                   <input 

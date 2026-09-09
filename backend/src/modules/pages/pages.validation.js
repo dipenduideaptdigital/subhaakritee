@@ -53,6 +53,7 @@ const timelineBlockSchema = z.object({ type: z.literal("timeline"), data: z.reco
 const aboutAwardsBlockSchema = z.object({ type: z.literal("aboutAwards"), data: z.record(z.any()).default({}) });
 const aboutGalleryBlockSchema = z.object({ type: z.literal("aboutGallery"), data: z.record(z.any()).default({}) });
 const projectsBannerBlockSchema = z.object({ type: z.literal("projectsBanner"), data: z.record(z.any()).default({}) });
+const blogBannerBlockSchema = z.object({ type: z.literal("blogBanner"), data: z.record(z.any()).default({}) });
 
 const contactFormBlockSchema = z.object({
   type: z.literal("contactForm"),
@@ -105,6 +106,7 @@ const blockSchema = z.discriminatedUnion("type", [
   aboutAwardsBlockSchema,
   aboutGalleryBlockSchema,
   projectsBannerBlockSchema,
+  blogBannerBlockSchema,
 ]);
 
 const pageContentSchema = z.object({
@@ -162,7 +164,7 @@ export const updatePageSchema = createPageSchema.partial().extend({
 // Admin Filter Matrix & Pagination Configuration Management Schema Lookups
 export const pageQuerySchema = z.object({
   page: z.coerce.number().int().min(1, "Page tracking parameter must remain greater than 0").default(1),
-  limit: z.coerce.number().int().min(1, "Pagination capacity constraint limit must register at least 1 data node").max(100, "Maximum network extraction block limit is capped at 100 records buffer").default(10),
+  limit: z.coerce.number().int().min(1, "Pagination capacity constraint limit must register at least 1 data node").max(100, "Maximum network extraction block limit is capped at 100 records buffer").default(100),
   search: z.string().trim().optional(),
   status: z.enum(["DRAFT", "PUBLISHED", "ARCHIVED"]).optional(),
   template: z.enum(ALLOWED_TEMPLATES).optional(), 

@@ -36,6 +36,7 @@ import TimelineBlock from '../blocks/TimelineBlock';
 import AboutAwardsBlock from '../blocks/AboutAwardsBlock';
 import AboutGalleryBlock from '../blocks/AboutGalleryBlock';
 import ProjectsHero from '../projects/ProjectsHero';
+import BlogHero from '../blog/BlogHero';
 
 const BlockMapper = memo(({ block, index }) => {
   const { type, data } = block;
@@ -80,6 +81,7 @@ const BlockMapper = memo(({ block, index }) => {
     case 'testimonialsTwo': return <TestimonialsTwo key={index} data={data} />;
     case 'ctaSectionTwo': return <CtaSectionTwo key={index} data={data} />;
     case 'projectsBanner': return <ProjectsHero key={index} {...data} />;
+    case 'blogBanner': return <BlogHero key={index} {...data} />;
     case 'richText':
       return (
         <div key={index} className="py-12 md:py-24 overflow-hidden w-full">

@@ -89,6 +89,7 @@ export const howWeWorkSchema = z.object({
         id: z.union([z.string(), z.number()]).optional(),
         title: z.string().max(100).optional(),
         description: z.string().max(500).optional(),
+        image: z.string().optional(),
       })
     ).optional(),
     bottomText: z.string().max(200).optional(),

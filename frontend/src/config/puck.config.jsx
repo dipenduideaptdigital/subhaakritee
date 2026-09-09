@@ -26,6 +26,7 @@ import TimelineBlock from '../components/blocks/TimelineBlock';
 import AboutAwardsBlock from '../components/blocks/AboutAwardsBlock';
 import AboutGalleryBlock from '../components/blocks/AboutGalleryBlock';
 import ProjectsHero from '../components/projects/ProjectsHero';
+import BlogHero from '../components/blog/BlogHero';
 
 const CollapsibleTiptap = ({ label, value, onChange }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -878,6 +879,23 @@ export const puckConfig = {
         backgroundImage: ""
       },
       render: (props) => <ProjectsHero title={props.title} backgroundImage={props.backgroundImage} />
+    },
+
+    blogBanner: {
+      fields: {
+        title: { type: "text" },
+        breadcrumbText: { type: "text" },
+        backgroundImage: { 
+          type: "custom", 
+          render: ({ onChange, value }) => <ImageField value={value} onChange={onChange} /> 
+        }
+      },
+      defaultProps: {
+        title: "Blog & Articles",
+        breadcrumbText: "Blog",
+        backgroundImage: ""
+      },
+      render: (props) => <BlogHero title={props.title} breadcrumbText={props.breadcrumbText} backgroundImage={props.backgroundImage} />
     },
   }
 };

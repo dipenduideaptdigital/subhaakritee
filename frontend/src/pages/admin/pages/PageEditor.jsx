@@ -64,7 +64,8 @@ const PageEditor = () => {
     { type: 'serviceDetails', label: 'Service Details Main Content' },
     { type: 'ctaSection', label: 'Call To Action (CTA) Section' },
     { type: 'contactBanner', label: 'Contact Us Banner' },
-    { type: 'contactInfo', label: 'Contact Info & Form' }
+    { type: 'contactInfo', label: 'Contact Info & Form' },
+    { type: 'blogBanner', label: 'Blog Banner' }
   ];
 
   const [formData, setFormData] = useState({
@@ -331,6 +332,14 @@ const PageEditor = () => {
           workspaceImage: '',
           mapIframeUrl: '',
           formId: ''
+        };
+        break;
+
+      case 'blogBanner':
+        defaultData = {
+          title: "Blog & Articles",
+          breadcrumbText: "Blog",
+          backgroundImage: ""
         };
         break;
         

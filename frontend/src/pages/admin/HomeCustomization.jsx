@@ -318,6 +318,7 @@ const HomeCustomization = () => {
   const [previewAbout, setPreviewAbout] = useState('');
   const [previewOurServicesMain, setPreviewOurServicesMain] = useState('');
   const [previewOurServicesBottom, setPreviewOurServicesBottom] = useState('');
+  const [previewHowWeWorkSteps, setPreviewHowWeWorkSteps] = useState(['', '', '', '']);
   const [previewOurProjectsBottom, setPreviewOurProjectsBottom] = useState('');
   const [previewOurProjectsList, setPreviewOurProjectsList] = useState(['', '', '', '', '']);
   const [previewPanoramasView, setPreviewPanoramasView] = useState('');
@@ -335,6 +336,7 @@ const HomeCustomization = () => {
   const aboutImageRef = useRef(null);
   const ourServicesMainRef = useRef(null);
   const ourServicesBottomRef = useRef(null);
+  const howWeWorkStepImageRefs = useRef([]);
   const ourProjectsBottomRef = useRef(null);
   const projectImageRefs = useRef([]);
   const panoramasViewRef = useRef(null);
@@ -467,7 +469,12 @@ const HomeCustomization = () => {
       // 5. How We Work
       if (howWeWorkRes.status === 'fulfilled' && howWeWorkRes.value.data?.data?.content) {
         const content = howWeWorkRes.value.data.data.content;
-        if (Object.keys(content).length > 0) setHowWeWorkData(content);
+        if (Object.keys(content).length > 0) {
+          setHowWeWorkData(content);
+          if (content.steps) {
+            setPreviewHowWeWorkSteps(content.steps.map(s => s.image ? getAssetUrl(s.image) : ''));
+          }
+        }
       }
 
       // 6. Projects
@@ -945,6 +952,55 @@ const HomeCustomization = () => {
     }
   };
 
+  // HowWeWork
+  const handleHowWeWorkStepImageUpload = async (e, index) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      setPreviewHowWeWorkSteps(prev => {
+        const newList = [...prev];
+        newList[index] = event.target.result;
+        return newList;
+      });
+    };
+    reader.readAsDataURL(file);
+
+    const formData = new FormData();
+    formData.append('image', file);
+
+    try {
+      setErrorMsg('');
+      const res = await apiClient.post('/uploads/image', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+
+      const { data } = res;
+      if (data.success && data.data.url) {
+        const uploadedUrl = data.data.url;
+        
+        setHowWeWorkData(prev => {
+          const newSteps = [...prev.steps];
+          newSteps[index] = { ...newSteps[index], image: uploadedUrl };
+          return { ...prev, steps: newSteps };
+        });
+      }
+    } catch (error) {
+      console.error(`Failed to upload step ${index} image:`, error);
+      const errorDetail = error.response?.data?.message || 'File must be an image (Max 5MB)';
+      setErrorMsg(`Upload Failed: ${errorDetail}`);
+      
+      setPreviewHowWeWorkSteps(prev => {
+        const newList = [...prev];
+        newList[index] = howWeWorkData.steps[index]?.image ? getAssetUrl(howWeWorkData.steps[index].image) : '';
+        return newList;
+      });
+    } finally {
+      e.target.value = '';
+    }
+  };
+
   const handleProjectImageUpload = async (e, index) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -1388,6 +1444,9 @@ const HomeCustomization = () => {
           howWeWorkData={howWeWorkData}
           onChange={handleHowWeWorkInputChange}
           onStepItemChange={handleHowWeWorkStepChange}
+          onStepImageUpload={handleHowWeWorkStepImageUpload}
+          previewSteps={previewHowWeWorkSteps}
+          stepImageRefs={howWeWorkStepImageRefs}
         />
       )}
 
