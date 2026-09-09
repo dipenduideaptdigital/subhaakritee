@@ -208,6 +208,8 @@ model Media {
   originalName    String
   mimeType        String    
   size            Int       
+  width           Int?      
+  height          Int?      
   url             String    
   thumbnailUrl    String?   
   

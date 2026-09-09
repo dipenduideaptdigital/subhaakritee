@@ -163,6 +163,19 @@ export const testimonialsSchema = z.object({
     authorRole: z.string().max(100).optional(),
     bottomText: z.string().max(200).optional(),
     logos: z.array(z.string()).optional(),
+    
+    items: z.array(
+      z.object({
+        ratingValue: z.string().max(10).optional(),
+        reviewCount: z.string().max(50).optional(),
+        conceptText: z.string().max(500).optional(),
+        mainQuote: z.string().max(1000).optional(),
+        authorName: z.string().max(100).optional(),
+        authorRole: z.string().max(100).optional(),
+        image: z.string().optional(),
+        authorImage: z.string().optional()
+      })
+    ).optional(),
   }),
 });
 

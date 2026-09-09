@@ -45,6 +45,8 @@ export const saveUploadedFile = async (file, userId) => {
         originalName: file.originalname,
         mimeType: processed.mimeType,
         size: processed.finalSize,
+        width: mainUpload.width,
+        height: mainUpload.height,
         url: mainUpload.secure_url,
         thumbnailUrl: dynamicThumbUrl,
         uploadedById: userId,

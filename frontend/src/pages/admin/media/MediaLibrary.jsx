@@ -93,6 +93,15 @@ const MediaLibrary = () => {
     return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
   };
 
+  const getAspectRatio = (w, h) => {
+    if (!w || !h) return '';
+    const gcd = (a, b) => b === 0 ? a : gcd(b, a % b);
+    const divisor = gcd(w, h);
+    const rw = w / divisor;
+    const rh = h / divisor;
+    return rw > 50 || rh > 50 ? `(~${(w / h).toFixed(2)}:1)` : `(${rw}:${rh})`;
+  };
+
   return (
     <div className="h-[calc(100vh-125px)] flex flex-col font-sans animate-in fade-in duration-500 text-zinc-900 dark:text-zinc-100">
       {/* Header */}
@@ -224,6 +233,12 @@ const MediaLibrary = () => {
                 <div className="flex gap-2"><strong className="w-24 text-zinc-800 dark:text-zinc-200">File name:</strong> <span className="break-all">{selectedMedia.originalName}</span></div>
                 <div className="flex gap-2"><strong className="w-24 text-zinc-800 dark:text-zinc-200">File type:</strong> {selectedMedia.mimeType}</div>
                 <div className="flex gap-2"><strong className="w-24 text-zinc-800 dark:text-zinc-200">File size:</strong> {formatBytes(selectedMedia.size)}</div>
+                {selectedMedia.width && selectedMedia.height && (
+                  <div className="flex gap-2">
+                    <strong className="w-24 text-zinc-800 dark:text-zinc-200">Dimensions:</strong> 
+                    {selectedMedia.width} x {selectedMedia.height} px <span className="text-zinc-400 ml-1 font-semibold">{getAspectRatio(selectedMedia.width, selectedMedia.height)}</span>
+                  </div>
+                )}
                 <div className="flex gap-2"><strong className="w-24 text-zinc-800 dark:text-zinc-200">Uploaded on:</strong> {new Date(selectedMedia.createdAt).toLocaleDateString()}</div>
                 <div className="flex gap-2"><strong className="w-24 text-zinc-800 dark:text-zinc-200">Uploaded by:</strong> {selectedMedia.uploadedBy?.name || 'Admin'}</div>
               </div>

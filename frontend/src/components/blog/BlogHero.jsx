@@ -9,10 +9,10 @@ const BlogHero = ({ title = "Blog", breadcrumbText = "Blog", backgroundImage }) 
   return (
     <div className="relative h-[50vh] min-h-[400px] w-full flex items-center justify-center bg-zinc-900">
       <div 
-        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-60"
+        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${bgImage})` }}
       >
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+        <div className="absolute inset-0 bg-black/20"></div>
       </div>
 
       <div className="relative z-10 text-center text-white fade-in mt-16">
