@@ -129,8 +129,9 @@ export const createPageSchema = z.object({
     
   excerpt: z.string().trim().max(1000, "Excerpt cannot exceed 1000 characters").optional().nullable(),
   content: pageContentSchema,
-  status: z.enum(["DRAFT", "PUBLISHED"]).default("DRAFT").optional(),
-  
+  status: z.enum(["DRAFT", "PUBLISHED", "SCHEDULED"]).default("DRAFT").optional(),
+  scheduledUpdateAt: z.string().datetime({ message: "Invalid ISO-8601 datetime format" }).optional().nullable(),
+  scheduledUpdateData: z.any().optional().nullable(),
   // Template Design Execution Hard Security Control
   template: z.enum(ALLOWED_TEMPLATES, {
     errorMap: () => ({ message: "Selected layout design template is not registered or supported by system." })
@@ -155,10 +156,10 @@ export const createPageSchema = z.object({
   ogDescription: z.string().trim().max(500).optional().nullable(),
   ogImageId: z.union([z.string().cuid("Invalid OG Image ID format."), z.literal("")]).optional().nullable(),
 }).strict();
-
-// Core Update Operations Pipeline Matrix Verification Schema 
+ 
+// Core Update Operations Pipeline Matrix Verification Schema  
 export const updatePageSchema = createPageSchema.partial().extend({
-  status: z.enum(["DRAFT", "PUBLISHED", "ARCHIVED"]).optional(),
+  status: z.enum(["DRAFT", "PUBLISHED", "ARCHIVED", "SCHEDULED"]).optional(),
 });
 
 // Admin Filter Matrix & Pagination Configuration Management Schema Lookups
@@ -166,7 +167,7 @@ export const pageQuerySchema = z.object({
   page: z.coerce.number().int().min(1, "Page tracking parameter must remain greater than 0").default(1),
   limit: z.coerce.number().int().min(1, "Pagination capacity constraint limit must register at least 1 data node").max(100, "Maximum network extraction block limit is capped at 100 records buffer").default(100),
   search: z.string().trim().optional(),
-  status: z.enum(["DRAFT", "PUBLISHED", "ARCHIVED"]).optional(),
+  status: z.enum(["DRAFT", "PUBLISHED", "ARCHIVED", "SCHEDULED"]).optional(),
   template: z.enum(ALLOWED_TEMPLATES).optional(), 
   authorId: z.string().cuid("Invalid corporate author query sequence filter constraint token").optional(),
   parentId: z.string().cuid("Invalid branch structural parent filter query identity token parameter").optional().nullable(), 

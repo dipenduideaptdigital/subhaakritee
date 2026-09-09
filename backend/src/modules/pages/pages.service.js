@@ -130,6 +130,7 @@ export const createNewPage = async (payload, authorId) => {
     authorId,
     updatedById: authorId,
     publishedAt,
+    scheduledUpdateAt: payload.scheduledUpdateAt ? new Date(payload.scheduledUpdateAt) : null,
   };
 
   try {
@@ -155,17 +156,38 @@ export const updateExistingPage = async (id, payload, actorId) => {
     await validateHierarchy(id, payload.parentId);
   }
 
+  // ==== INTERCEPT SCHEDULED UPDATES FOR LIVE PAGES ====
+  if (existingPage.status === "PUBLISHED" && payload.scheduledUpdateAt) {
+    const futureData = { ...payload };
+    delete futureData.scheduledUpdateAt;
+    
+    const updateData = {
+      scheduledUpdateAt: new Date(payload.scheduledUpdateAt),
+      scheduledUpdateData: futureData,
+      updatedById: actorId
+    };
+    
+    const updatedPage = await repo.updatePageWithRevision(id, updateData, null, actorId);
+    return serializePage(updatedPage, "admin");
+  }
+
   const updateData = { updatedById: actorId };
   const allowedFields = [
     "title", "excerpt", "content", "status", "template", 
     "metaTitle", "metaDescription", "metaKeywords", "featuredImageId",
     "parentId", "menuOrder", "showInMenu", "includeInSitemap", "noIndex",
-    "noFollow", "canonicalUrl", "ogTitle", "ogDescription", "ogImageId"
+    "noFollow", "canonicalUrl", "ogTitle", "ogDescription", "ogImageId",
+    "scheduledUpdateAt"
   ];
   
   allowedFields.forEach(field => {
     if (payload[field] !== undefined) updateData[field] = payload[field];
   });
+
+  if (payload.scheduledUpdateData === null || payload.scheduledUpdateAt === null) {
+    updateData.scheduledUpdateData = null;
+    updateData.scheduledUpdateAt = null;
+  }
 
   const parentIdChanged = payload.parentId !== undefined && payload.parentId !== existingPage.parentId;
   const slugExplicitlyChanged = payload.slug !== undefined && payload.slug !== existingPage.slug;

@@ -10,7 +10,10 @@ import {
   Plus,
   Trash2,
   Settings,
-  ChevronDown
+  ChevronDown,
+  CalendarClock,
+  TimerOff,
+  CheckCircle
 } from 'lucide-react';
 import DynamicBlockEditor from '../../../components/admin/DynamicBlockEditor';
 import PreviewManager from '../../../components/admin/PreviewManager';
@@ -34,6 +37,8 @@ const PageEditor = () => {
   const [error, setError] = useState(null);
   const [showBlockMenu, setShowBlockMenu] = useState(false);
   const [isPuckMode, setIsPuckMode] = useState(false);
+  const [isScheduling, setIsScheduling] = useState(false);
+  const [successMsg, setSuccessMsg] = useState('');
 
   useEffect(() => {
     if (isPuckMode) {
@@ -77,7 +82,8 @@ const PageEditor = () => {
     content: { blocks: [] },
     metaTitle: '', metaDescription: '', metaKeywords: '',
     includeInSitemap: true, noIndex: false, noFollow: false,
-    canonicalUrl: '', ogTitle: '', ogDescription: '', ogImageId: null
+    canonicalUrl: '', ogTitle: '', ogDescription: '', ogImageId: null,
+    scheduledUpdateAt: ''
   });
 
   useEffect(() => {
@@ -143,8 +149,11 @@ const PageEditor = () => {
         canonicalUrl: data.data.canonicalUrl || '',
         ogTitle: data.data.ogTitle || '',
         ogDescription: data.data.ogDescription || '',
-        ogImageId: data.data.ogImageId || null
+        ogImageId: data.data.ogImageId || null,
+        scheduledUpdateAt: data.data.scheduledUpdateAt ? new Date(data.data.scheduledUpdateAt).toISOString().slice(0, 16) : ''
       });
+
+      if (data.data.scheduledUpdateAt) setIsScheduling(true);
     } catch (err) {
       console.error('Failed to fetch page:', err);
       setError('Failed to load page. It may have been deleted or you lack permissions.');
@@ -391,9 +400,36 @@ const PageEditor = () => {
     });
   };
 
+  const handleDiscardSchedule = async () => {
+    if (!window.confirm("Are you sure you want to discard the scheduled updates? The page will revert to its current live state.")) return;
+    
+    try {
+      setSaving(true);
+      const payload = { ...formData };
+      if (payload.content && payload.content.blocks) {
+        payload.content.blocks = payload.content.blocks.map(({ id, ...block }) => block);
+      }
+      
+      payload.scheduledUpdateAt = null; 
+      payload.scheduledUpdateData = null;
+      payload.status = formData.status === 'SCHEDULED' ? 'DRAFT' : 'PUBLISHED';
+      
+      await pagesApi.updatePage(id, payload);
+      
+      setSuccessMsg('Schedule discarded successfully!');
+      setTimeout(() => {
+        window.location.reload(); 
+      }, 1500);
+    } catch (err) {
+      console.error('Failed to discard schedule:', err);
+      setError('Failed to discard scheduled updates.');
+    } finally {
+      setSaving(false);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const payload = { ...formData };
     
     if (isServicesMode) {
@@ -413,17 +449,32 @@ const PageEditor = () => {
       delete payload.slug;
     }
 
+    if (isScheduling && payload.scheduledUpdateAt) {
+      payload.scheduledUpdateAt = new Date(payload.scheduledUpdateAt).toISOString();
+    } else {
+      payload.scheduledUpdateAt = null;
+    }
+
     try {
       setSaving(true);
       setError(null);
+      setSuccessMsg('');
 
       if (isEditMode) {
         await pagesApi.updatePage(id, payload);
+        setSuccessMsg('Page updated successfully!');
+        setTimeout(() => {
+          setSuccessMsg('');
+          navigate(backPath);
+        }, 1500);
       } else {
-        await pagesApi.createPage(payload);
+        const res = await pagesApi.createPage(payload);
+        setSuccessMsg('Page created successfully!');
+        setTimeout(() => {
+          setSuccessMsg('');
+          navigate(`${backPath}/edit/${res.data.id}`, { replace: true });
+        }, 1500);
       }
-
-      navigate(backPath);
     } catch (err) {
       console.error('Failed to save page:', err);
       setError(err.response?.data?.message || 'Failed to save page. Please check your inputs.');
@@ -544,42 +595,105 @@ const PageEditor = () => {
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-3">
-          <Can permission="page.preview">
-            <PreviewManager id={isEditMode ? id : null} entityType="page" />
-          </Can>
+        <div className="flex items-start gap-3">
+          <div className="hidden sm:block">
+            <Can permission="page.preview">
+              <PreviewManager id={isEditMode ? id : null} entityType="page" />
+            </Can>
+          </div>
+          
+          {/* Minimal Scheduler UI */}
+          {isScheduling && (
+            <div className="animate-in slide-in-from-right-4 fade-in duration-300">
+              <input
+                type="datetime-local"
+                name="scheduledUpdateAt"
+                value={formData.scheduledUpdateAt}
+                onChange={handleInputChange}
+                className="h-[42px] px-3 border border-indigo-200 dark:border-indigo-500/30 rounded-xl bg-indigo-50/80 dark:bg-indigo-500/10 text-indigo-800 dark:text-indigo-300 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500/40 transition-colors [color-scheme:light] dark:[color-scheme:dark] shadow-sm cursor-pointer"
+              />
+            </div>
+          )}
+
+          <button
+            type="button"
+            onClick={() => {
+              setIsScheduling(!isScheduling);
+              if (isScheduling) setFormData(p => ({ ...p, scheduledUpdateAt: '' }));
+            }}
+            className={`w-[42px] h-[42px] rounded-xl border transition-all duration-300 flex items-center justify-center shadow-sm ${
+              isScheduling 
+                ? 'bg-indigo-100 dark:bg-indigo-500/20 border-indigo-300 dark:border-indigo-500/30 text-indigo-700 dark:text-indigo-400' 
+                : 'bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-700 text-zinc-500 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-200 dark:hover:border-indigo-500/30 hover:bg-indigo-50 dark:hover:bg-indigo-500/10'
+            }`}
+            title={isScheduling ? 'Cancel Schedule' : 'Schedule Future Update'}
+          >
+            <CalendarClock className="w-5 h-5" />
+          </button>
+
+          {formData.scheduledUpdateAt && (
+            <button
+              type="button"
+              onClick={handleDiscardSchedule}
+              className="h-[42px] px-4 rounded-xl border border-red-200 dark:border-red-500/30 bg-red-50 dark:bg-red-500/10 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-500/20 text-sm font-semibold transition-colors flex items-center gap-2 shadow-sm"
+              title="Discard future updates and revert to live version"
+            >
+              <TimerOff className="w-4 h-4" />
+              Discard Schedule
+            </button>
+          )}
+
           <select
             name="status"
             value={formData.status}
-            onChange={handleInputChange}
-            className="px-4 py-2.5 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-zinc-100/10 cursor-pointer transition-colors"
+            onChange={(e) => {
+              handleInputChange(e);
+              if (e.target.value === 'SCHEDULED') {
+                setIsScheduling(true);
+              } else if (e.target.value === 'DRAFT' || e.target.value === 'ARCHIVED') {
+                setIsScheduling(false);
+                setFormData(p => ({ ...p, scheduledUpdateAt: '' }));
+              }
+            }}
+            className="h-[42px] px-4 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-zinc-100/10 cursor-pointer transition-colors"
           >
             <option value="DRAFT">Draft</option>
-            
             <Can 
               permission="page.publish" 
               fallback={<option value="PUBLISHED" disabled>Published (Requires Permission)</option>}
             >
               <option value="PUBLISHED">Published</option>
             </Can>
-
+            <option value="SCHEDULED">Scheduled</option>
             {isEditMode && <option value="ARCHIVED">Archived</option>}
           </select>
+
           <button
             type="submit"
-            disabled={saving}
-            className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 rounded-xl font-medium hover:bg-zinc-800 dark:hover:bg-white transition-colors shadow-sm focus:ring-2 focus:ring-zinc-900/20 dark:focus:ring-zinc-100/20 disabled:opacity-70"
+            disabled={saving || (isScheduling && !formData.scheduledUpdateAt) || (formData.status === 'SCHEDULED' && !formData.scheduledUpdateAt)}
+            className={`h-[42px] inline-flex items-center justify-center gap-2 px-6 rounded-xl font-medium transition-colors shadow-sm focus:ring-2 disabled:opacity-70 ${
+              isScheduling 
+                ? 'bg-indigo-600 hover:bg-indigo-700 text-white focus:ring-indigo-600/20' 
+                : 'bg-zinc-900 hover:bg-zinc-800 text-white dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-white focus:ring-zinc-900/20 dark:focus:ring-zinc-100/20'
+            }`}
           >
             {saving ? (
-              <div className="w-4 h-4 border-2 border-white dark:border-zinc-900 border-t-transparent dark:border-t-transparent rounded-full animate-spin"></div>
+              <div className="w-4 h-4 border-2 border-t-transparent border-white dark:border-zinc-900 rounded-full animate-spin"></div>
             ) : (
               <Save className="w-4 h-4" />
             )}
-            Save Page
+            {isScheduling ? 'Schedule' : 'Save'}
           </button>
         </div>
       </div>
 
+      {successMsg && (
+        <div className="bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 text-emerald-700 dark:text-emerald-400 px-4 py-3 rounded-xl flex items-center gap-3 shadow-sm transition-colors duration-300">
+          <CheckCircle className="w-5 h-5 flex-shrink-0" />
+          <p className="font-medium">{successMsg}</p>
+        </div>
+      )}
+      
       {error && (
         <div className="bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 text-red-700 dark:text-red-400 px-4 py-3 rounded-xl flex items-center gap-3 shadow-sm transition-colors duration-300">
           <AlertCircle className="w-5 h-5 flex-shrink-0" />
@@ -811,15 +925,19 @@ const PageEditor = () => {
       <div className="flex justify-start mt-8 pt-4">
         <button
           type="submit"
-          disabled={saving}
-          className="bg-zinc-900 dark:bg-zinc-100 hover:bg-zinc-800 dark:hover:bg-white text-white dark:text-zinc-900 px-8 py-3 rounded-xl font-medium tracking-wide flex items-center justify-center gap-2 transition-all shadow-lg shadow-zinc-900/20 dark:shadow-none disabled:opacity-70 text-sm w-full sm:w-auto"
+          disabled={saving || (isScheduling && !formData.scheduledUpdateAt) || (formData.status === 'SCHEDULED' && !formData.scheduledUpdateAt)}
+          className={`px-8 py-3 rounded-xl font-medium tracking-wide flex items-center justify-center gap-2 transition-all shadow-lg disabled:opacity-70 text-sm w-full sm:w-auto ${
+            isScheduling
+              ? 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-indigo-600/20'
+              : 'bg-zinc-900 dark:bg-zinc-100 hover:bg-zinc-800 dark:hover:bg-white text-white dark:text-zinc-900 shadow-zinc-900/20 dark:shadow-none'
+          }`}
         >
           {saving ? (
-            <div className="w-5 h-5 border-2 border-white dark:border-zinc-900 border-t-transparent dark:border-t-transparent rounded-full animate-spin"></div>
+            <div className="w-5 h-5 border-2 border-white border-t-transparent dark:border-zinc-900 dark:border-t-transparent rounded-full animate-spin"></div>
           ) : (
             <Save className="w-5 h-5" />
           )}
-          {saving ? 'Saving...' : 'Save'}
+          {isScheduling ? (saving ? 'Scheduling...' : 'Schedule Update') : (saving ? 'Saving...' : 'Save')}
         </button>
       </div>
     </form>

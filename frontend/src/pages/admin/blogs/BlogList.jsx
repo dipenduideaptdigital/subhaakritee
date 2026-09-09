@@ -4,14 +4,68 @@ import { blogsApi } from '../../../api/blogs';
 import Can from '../../../components/shared/Can';
 import { 
   FileText, Plus, Edit3, Trash2, Search, 
-  ExternalLink, AlertCircle, Clock, Eye 
+  ExternalLink, AlertCircle, Clock, Eye,
+  CheckCircle, FileEdit, Archive
 } from 'lucide-react';
+
+const TABS = [
+  { id: 'ALL', label: 'All Posts' },
+  { id: 'PUBLISHED', label: 'Published', icon: CheckCircle },
+  { id: 'DRAFT', label: 'Drafts', icon: FileEdit },
+  { id: 'SCHEDULED', label: 'Scheduled', icon: Clock },
+  { id: 'ARCHIVED', label: 'Archived', icon: Archive }
+];
+
+// --- Real-Time Countdown Component for Scheduled Blogs ---
+const CountdownTimer = ({ targetDate }) => {
+  const [timeLeft, setTimeLeft] = useState('');
+
+  useEffect(() => {
+    if (!targetDate) return;
+    
+    const updateTimer = () => {
+      const now = new Date().getTime();
+      const distance = new Date(targetDate).getTime() - now;
+
+      if (distance < 0) {
+        setTimeLeft('Publishing soon...');
+        return;
+      }
+
+      const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+      let timeString = '';
+      if (d > 0) timeString += `${d}d `;
+      if (h > 0 || d > 0) timeString += `${h}h `;
+      timeString += `${m}m ${s}s`;
+
+      setTimeLeft(timeString);
+    };
+
+    updateTimer(); 
+    const interval = setInterval(updateTimer, 1000);
+    return () => clearInterval(interval);
+  }, [targetDate]);
+
+  if (!timeLeft) return null;
+
+  return (
+    <div className="flex items-center gap-1.5 mt-1.5 text-[10px] font-mono font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10 px-2 py-0.5 rounded-md border border-blue-200 dark:border-blue-500/20 w-fit transition-colors">
+      <Clock className="w-3 h-3 animate-pulse" />
+      <span>Live in: {timeLeft}</span>
+    </div>
+  );
+};
 
 const BlogList = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [activeTab, setActiveTab] = useState('ALL');
   const [isDeleting, setIsDeleting] = useState(null);
 
   useEffect(() => {
@@ -45,23 +99,39 @@ const BlogList = () => {
     }
   };
 
-  const filteredBlogs = blogs.filter(blog => 
-    blog.title?.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredBlogs = blogs.filter(blog => {
+    const matchesTab = activeTab === 'ALL' ? true : blog.status === activeTab;
+    const matchesSearch = blog.title?.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchesTab && matchesSearch;
+  });
 
-  const getStatusBadge = (status) => {
-    switch (status) {
+  const getStatusBadge = (blog) => {
+    let badge = null;
+    switch (blog.status) {
       case 'PUBLISHED': 
-        return <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20 uppercase tracking-wider transition-colors duration-300">Published</span>;
+        badge = <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20 uppercase tracking-wider transition-colors duration-300">Published</span>;
+        break;
       case 'DRAFT': 
-        return <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/20 uppercase tracking-wider transition-colors duration-300">Draft</span>;
+        badge = <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/20 uppercase tracking-wider transition-colors duration-300">Draft</span>;
+        break;
       case 'SCHEDULED': 
-        return <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-500/20 flex items-center gap-1 uppercase tracking-wider transition-colors duration-300"><Clock className="w-3 h-3"/> Scheduled</span>;
+        badge = <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-500/20 flex items-center gap-1 uppercase tracking-wider transition-colors duration-300"><Clock className="w-3 h-3"/> Scheduled</span>;
+        break;
       case 'ARCHIVED': 
-        return <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700 uppercase tracking-wider transition-colors duration-300">Archived</span>;
+        badge = <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700 uppercase tracking-wider transition-colors duration-300">Archived</span>;
+        break;
       default: 
-        return <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700 uppercase tracking-wider transition-colors duration-300">{status}</span>;
+        badge = <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700 uppercase tracking-wider transition-colors duration-300">{blog.status}</span>;
     }
+
+    return (
+      <div className="flex flex-col items-start gap-1">
+        {badge}
+        {blog.status === 'SCHEDULED' && blog.publishedAt && (
+          <CountdownTimer targetDate={blog.publishedAt} />
+        )}
+      </div>
+    );
   };
 
   if (loading) {
@@ -102,6 +172,24 @@ const BlogList = () => {
       {/* Main Content Area */}
       <div className="bg-white dark:bg-zinc-900 rounded-2xl shadow-sm border border-zinc-100 dark:border-zinc-800 overflow-hidden transition-colors duration-300">
         
+        {/* TABS NAVIGATION */}
+        <div className="flex border-b border-zinc-100 dark:border-zinc-800 px-6 gap-6 bg-zinc-50/50 dark:bg-zinc-900/50 overflow-x-auto transition-colors duration-300">
+          {TABS.map(tab => (
+            <button 
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`py-3.5 text-xs font-semibold uppercase tracking-wider border-b-2 transition-all whitespace-nowrap flex items-center gap-2 cursor-pointer ${
+                activeTab === tab.id 
+                  ? 'border-zinc-950 dark:border-white text-zinc-950 dark:text-white font-bold' 
+                  : 'border-transparent text-zinc-400 dark:text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300'
+              }`}
+            >
+              {tab.icon && <tab.icon className="w-3.5 h-3.5" />}
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
         {/* Search Toolbar */}
         <div className="p-4 border-b border-zinc-100 dark:border-zinc-800 flex items-center justify-between gap-4 bg-zinc-50/50 dark:bg-zinc-800/50 transition-colors duration-300">
           <div className="relative w-full max-w-md">
@@ -154,7 +242,7 @@ const BlogList = () => {
                       </div>
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">{getStatusBadge(blog.status)}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{getStatusBadge(blog)}</td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm text-zinc-900 dark:text-zinc-100 font-medium">{blog.author?.name}</div>
                     <div className="text-xs text-zinc-500 dark:text-zinc-400 flex items-center gap-2 mt-1">

@@ -128,18 +128,39 @@ const ProjectEditor = () => {
     <form onSubmit={handleSubmit} className="space-y-6 pb-20 text-zinc-900 dark:text-zinc-100 font-sans transition-colors duration-300">
       
       {/* Header */}
-      <div className="flex justify-between items-center bg-white dark:bg-zinc-900 p-6 rounded-2xl shadow-sm border border-zinc-100 dark:border-zinc-800 transition-colors">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-zinc-900 p-6 rounded-2xl shadow-sm border border-zinc-100 dark:border-zinc-800 transition-colors duration-300">
         <div className="flex items-center gap-4">
           <Link to="/admin/projects" className="p-2 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100 rounded-full transition-colors">
             <ArrowLeft className="w-5 h-5"/>
           </Link>
-          <h1 className="text-2xl font-bold">{isEditMode ? 'Edit Project' : 'Add New Project'}</h1>
+          <div>
+            <h1 className="text-2xl font-bold">{isEditMode ? 'Edit Project' : 'Add New Project'}</h1>
+            <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-1">
+              {isEditMode ? `Editing: ${formData.title}` : 'Draft a new project for your portfolio.'}
+            </p>
+          </div>
         </div>
-        <Can permission={isEditMode ? 'project.edit' : 'project.create'}>
-          <button type="submit" disabled={saving} className="px-6 py-2.5 bg-zinc-900 dark:bg-indigo-600 text-white rounded-xl flex items-center gap-2 hover:bg-zinc-800 dark:hover:bg-indigo-500 transition-colors shadow-sm disabled:opacity-70 cursor-pointer text-sm font-medium">
-            <Save className="w-4 h-4" /> Save
-          </button>
-        </Can>
+        
+        <div className="flex items-center gap-3">
+          {/* Status Dropdown inside Header */}
+          <select
+            name="status"
+            value={formData.status}
+            onChange={handleChange}
+            className="h-[42px] px-4 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-zinc-900/10 dark:focus:ring-zinc-100/10 cursor-pointer transition-colors"
+          >
+            <option value="DRAFT">Draft</option>
+            <option value="PUBLISHED">Published</option>
+            {isEditMode && <option value="ARCHIVED">Archived</option>}
+          </select>
+
+          <Can permission={isEditMode ? 'project.edit' : 'project.create'}>
+            <button type="submit" disabled={saving} className="h-[42px] px-6 bg-indigo-600 text-white rounded-xl flex items-center gap-2 hover:bg-indigo-700 transition-colors shadow-sm disabled:opacity-70 cursor-pointer text-sm font-medium">
+              {saving ? <div className="w-4 h-4 border-2 border-t-transparent border-white rounded-full animate-spin"></div> : <Save className="w-4 h-4" />} 
+              Save
+            </button>
+          </Can>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -161,12 +182,7 @@ const ProjectEditor = () => {
                   <option>Residential</option><option>Commercial</option><option>Landscape</option><option>Interior</option>
                 </select>
               </div>
-              <div>
-                <label className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Status</label>
-                <select name="status" value={formData.status} onChange={handleChange} className="w-full mt-1.5 p-2.5 border border-zinc-200 dark:border-zinc-700 rounded-xl bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-colors cursor-pointer">
-                  <option value="PUBLISHED">Published</option><option value="DRAFT">Draft</option>
-                </select>
-              </div>
+              {/* Status field moved to Header */}
             </div>
 
             <div className="grid grid-cols-2 gap-4">

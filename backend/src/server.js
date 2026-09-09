@@ -7,6 +7,7 @@ import { systemStateStore } from "./shared/core/systemStateStore.js";
 
 // all jobs
 import { initSystemHousekeeping } from "./jobs/systemCleanup.job.js";
+import { initPageJobs } from "./jobs/pages.job.js";
 import { initBlogJobs } from "./jobs/blogs.job.js";
 
 const server = http.createServer(app);
@@ -29,6 +30,7 @@ const startServer = async () => {
     
     initSystemHousekeeping();
     initBlogJobs();
+    initPageJobs();
     logger.info("Background jobs initialized.");
 
     server.listen(PORT, () => {
