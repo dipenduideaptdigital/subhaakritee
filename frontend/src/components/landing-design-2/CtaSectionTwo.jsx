@@ -36,7 +36,7 @@ const CtaSectionTwo = ({ data, onCtaClick }) => {
               className="group inline-flex items-center space-x-4 pl-6 pr-2 py-2 border border-gray-300 hover:border-gray-500 rounded-full text-xs md:text-sm font-bold tracking-wide text-gray-800 bg-white transition-all duration-300 shadow-[0_4px_12px_rgba(0,0,0,0.02)] cursor-pointer font-['Helvetica',sans-serif]"
             >
               <span className="font-['Helvetica',sans-serif]">{buttonText}</span>
-              <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-[#3b82f6] flex items-center justify-center text-white transition-transform group-hover:scale-105">
+              <div className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-[#ffc300] flex items-center justify-center text-black transition-transform group-hover:scale-105">
                 <ArrowUpRight className="w-4.5 h-4.5 md:w-5 md:h-5" />
               </div>
             </button>

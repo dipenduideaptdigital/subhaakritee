@@ -43,7 +43,7 @@ const Cta = ({ data: externalData }) => {
     return parts.map((part, index) => {
       if (part.startsWith('[') && part.endsWith(']')) {
         return (
-          <span key={index} className="text-[#228BFF]">
+         <span key={index} className="text-[#ffc300]">
             {part.slice(1, -1).split(/\\n|\n/).map((line, lIdx, arr) => (
               <React.Fragment key={lIdx}>
                 {line}
@@ -83,7 +83,7 @@ const Cta = ({ data: externalData }) => {
             </h2>
             
             <Link to="/contact">
-              <button className="group flex items-center border border-gray-300 rounded-full pl-7 pr-2 py-2 w-max hover:border-[#228BFF] transition-colors duration-300 cursor-pointer font-['Helvetica',sans-serif]">
+                <button className="group flex items-center border border-gray-300 rounded-full pl-7 pr-2 py-2 w-max hover:border-[#ffc300] transition-colors duration-300 cursor-pointer font-['Helvetica',sans-serif]">
                 <span className="font-semibold text-[15px] text-[#111827] group-hover:text-[#228BFF] transition-colors tracking-wide mr-6 font-['Helvetica',sans-serif]">
                   {buttonText}
                 </span>
