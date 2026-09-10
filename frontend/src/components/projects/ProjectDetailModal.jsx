@@ -21,7 +21,7 @@ const ProjectDetailModal = ({ project, onClose }) => {
           
           <button 
             onClick={onClose}
-            className="absolute right-6 top-6 z-20 p-2.5 bg-zinc-950/80 hover:bg-[#3B82F6] text-white rounded-full transition-colors backdrop-blur-md shadow-lg"
+            className="absolute right-6 top-6 z-20 p-2.5 bg-zinc-950/80 hover:bg-[#ffc300] text-white rounded-full transition-colors backdrop-blur-md shadow-lg"
           >
             <X className="w-4 h-4" />
           </button>
@@ -45,10 +45,10 @@ const ProjectDetailModal = ({ project, onClose }) => {
               <div>
                 <div className="flex items-center gap-4 text-zinc-400 text-[10px] tracking-widest uppercase font-semibold mb-4">
                   <span className="flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-[#3B82F6]" /> {project.location}
+                    <MapPin className="w-3.5 h-3.5 text-[#ffc300]" /> {project.location}
                   </span>
                   <span className="flex items-center gap-1.5">
-                    <Calendar className="w-3.5 h-3.5 text-[#3B82F6]" /> {project.year}
+                    <Calendar className="w-3.5 h-3.5 text-[#ffc300]" /> {project.year}
                   </span>
                 </div>
 

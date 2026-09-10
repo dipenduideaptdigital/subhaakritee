@@ -92,7 +92,7 @@ const ContactInfoBlock = ({
     return parts.map((part, index) => {
       if (part.startsWith('[') && part.endsWith(']')) {
         return (
-          <span key={index} className="text-[#3B82F6]">
+          <span key={index} className="text-[#ffc300]">
             {part.slice(1, -1).split(/\\n|\n/).map((line, lIdx, arr) => (
               <React.Fragment key={lIdx}>
                 {line}
@@ -144,7 +144,7 @@ const ContactInfoBlock = ({
             <div className="flex flex-col text-left">
               <h4 className="text-[15px] font-bold text-gray-900 mb-3 md:mb-4">{supportTitle || 'Support'}</h4>
               <p className="text-gray-900 font-bold text-[15px] mb-1">{supportPhone || '+91 9831-637-409'}</p>
-              <a href={`mailto:${supportEmail}`} className="text-gray-600 text-[15px] hover:text-[#3B82F6] transition-colors">
+              <a href={`mailto:${supportEmail}`} className="text-gray-600 text-[15px] hover:text-[#ffc300] transition-colors">
                 {supportEmail || 'Subhaakritee@Hotmail.Com'}
               </a>
             </div>
@@ -183,13 +183,13 @@ const ContactInfoBlock = ({
                 <div className="flex flex-col text-left">
                   <label className="text-sm font-medium text-gray-700 mb-2">First name</label>
                   <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} placeholder="First name" required disabled={status.loading}
-                    className="w-full bg-white text-gray-900 px-5 border border-gray-300 outline-none placeholder:text-gray-400 placeholder:font-light focus:border-[#3B82F6] transition-colors text-sm disabled:opacity-50" 
+                    className="w-full bg-white text-gray-900 px-5 border border-gray-300 outline-none placeholder:text-gray-400 placeholder:font-light focus:border-[#ffc300] transition-colors text-sm disabled:opacity-50" 
                     style={{ height: '48.4px', borderRadius: '20px' }} />
                 </div>
                 <div className="flex flex-col text-left">
                   <label className="text-sm font-medium text-gray-700 mb-2">Last name</label>
                   <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} placeholder="Last name" required disabled={status.loading}
-                    className="w-full bg-white text-gray-900 px-5 border border-gray-300 outline-none placeholder:text-gray-400 placeholder:font-light focus:border-[#3B82F6] transition-colors text-sm disabled:opacity-50" 
+                    className="w-full bg-white text-gray-900 px-5 border border-gray-300 outline-none placeholder:text-gray-400 placeholder:font-light focus:border-[#ffc300] transition-colors text-sm disabled:opacity-50" 
                     style={{ height: '48.4px', borderRadius: '20px' }} />
                 </div>
               </div>
@@ -197,7 +197,7 @@ const ContactInfoBlock = ({
               <div className="flex flex-col text-left">
                 <label className="text-sm font-medium text-gray-700 mb-2">Email</label>
                 <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="you@gmail.com" required disabled={status.loading}
-                  className="w-full bg-white text-gray-900 px-5 border border-gray-300 outline-none placeholder:text-gray-400 placeholder:font-light focus:border-[#3B82F6] transition-colors text-sm disabled:opacity-50" 
+                  className="w-full bg-white text-gray-900 px-5 border border-gray-300 outline-none placeholder:text-gray-400 placeholder:font-light focus:border-[#ffc300] transition-colors text-sm disabled:opacity-50" 
                   style={{ height: '48.4px', borderRadius: '20px' }} />
               </div>
 
@@ -205,7 +205,7 @@ const ContactInfoBlock = ({
                 <label className="text-sm font-medium text-gray-700 mb-2">Contact No.</label>
                 <div className="relative flex items-center">
                   <input type="tel" name="contactNo" value={formData.contactNo} onChange={handleChange} placeholder="No." required disabled={status.loading}
-                    className="w-full bg-white text-gray-900 px-5 border border-gray-300 outline-none placeholder:text-gray-400 placeholder:font-light focus:border-[#3B82F6] transition-colors text-sm appearance-none disabled:opacity-50 pr-12" 
+                    className="w-full bg-white text-gray-900 px-5 border border-gray-300 outline-none placeholder:text-gray-400 placeholder:font-light focus:border-[#ffc300] transition-colors text-sm appearance-none disabled:opacity-50 pr-12" 
                     style={{ height: '48.4px', borderRadius: '20px' }} />
                   <div className="absolute right-5 pointer-events-none text-gray-500 flex items-center">
                     <ChevronDown className="w-5 h-5 text-gray-400" />
@@ -216,7 +216,7 @@ const ContactInfoBlock = ({
               <div className="flex flex-col text-left">
                 <label className="text-sm font-medium text-gray-700 mb-2">Message</label>
                 <textarea name="message" value={formData.message} onChange={handleChange} placeholder="Write your message..." required rows="5" disabled={status.loading}
-                  className="w-full bg-white text-gray-900 px-5 py-4 border border-gray-300 outline-none placeholder:text-gray-400 placeholder:font-light focus:border-[#3B82F6] transition-colors text-sm resize-y min-h-[120px] disabled:opacity-50"
+                  className="w-full bg-white text-gray-900 px-5 py-4 border border-gray-300 outline-none placeholder:text-gray-400 placeholder:font-light focus:border-[#ffc300] transition-colors text-sm resize-y min-h-[120px] disabled:opacity-50"
                   style={{ borderRadius: '20px' }}
                 ></textarea>
               </div>
@@ -226,7 +226,7 @@ const ContactInfoBlock = ({
                   <span className="text-sm font-bold text-gray-800 pr-10">
                     {status.loading ? 'Sending...' : 'Send Message'}
                   </span>
-                  <div className="w-9 h-9 rounded-full bg-[#3B82F6] flex items-center justify-center text-white transition-transform group-hover:scale-105 shrink-0">
+                  <div className="w-9 h-9 rounded-full bg-[#ffc300] flex items-center justify-center text-black transition-transform group-hover:scale-105 shrink-0">
                     {status.loading ? <Loader2 className="w-4.5 h-4.5 animate-spin" /> : <ChevronRight className="w-5 h-5" />}
                    </div>
                 </button>

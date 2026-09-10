@@ -20,7 +20,7 @@ const AboutAwardsBlock = ({ badgeText, title, mainImage, awards = [] }) => {
     return parts.map((part, index) => {
       if (part.startsWith('[') && part.endsWith(']')) {
         return (
-          <span key={index} className="text-[#3B82F6]">
+          <span key={index} className="text-[#ffc300]">
             {part.slice(1, -1).split(/\\n|\n/).map((line, lIdx, arr) => (
               <React.Fragment key={lIdx}>{line}{lIdx < arr.length - 1 && <br className="hidden md:block" />}</React.Fragment>
             ))}
@@ -70,7 +70,7 @@ const AboutAwardsBlock = ({ badgeText, title, mainImage, awards = [] }) => {
           </div>
 
           {/* Awards Compact List (Figma / Second Frame Design) */}
-          <div className="w-full flex flex-col border-t-2 border-[#3B82F6] font-['Helvetica',sans-serif]">
+          <div className="w-full flex flex-col border-t-2 border-[#ffc300] font-['Helvetica',sans-serif]">
             {awardsList.map((award, index) => {
               const isActive = activeAward === award.year;
 
@@ -91,7 +91,7 @@ const AboutAwardsBlock = ({ badgeText, title, mainImage, awards = [] }) => {
                   </div>
 
                   {isActive ? (
-                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#3B82F6] flex items-center justify-center text-white shrink-0 shadow-sm">
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#ffc300] flex items-center justify-center text-black shrink-0 shadow-sm">
                       <ArrowRight className="w-4 h-4 sm:w-4.5 sm:h-4.5" strokeWidth={2.5} />
                     </div>
                   ) : (

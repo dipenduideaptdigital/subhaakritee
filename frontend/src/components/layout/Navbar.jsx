@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronDown, Phone, Menu, X } from 'lucide-react';
+import { ChevronDown, Phone, Search, Menu, X } from 'lucide-react';
 import { pagesApi } from '../../api/pages';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../assets/logos/logo2.svg'; 

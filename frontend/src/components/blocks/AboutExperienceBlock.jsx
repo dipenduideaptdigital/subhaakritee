@@ -15,7 +15,7 @@ const AboutExperienceBlock = ({
     return parts.map((part, index) => {
       if (part.startsWith('[') && part.endsWith(']')) {
         return (
-          <span key={index} className="text-[#228BFF]">
+          <span key={index} className="text-[#ffc300]">
             {part.slice(1, -1).split(/\\n|\n/).map((line, lIdx, arr) => (
               <React.Fragment key={lIdx}>
                 {line}
@@ -124,11 +124,11 @@ const AboutExperienceBlock = ({
                 }}
               />
               
-              <a href={buttonLink || '#'} className="mt-8 lg:mt-10 group flex items-center border border-gray-300 rounded-full pl-7 pr-2 py-2 w-max hover:border-[#228BFF] transition-colors duration-300 font-['Outfit',sans-serif]">
-                <span className="font-['Outfit',sans-serif] font-semibold text-[15px] text-[#111827] group-hover:text-[#228BFF] transition-colors">
+              <a href={buttonLink || '#'} className="mt-8 lg:mt-10 group flex items-center border border-gray-300 rounded-full pl-7 pr-2 py-2 w-max hover:border-[#ffc300] transition-colors duration-300 font-['Outfit',sans-serif]">
+                <span className="font-['Outfit',sans-serif] font-semibold text-[15px] text-[#111827] group-hover:text-[#ffc300] transition-colors">
                   {buttonText || 'Learn More'}
                 </span>
-                <div className="ml-5 w-10 h-10 rounded-full bg-[#228BFF] flex items-center justify-center group-hover:bg-[#1b6ecc] transition-colors">
+                <div className="ml-5 w-10 h-10 rounded-full bg-[#ffc300] flex items-center justify-center group-hover:bg-[#e6b000] transition-colors">
                   <ArrowRight size={16} className="text-white transform group-hover:translate-x-1 transition-transform" />
                 </div>
               </a>

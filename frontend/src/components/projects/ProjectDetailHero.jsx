@@ -31,7 +31,7 @@ const ProjectDetailHero = ({ project }) => {
       <div className="relative z-10 text-center text-white px-4 mt-15 select-none">
         
         {/* Category Tag */}
-        <span className="inline-block px-4 py-1.5 rounded-full border border-white/20 backdrop-blur-md text-[10px] md:text-xs font-bold uppercase tracking-widest text-[#3B82F6] bg-white/5 mb-6">
+        <span className="inline-block px-4 py-1.5 rounded-full border border-white/20 backdrop-blur text-[10px] md:text-xs font-bold uppercase tracking-widest text-[#ffc300] bg-black/5 mb-6">
           {project.category}
         </span>
 

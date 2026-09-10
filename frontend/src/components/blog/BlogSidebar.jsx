@@ -29,9 +29,9 @@ const BlogSidebar = ({ sidebarData, onSearchSubmit, activeCategorySlug, onCatego
             placeholder="Search...." 
             value={localSearchInputTerm}
             onChange={(e) => setLocalSearchInputString(e.target.value)}
-            className="w-full border border-zinc-200 rounded-full py-3.5 px-6 pr-12 focus:outline-none focus:border-[#3B82F6] focus:ring-1 focus:ring-[#3B82F6] transition-all text-base font-extralight text-zinc-600 placeholder-zinc-400"
+            className="w-full border border-zinc-200 rounded-full py-3.5 px-6 pr-12 focus:outline-none focus:border-[#ffc300] focus:ring-1 focus:ring-[#ffc300] transition-all text-base font-extralight text-zinc-600 placeholder-zinc-400"
           />
-          <button type="submit" className="absolute right-5 top-1/2 -translate-y-1/2 text-zinc-600 hover:text-[#3B82F6] transition-colors">
+          <button type="submit" className="absolute right-5 top-1/2 -translate-y-1/2 text-zinc-600 hover:text-[#ffc300] transition-colors">
             <Search className="w-5 h-5" />
           </button>
         </form>
@@ -49,7 +49,7 @@ const BlogSidebar = ({ sidebarData, onSearchSubmit, activeCategorySlug, onCatego
                   key={category.id} 
                   onClick={() => onCategorySelect && onCategorySelect(category.slug)}
                   className={`font-['Montserrat'] text-[18px] md:text-[22px] font-semibold capitalize border-b border-zinc-200 py-4 flex justify-between items-center transition-colors cursor-pointer ${
-                    isSelectedNode ? 'text-[#3B82F6]' : 'text-zinc-600 hover:text-[#3B82F6]'
+                    isSelectedNode ? 'text-[#ffc300]' : 'text-zinc-600 hover:text-[#ffc300]'
                   }`}
                 >
                   <span>{category.name}</span>
@@ -84,7 +84,7 @@ const BlogSidebar = ({ sidebarData, onSearchSubmit, activeCategorySlug, onCatego
                   />
                 </div>
                 <div className="flex flex-col justify-center flex-1 min-w-0">
-                  <h4 className="font-bold text-zinc-900 text-[14px] md:text-[15px] mb-2 leading-snug group-hover:text-[#3B82F6] transition-colors line-clamp-2 text-left">
+                  <h4 className="font-bold text-zinc-900 text-[14px] md:text-[15px] mb-2 leading-snug group-hover:text-[#ffc300] transition-colors line-clamp-2 text-left">
                     {post.title}
                   </h4>
                   <div className="flex items-center gap-2">
@@ -108,7 +108,7 @@ const BlogSidebar = ({ sidebarData, onSearchSubmit, activeCategorySlug, onCatego
               <span 
                 key={tag.id} 
                 onClick={() => onTagSelect && onTagSelect(tag.slug)}
-                className="px-4 py-2 border border-zinc-200 rounded-full text-[12px] md:text-[13px] font-medium text-zinc-600 hover:border-[#3B82F6] hover:text-[#3B82F6] cursor-pointer bg-white hover:bg-blue-50/20 transition-all shadow-sm"
+                className="px-4 py-2 border border-zinc-200 rounded-full text-[12px] md:text-[13px] font-medium text-zinc-600 hover:border-[#ffc300] hover:text-[#ffc300] cursor-pointer bg-white hover:bg-[#ffc300]/10 transition-all shadow-sm"
               >
                 {tag.name}
               </span>

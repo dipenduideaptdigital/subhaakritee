@@ -61,21 +61,21 @@ const BlockRendererNode = memo(({ block }) => {
     case 'paragraph':
       return (
         <div 
-          className="mb-6 text-[16px] md:text-[19px] text-zinc-500 leading-relaxed font-normal text-left prose prose-zinc max-w-none prose-a:text-blue-600 hover:prose-a:text-blue-800"
+          className="mb-6 text-[16px] md:text-[19px] text-zinc-500 leading-relaxed font-normal text-left prose prose-zinc max-w-none prose-a:text-[#ffc300] hover:prose-a:text-[#e6b000]"
           dangerouslySetInnerHTML={{ __html: data?.text || data?.content || '' }}
         />
       );
     case 'richText':
       return (
         <div 
-          className="prose prose-zinc max-w-none text-left mb-6 text-zinc-500 text-[16px] md:text-[19px] leading-relaxed prose-headings:text-zinc-900 prose-headings:font-bold prose-a:text-blue-600"
+          className="prose prose-zinc max-w-none text-left mb-6 text-zinc-500 text-[16px] md:text-[19px] leading-relaxed prose-headings:text-zinc-900 prose-headings:font-bold prose-a:text-[#ffc300]"
           dangerouslySetInnerHTML={{ __html: data?.content || '' }}
         />
       );
     case 'quote':
       return (
         <div className="bg-[#EBF5FF] rounded-3xl p-8 md:p-12 relative mt-8 mb-8 overflow-hidden flex flex-col items-center justify-center text-center min-h-[200px]">
-          <div className="absolute top-2 opacity-20 left-1/2 -translate-x-1/2 font-serif text-[150px] leading-none text-[#3B82F6] select-none pointer-events-none">
+          <div className="absolute top-2 opacity-20 left-1/2 -translate-x-1/2 font-serif text-[150px] leading-none text-[#ffc300] select-none pointer-events-none">
             &ldquo;
           </div>
           <div className="relative z-10 pt-4">

@@ -16,9 +16,9 @@ const ProjectSpecs = ({ project }) => {
     <div className="container mx-auto px-6 md:px-12 lg:px-35 max-w-[1400px] py-16 md:py-20 font-sans bg-white">
       {/* Breadcrumbs */}
       <div className="flex items-center gap-2 text-[10px] md:text-xs font-semibold tracking-wider text-zinc-400 uppercase mb-4 font-['Outfit'] select-none">
-        <Link to="/" className="hover:text-[#3B82F6] transition-colors">Home</Link>
+        <Link to="/" className="hover:text-[#ffc300] transition-colors">Home</Link>
         <span className="text-zinc-300 font-normal">&gt;</span>
-        <Link to="/projects" className="hover:text-[#3B82F6] transition-colors">Projects</Link>
+        <Link to="/projects" className="hover:text-[#ffc300] transition-colors">Projects</Link>
         <span className="text-zinc-300 font-normal">&gt;</span>
         <span className="text-zinc-500 font-medium">{project.title}</span>
       </div>

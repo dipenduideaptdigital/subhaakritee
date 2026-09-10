@@ -15,7 +15,7 @@ const TimelineBlock = ({ badgeText, title, items = [] }) => {
           {parts.map((part, i) => {
             if (part.startsWith('[') && part.endsWith(']')) {
               return (
-                <span key={i} className="text-[#3B82F6]">
+                <span key={i} className="text-[#ffc300]">
                   {part.slice(1, -1)}
                 </span>
               );
@@ -68,7 +68,7 @@ const TimelineBlock = ({ badgeText, title, items = [] }) => {
                 </div>
                 
                 <div className="h-[30px] w-full"></div>
-                <div className="w-[12px] h-[12px] rounded-full bg-[#3B82F6] shrink-0 ring-4 ring-white"></div>
+               <div className="w-[12px] h-[12px] rounded-full bg-[#ffc300] shrink-0 ring-4 ring-white"></div>
                 <div className="h-[25px] w-full"></div>
                 
                 <div className="w-full flex flex-col items-start px-1 font-['Outfit',sans-serif]">
@@ -93,7 +93,7 @@ const TimelineBlock = ({ badgeText, title, items = [] }) => {
             {items.map((item, idx) => (
               <div key={idx} className="flex flex-col relative pl-12 sm:pl-16 w-full font-['Outfit',sans-serif]">
                 {/* Timeline Dot */}
-                <div className="absolute left-[18px] sm:left-[26px] top-1/2 transform -translate-y-1/2 w-[12px] h-[12px] rounded-full bg-[#3B82F6] z-10 ring-4 ring-white"></div>
+                <div className="absolute left-[18px] sm:left-[26px] top-1/2 transform -translate-y-1/2 w-[12px] h-[12px] rounded-full bg-[#ffc300] z-10 ring-4 ring-white"></div>
 
                 {/* Content Card */}
                 <div className="w-full flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 bg-gray-50/50 p-4 sm:p-5 rounded-[24px] border border-gray-100 hover:border-gray-200 transition-all duration-300">

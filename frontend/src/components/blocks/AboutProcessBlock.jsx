@@ -36,7 +36,7 @@ const AboutProcessBlock = ({ backgroundImage, steps = [] }) => {
             key={index}
             className={`group flex-1 flex flex-col justify-end p-6 sm:p-8 lg:p-12 h-[230px] xs:h-[260px] md:h-[290px] lg:h-auto my-2 lg:my-20 ${borderClasses[index % borderClasses.length] || 'border-none'}`}
           >
-            <div className="font-['Outfit',sans-serif] text-[48px] sm:text-[60px] lg:text-[80px] font-black text-white/50 group-hover:text-[#228BFF] transition-colors duration-300 mb-2 lg:mb-4">
+            <div className="font-['Outfit',sans-serif] text-[48px] sm:text-[60px] lg:text-[80px] font-black text-white/50 group-hover:text-[#ffc300] transition-colors duration-300 mb-2 lg:mb-4">
               {item.number}
             </div>
             <div className="text-white font-['Outfit',sans-serif]">

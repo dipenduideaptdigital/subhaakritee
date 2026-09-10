@@ -15,7 +15,7 @@ const ProjectsFilter = ({
             onClick={() => setSelectedCategory(cat)}
             className={`px-8 py-4 transition-colors duration-300 shrink-0 rounded-none cursor-pointer flex items-center justify-center ${
               isActive 
-                ? 'bg-blue-800 text-white' 
+                ? 'bg-[#ffc300] text-black' 
                 : 'bg-[#F7F7F7] hover:bg-[#EEEEEE] text-black'
             }`}
             style={{

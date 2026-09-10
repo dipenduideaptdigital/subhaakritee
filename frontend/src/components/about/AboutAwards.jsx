@@ -33,9 +33,9 @@ const AboutAwards = () => {
           {/* Heading */}
           <div className="max-w-4xl">
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-bold leading-[1.15] tracking-tight font-['Outfit',sans-serif] text-gray-900">
-              Design That <span className="text-[#3B82F6]">Speaks Our</span>
+              Design That <span className="text-[#ffc300]">Speaks Our</span>
               <br className="hidden md:block" />
-              <span className="text-[#3B82F6]">Industry</span> Awards
+              <span className="text-[#ffc300]">Industry</span> Awards
             </h2>
           </div>
         </div>
@@ -53,7 +53,7 @@ const AboutAwards = () => {
           </div>
 
           {/* Awards Compact List (Figma / Second Frame Design) */}
-          <div className="w-full flex flex-col border-t-2 border-[#3B82F6] font-['Helvetica',sans-serif]">
+          <div className="w-full flex flex-col border-t-2 border-[#ffc300] font-['Helvetica',sans-serif]">
             {AWARDS_DATA.map((award, index) => {
               const isActive = activeAward === award.year;
 
@@ -77,7 +77,7 @@ const AboutAwards = () => {
 
                   {/* Icons */}
                   {isActive ? (
-                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#3B82F6] flex items-center justify-center text-white shrink-0 shadow-sm">
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#ffc300] flex items-center justify-center text-black shrink-0 shadow-sm">
                       <ArrowRight className="w-4 h-4 sm:w-4.5 sm:h-4.5" strokeWidth={2.5} />
                     </div>
                   ) : (

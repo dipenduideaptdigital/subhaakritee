@@ -23,7 +23,7 @@ const BlogDetailHero = ({ post }) => {
           <span className="text-zinc-300 font-light">&gt;</span>
           <Link to="/blog" className="hover:text-[#3B82F6] transition-colors">Blog</Link>
           <span className="text-zinc-300 font-light">&gt;</span>
-          <span className="text-[#3B82F6] font-bold">{post.categories?.[0]?.name || 'Article'}</span>
+          <span className="text-[#ffc300] font-bold">{post.categories?.[0]?.name || 'Article'}</span>
         </div>
       </div>
     </div>

@@ -46,7 +46,7 @@ const BlogDetail = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="w-10 h-10 border-4 border-[#3B82F6] border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-10 h-10 border-4 border-[#ffc300] border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -71,7 +71,7 @@ const BlogDetail = () => {
               {/* Header Badges */}
               <div className="flex flex-wrap items-center gap-4 mb-6">
                 {blog.categories?.map(cat => (
-                  <span key={cat.id} className="px-4 py-1.5 bg-[#3B82F6] text-white text-xs font-bold rounded-full uppercase tracking-widest">
+                  <span key={cat.id} className="px-4 py-1.5 bg-[#ffc300] text-white text-xs font-bold rounded-full uppercase tracking-widest">
                     {cat.name}
                   </span>
                 ))}
@@ -94,10 +94,10 @@ const BlogDetail = () => {
              <div className="flex flex-col md:flex-row justify-between items-start border-y-2 border-zinc-200 pt-8 pb-8 mt-16 mb-8 gap-8">
                 {navigationSiblings?.prev ? (
                   <Link to={`/blog/${navigationSiblings.prev.slug}`} className="group w-full md:w-1/2 flex flex-col items-start">
-                    <div className="flex items-center gap-2 text-zinc-400 font-bold text-[13px] tracking-widest uppercase mb-3 group-hover:text-[#3B82F6] transition-colors">
+                    <div className="flex items-center gap-2 text-zinc-400 font-bold text-[13px] tracking-widest uppercase mb-3 group-hover:text-[#ffc300] transition-colors">
                       <span className="text-lg leading-none">&larr;</span> Previous Post
                     </div>
-                    <div className="font-['Outfit'] font-bold text-lg md:text-xl leading-snug text-zinc-900 group-hover:text-[#3B82F6] transition-colors pr-4">
+                    <div className="font-['Outfit'] font-bold text-lg md:text-xl leading-snug text-zinc-900 group-hover:text-[#ffc300] transition-colors pr-4">
                       {navigationSiblings.prev.title}
                     </div>
                   </Link>
@@ -105,10 +105,10 @@ const BlogDetail = () => {
 
                 {navigationSiblings?.next && (
                   <Link to={`/blog/${navigationSiblings.next.slug}`} className="group w-full md:w-1/2 flex flex-col items-start md:items-end text-left md:text-right">
-                    <div className="flex items-center gap-2 text-zinc-400 font-bold text-[13px] tracking-widest uppercase mb-3 group-hover:text-[#3B82F6] transition-colors">
+                    <div className="flex items-center gap-2 text-zinc-400 font-bold text-[13px] tracking-widest uppercase mb-3 group-hover:text-[#ffc300] transition-colors">
                       Next Post <span className="text-lg leading-none">&rarr;</span>
                     </div>
-                    <div className="font-['Outfit'] font-bold text-lg md:text-xl leading-snug text-zinc-900 group-hover:text-[#3B82F6] transition-colors md:pl-4">
+                    <div className="font-['Outfit'] font-bold text-lg md:text-xl leading-snug text-zinc-900 group-hover:text-[#ffc300] transition-colors md:pl-4">
                       {navigationSiblings.next.title}
                     </div>
                   </Link>

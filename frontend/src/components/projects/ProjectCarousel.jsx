@@ -129,7 +129,7 @@ const ProjectCarousel = () => {
             onClick={() => setCurrentIndex(index)}
             className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
               index === currentIndex 
-                ? 'w-8 bg-[#3B82F6]' 
+                ? 'w-8 bg-[#ffc300]' 
                 : 'w-2.5 bg-zinc-300 hover:bg-zinc-400'
             }`}
           />

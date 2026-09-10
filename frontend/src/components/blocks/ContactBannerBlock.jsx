@@ -21,7 +21,7 @@ const ContactBannerBlock = ({ title, breadcrumbText, backgroundImage }) => {
         
         <div className="font-['Helvetica',sans-serif] font-medium text-xs sm:text-sm md:text-base tracking-widest text-center flex items-center justify-center space-x-3 text-gray-200 uppercase opacity-80">
           <Link to="/" className="hover:text-[#3B82F6] transition-colors">Home</Link>
-          <span className="text-[#3B82F6] opacity-70">&gt;</span>
+          <span className="text-[#ffc300] opacity-70">&gt;</span>
           <span className="text-white">{breadcrumbText || 'Contact Us'}</span>
         </div>
       </div>

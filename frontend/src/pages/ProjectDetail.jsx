@@ -54,7 +54,7 @@ const ProjectDetail = () => {
     return (
       <div className="min-h-[80vh] flex flex-col items-center justify-center text-center px-6">
         <h2 className="text-2xl font-semibold text-zinc-800 mb-2">Project Not Found</h2>
-        <Link to="/projects" className="inline-flex items-center gap-2 px-6 py-3 bg-[#3B82F6] text-white rounded-full">
+        <Link to="/projects" className="inline-flex items-center gap-2 px-6 py-3 bg-[#ffc300] text-white rounded-full">
           <ArrowLeft className="w-4 h-4" /> Back to Projects
         </Link>
       </div>

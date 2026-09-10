@@ -69,20 +69,20 @@ const ServiceDetailsBlock = ({
             {/* Mobile-only Dropdown */}
             <div className="sm:hidden -mx-5 px-5 relative mb-4" ref={dropdownRef}>
               <h3 className="flex items-center gap-2 text-[15px] font-bold text-gray-900 mb-3">
-                <span className="w-1.5 h-4 rounded-full bg-[#3B82F6]"></span>
+                <span className="w-1.5 h-4 rounded-full bg-[#ffc300]"></span>
                 Other Services
               </h3>
 
               <button
                 type="button"
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="w-full flex items-center justify-between bg-white border border-gray-200 rounded-2xl px-5 py-3.5 shadow-sm text-left focus:outline-none transition-all duration-200 hover:border-[#3B82F6]"
+                className="w-full flex items-center justify-between bg-white border border-gray-200 rounded-2xl px-5 py-3.5 shadow-sm text-left focus:outline-none transition-all duration-200 hover:border-[#ffc300]"
               >
                 <span className="text-[15px] font-bold text-gray-900 capitalize">
                   {dynamicServices.find(s => location.pathname === s.fullPath)?.title || "Select Service"}
                 </span>
                 <ChevronDown
-                  className={`w-5 h-5 text-gray-500 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180 text-[#3B82F6]' : ''}`}
+                  className={`w-5 h-5 text-gray-500 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180 text-[#ffc300]' : ''}`}
                 />
               </button>
 
@@ -98,8 +98,8 @@ const ServiceDetailsBlock = ({
                             to={service.fullPath}
                             onClick={() => setIsDropdownOpen(false)}
                             className={`block px-5 py-3.5 text-[14.5px] font-semibold transition-colors border-b border-gray-50 last:border-b-0 ${isActive
-                              ? 'bg-blue-50/70 text-[#3B82F6]'
-                              : 'text-gray-700 hover:bg-gray-50 hover:text-[#3B82F6]'
+                              ? 'bg-[#ffc300]/10 text-[#ffc300]'
+                              : 'text-gray-700 hover:bg-gray-50 hover:text-[#ffc300]'
                               }`}
                           >
                             {service.title}
@@ -133,7 +133,7 @@ const ServiceDetailsBlock = ({
                           } ${isLast ? 'border-b border-gray-200' : ''}`}
                       >
                         <div className="flex items-center space-x-4 md:space-x-5 transform group-hover:translate-x-2 transition-transform duration-300 pr-4 pl-4 lg:pl-6">
-                          <span className={`text-[17px] lg:text-[19px] font-base leading-[1.2] capitalize font-helvetica transition-colors ${isActive ? 'text-[#3B82F6]' : 'text-gray-900 group-hover:text-[#3B82F6]'}`}>
+                          <span className={`text-[17px] lg:text-[19px] font-base leading-[1.2] capitalize font-helvetica transition-colors ${isActive ? 'text-[#ffc300]' : 'text-gray-900 group-hover:text-[#ffc300]'}`}>
                             {service.title}
                           </span>
                         </div>
@@ -193,7 +193,7 @@ const ServiceDetailsBlock = ({
               <div className="grid grid-cols-2 gap-y-6 gap-x-4 sm:gap-y-8 sm:gap-x-10 mb-10 sm:mb-14">
                 {features.map((item, index) => (
                   <div key={index} className="flex items-center gap-2.5 sm:gap-4">
-                    <div className="w-11 h-11 sm:w-16 sm:h-16 rounded-full bg-[#198CF4] flex items-center justify-center shrink-0">
+                    <div className="w-11 h-11 sm:w-16 sm:h-16 rounded-full bg-[#ffc300] flex items-center justify-center shrink-0">
                       <img src={disruptiveInnovation} alt={item.title} className="w-5.5 h-5.5 sm:w-8 sm:h-8 object-contain" />
                     </div>
                     <div className="flex flex-col justify-center min-w-0">
@@ -236,8 +236,8 @@ const ServiceDetailsBlock = ({
               <div className="sm:hidden bg-white rounded-2xl shadow-sm border border-gray-100 divide-y divide-gray-100 mb-6 overflow-hidden">
                 {[...leftBullets, ...rightBullets].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-3 px-4 py-3.5">
-                    <div className="w-6 h-6 rounded-full bg-[#3B82F6]/10 flex items-center justify-center shrink-0">
-                      <Check className="w-3.5 h-3.5 text-[#3B82F6]" strokeWidth={3} />
+                    <div className="w-6 h-6 rounded-full bg-[#ffc300]/10 flex items-center justify-center shrink-0">
+                       <Check className="w-3.5 h-3.5 text-[#ffc300]" strokeWidth={3} />
                     </div>
                     <span className="text-gray-800 text-[14px] leading-snug">{item.text}</span>
                   </div>
@@ -248,7 +248,7 @@ const ServiceDetailsBlock = ({
                 <div className="flex flex-col space-y-5">
                   {leftBullets.map((item, idx) => (
                     <div key={`left-${idx}`} className="flex items-center gap-3">
-                      <div className="w-2.5 h-2.5 rounded-full bg-[#3B82F6] shrink-0"></div>
+                      <div className="w-2.5 h-2.5 rounded-full bg-[#ffc300] shrink-0"></div>
                       <span className="text-gray-900 text-[16px]">{item.text}</span>
                     </div>
                   ))}
@@ -256,7 +256,7 @@ const ServiceDetailsBlock = ({
                 <div className="flex flex-col space-y-5">
                   {rightBullets.map((item, idx) => (
                     <div key={`right-${idx}`} className="flex items-center gap-3  px-3">
-                      <div className="w-2.5 h-2.5 rounded-full bg-[#3B82F6] shrink-0"></div>
+                      <div className="w-2.5 h-2.5 rounded-full bg-[#ffc300] shrink-0"></div>
                       <span className="text-gray-900 text-[16px]">{item.text}</span>
                     </div>
                   ))}
@@ -284,7 +284,7 @@ const ServiceDetailsBlock = ({
                         >
                           <span className="text-[15px] font-bold text-gray-900 whitespace-pre-line">{faqItem.question}</span>
                           <ChevronDown
-                            className={`w-4 h-4 text-[#3B82F6] shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+                            className={`w-4 h-4 text-[#ffc300] shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
                             strokeWidth={2.5}
                           />
                         </button>
@@ -310,8 +310,8 @@ const ServiceDetailsBlock = ({
                           onClick={() => setOpenFaq(isOpen ? -1 : index)}
                           className="flex items-center justify-between w-full text-left cursor-pointer outline-none group"
                         >
-                          <span className="text-[18px] md:text-[20px] font-bold text-gray-900 whitespace-pre-line group-hover:text-[#3B82F6] transition-colors">{faqItem.question}</span>
-                          <ChevronDown className={`w-5 h-5 text-[#3B82F6] shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} strokeWidth={2.5} />
+                          <span className="text-[18px] md:text-[20px] font-bold text-gray-900 whitespace-pre-line group-hover:text-[#ffc300] transition-colors">{faqItem.question}</span>
+                          <ChevronDown className={`w-5 h-5 text-[#ffc300] shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} strokeWidth={2.5} />
                         </button>
                         <div className={`grid transition-all duration-300 ease-in-out ${isOpen ? 'grid-rows-[1fr] mt-4' : 'grid-rows-[0fr]'}`}>
                           <div className="overflow-hidden">

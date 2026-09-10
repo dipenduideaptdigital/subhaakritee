@@ -37,9 +37,9 @@ const ProjectShowcase = ({ currentProjectSlug }) => {
         </div>
         <div className="max-w-3xl text-left ml-20">
           <h2 className="text-[40px] md:text-[50px] lg:text-[70px] font-bold tracking-[-0.04em] text-gray-900 leading-[1.1] capitalize font-['Helvetica']">
-            Explore <span className="text-[#3B82F6]">Our Project</span>
+            Explore <span className="text-[#ffc300]">Our Project</span>
             <br />
-            <span className="text-[#3B82F6]">Showcase</span>
+            <span className="text-[#ffc300]">Showcase</span>
           </h2>
         </div>
       </div>
@@ -60,7 +60,7 @@ const ProjectShowcase = ({ currentProjectSlug }) => {
                 loading="lazy"
               />
             </div>
-            <h3 className="text-2xl font-bold font-['Helvetica'] text-gray-900 mb-2 mt-6 group-hover:text-[#3B82F6] transition-colors leading-tight">
+            <h3 className="text-2xl font-bold font-['Helvetica'] text-gray-900 mb-2 mt-6 group-hover:text-[#ffc300] transition-colors leading-tight">
               {project.title}
             </h3>
             <p className="text-gray-500 font-['Helvetica'] text-sm md:text-base leading-relaxed line-clamp-2">

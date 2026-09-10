@@ -25,7 +25,7 @@ const AboutBanner = () => {
         <div className="font-['Helvetica',sans-serif] font-normal text-xs sm:text-sm md:text-base tracking-normal text-center flex items-center space-x-2 text-white uppercase">
           <Link 
             to="/" 
-            className="hover:text-[#3B82F6] transition-colors duration-200"
+            className="hover:text-[#ffc300] transition-colors duration-200"
           >
             Home
           </Link>

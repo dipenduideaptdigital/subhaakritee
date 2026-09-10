@@ -105,7 +105,7 @@ const BlogContent = () => {
                 <div className="flex items-center gap-4 mb-4">
                   <div className="flex flex-wrap gap-2">
                     {post.categories?.map((cat) => (
-                      <span key={cat.id} className="px-4 py-1.5 bg-[#3B82F6] text-white text-[10px] sm:text-xs font-semibold rounded-full uppercase tracking-wider">
+                      <span key={cat.id} className="px-4 py-1.5 bg-[#ffc300] text-black text-[10px] sm:text-xs font-semibold rounded-full uppercase tracking-wider">
                         {cat.name}
                       </span>
                     ))}
@@ -116,7 +116,7 @@ const BlogContent = () => {
                 </div>
 
                 <Link to={`/blog/${post.slug}`} className="block">
-                  <h2 className="font-['Outfit'] text-3xl sm:text-[43px] font-semibold leading-[1.1] text-zinc-900 mb-4 hover:text-[#3B82F6] transition-colors cursor-pointer line-clamp-2">
+                  <h2 className="font-['Outfit'] text-3xl sm:text-[43px] font-semibold leading-[1.1] text-zinc-900 mb-4 hover:text-[#ffc300] transition-colors cursor-pointer line-clamp-2">
                     {post.title}
                   </h2>
                 </Link>
@@ -125,7 +125,7 @@ const BlogContent = () => {
                   {post.excerpt || "Read the full article to explore deep insights and expert opinions on modern architectural and interior design concepts."}
                 </p>
 
-                <Link to={`/blog/${post.slug}`} className="inline-flex items-center text-zinc-900 text-sm font-bold border-b-[3px] border-zinc-900 pb-0.5 hover:text-[#3B82F6] hover:border-[#3B82F6] transition-colors uppercase tracking-wider">
+                <Link to={`/blog/${post.slug}`} className="inline-flex items-center text-zinc-900 text-sm font-bold border-b-[3px] border-zinc-900 pb-0.5 hover:text-[#ffc300] hover:border-[#ffc300] transition-colors uppercase tracking-wider">
                   Read More
                 </Link>
               </article>
@@ -162,7 +162,7 @@ const BlogContent = () => {
               <button 
                 disabled={currentPage === meta.totalPages}
                 onClick={() => updateFilters('page', currentPage + 1)}
-                className="w-10 h-10 rounded-full bg-[#3B82F6] text-white flex items-center justify-center font-bold shadow-md hover:bg-blue-600 transition-colors disabled:opacity-50"
+                className="w-10 h-10 rounded-full bg-[#ffc300] text-black flex items-center justify-center font-bold shadow-md hover:bg-[#e6b000] transition-colors disabled:opacity-50"
               >
                 <ArrowRight className="w-5 h-5" />
               </button>

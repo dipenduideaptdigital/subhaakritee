@@ -45,7 +45,7 @@ const ProjectDesignDetails = ({ project }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 mb-16">
           {bulletPoints.map((item, index) => (
             <div key={index} className="flex items-start gap-4">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#3B82F6] shrink-0 mt-2"></span>
+              <span className="w-2.5 h-2.5 rounded-full bg-[#ffc300] shrink-0 mt-2"></span>
               <span 
                 className="text-zinc-900 font-['Outfit'] select-none text-left text-base md:text-lg lg:text-[20px] leading-relaxed"
                 style={{ fontWeight: 600, fontStyle: 'normal' }}
@@ -87,7 +87,7 @@ const ProjectDesignDetails = ({ project }) => {
 
           {/* Photos Button */}
           <button 
-            className="bg-[#3B82F6] hover:bg-blue-600 text-white font-medium px-8 py-3.5 rounded-full inline-flex items-center gap-2.5 transition-all shadow-lg hover:shadow-blue-500/20 cursor-pointer"
+            className="bg-[#ffc300] hover:bg-[#ffc300] text-white font-medium px-8 py-3.5 rounded-full inline-flex items-center gap-2.5 transition-all shadow-lg hover:shadow-blue-500/20 cursor-pointer"
           >
             <Image className="w-5 h-5" />
             <span className="text-sm font-semibold tracking-wide">Photos</span>

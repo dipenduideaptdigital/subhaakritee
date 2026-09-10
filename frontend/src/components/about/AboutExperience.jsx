@@ -23,9 +23,9 @@ const AboutExperience = () => {
 
             {/* Heading */}
             <h2 className="text-[26px] xs:text-[30px] sm:text-[36px] md:text-[42px] lg:text-[48px] font-bold leading-[1.1] tracking-[-0.03em] text-[#111827] whitespace-normal lg:whitespace-nowrap">
-              We Design <span className="text-[#228BFF]">Spaces,</span>
+              We Design <span className="text-[#ffc300]">Spaces,</span>
               <span className="lg:hidden"> </span><br className="hidden lg:inline" />
-              <span className="text-[#228BFF]">That Deliver</span> Lasting
+              <span className="text-[#ffc300]">That Deliver</span> Lasting
               <span className="lg:hidden"> </span><br className="hidden lg:inline" />
               Impact
             </h2>
@@ -114,11 +114,11 @@ const AboutExperience = () => {
               </p>
 
               {/* Button */}
-              <button className="mt-8 lg:mt-10 group flex items-center border border-gray-300 rounded-full pl-7 pr-2 py-2 w-max hover:border-[#228BFF] transition-colors duration-300 font-['Outfit',sans-serif]">
-                <span className="font-['Outfit',sans-serif] font-semibold text-[15px] text-[#111827] group-hover:text-[#228BFF] transition-colors">
+              <button className="mt-8 lg:mt-10 group flex items-center border border-gray-300 rounded-full pl-7 pr-2 py-2 w-max hover:border-[#ffc300] transition-colors duration-300 font-['Outfit',sans-serif]">
+                <span className="font-['Outfit',sans-serif] font-semibold text-[15px] text-[#111827] group-hover:text-[#ffc300] transition-colors">
                   Learn More
                 </span>
-                <div className="ml-5 w-10 h-10 rounded-full bg-[#228BFF] flex items-center justify-center group-hover:bg-[#1b6ecc] transition-colors">
+                <div className="ml-5 w-10 h-10 rounded-full bg-[#ffc300] flex items-center justify-center group-hover:bg-[#e6b000] transition-colors">
                   <ArrowRight size={16} className="text-white transform group-hover:translate-x-1 transition-transform" />
                 </div>
               </button>

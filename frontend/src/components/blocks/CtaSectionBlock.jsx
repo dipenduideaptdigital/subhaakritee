@@ -9,7 +9,7 @@ const CtaSectionBlock = ({ badgeText, title, buttonText }) => {
     return parts.map((part, index) => {
       if (part.startsWith('[') && part.endsWith(']')) {
         return (
-          <span key={index} className="text-[#3B82F6]">
+          <span key={index} className="text-[#ffc300]">
             {part.slice(1, -1).split(/\\n|\n/).map((line, lIdx, arr) => (
               <React.Fragment key={lIdx}>
                 {line}
@@ -50,11 +50,11 @@ const CtaSectionBlock = ({ badgeText, title, buttonText }) => {
             </h2>
             
             <Link to="/contact" className="max-w-full">
-              <button className="group inline-flex items-center gap-3 sm:gap-4 rounded-full border border-zinc-300 hover:border-[#3B82F6] transition-colors pl-4 pr-2 sm:pl-6 py-2 cursor-pointer max-w-full font-['Helvetica',sans-serif]">
+              <button className="group inline-flex items-center gap-3 sm:gap-4 rounded-full border border-zinc-300 hover:border-[#ffc300] transition-colors pl-4 pr-2 sm:pl-6 py-2 cursor-pointer max-w-full font-['Helvetica',sans-serif]">
                 <span className="text-[11px] sm:text-[13px] font-bold tracking-wider text-zinc-600 uppercase group-hover:text-zinc-900 transition-colors truncate font-['Helvetica',sans-serif]">
                   {buttonText}
                 </span>
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#3B82F6] flex items-center justify-center text-white transition-transform group-hover:scale-105 shadow-md shrink-0">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#ffc300] flex items-center justify-center text-black transition-transform group-hover:scale-105 shadow-md shrink-0">
                   <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5" strokeWidth={2.5} />
                 </div>
               </button>
