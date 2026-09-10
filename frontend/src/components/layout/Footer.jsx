@@ -58,6 +58,36 @@ const Footer = () => {
 
   const copyrightText = footerData?.copyrightText || `Copyright Subhaakritee - All Rights Reserved.`;
 
+  const handleLinkClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const renderLink = (link, idx) => {
+    const isExternal = link.url?.startsWith('http');
+    return (
+      <li key={idx}>
+        {isExternal ? (
+          <a 
+            href={link.url} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="hover:text-blue-500 hover:translate-x-1 inline-block transition-all"
+          >
+            {link.label}
+          </a>
+        ) : (
+          <Link 
+            to={link.url} 
+            onClick={handleLinkClick}
+            className="hover:text-blue-500 hover:translate-x-1 inline-block transition-all"
+          >
+            {link.label}
+          </Link>
+        )}
+      </li>
+    );
+  };
+
   return (
     <footer className="bg-zinc-950 text-white pt-14 sm:pt-20 pb-8 px-6 text-left">
       <div className="container mx-auto max-w-7xl">
@@ -66,7 +96,7 @@ const Footer = () => {
           
           {/* Column 1: Logo & Info */}
           <div className="col-span-2 lg:col-span-1 flex flex-col sm:flex-row lg:flex-col items-start justify-between gap-4 sm:gap-6">
-            <Link to="/" className="flex items-center cursor-pointer transition-transform hover:scale-105 shrink-0">
+            <Link to="/" onClick={handleLinkClick} className="flex items-center cursor-pointer transition-transform hover:scale-105 shrink-0">
               <img 
                 src={logo} 
                 alt="Subhaakritee Logo" 
@@ -90,11 +120,7 @@ const Footer = () => {
           <div className="col-span-1 flex flex-col items-start text-left lg:pl-4 ml-15">
             <h4 className="text-xs sm:text-sm font-semibold tracking-wider text-gray-200 uppercase mb-3 sm:mb-4">{linksTitle2}</h4>
             <ul className="space-y-2.5 sm:space-y-3 text-gray-400 font-light text-xs sm:text-sm flex flex-col items-start">
-              {links2.map((link, idx) => (
-                <li key={idx}>
-                  <Link to={link.url} className="hover:text-blue-500 hover:translate-x-1 inline-block transition-all">{link.label}</Link>
-                </li>
-              ))}
+              {links2.map(renderLink)}
             </ul>
           </div>
 
@@ -102,16 +128,12 @@ const Footer = () => {
           <div className="col-span-1 flex flex-col items-start text-left ml-14">
             <h4 className="text-xs sm:text-sm font-semibold tracking-wider text-gray-200 uppercase mb-3 sm:mb-4">{linksTitle1}</h4>
             <ul className="space-y-2.5 sm:space-y-3 text-gray-400 font-light text-xs sm:text-sm flex flex-col items-start">
-              {links1.map((link, idx) => (
-                <li key={idx}>
-                  <Link to={link.url} className="hover:text-blue-500 hover:translate-x-1 inline-block transition-all">{link.label}</Link>
-                </li>
-              ))}
+              {links1.map(renderLink)}
             </ul>
           </div>
 
           {/* Column 4: Contact & Socials */}
-          <div className="col-span-2 lg:col-span-1 space-y-5 sm:space-y-6 flex flex-col items-center text-center lg:items-start lg:text-left pt-2 sm:pt-0 ">
+          <div className="col-span-2 lg:col-span-1 space-y-5 sm:space-y-6 flex flex-col items-center text-center lg:items-start lg:text-left pt-2 sm:pt-0">
             <div>
               <h4 className="text-xs sm:text-sm font-semibold tracking-wider text-gray-200 uppercase mb-2">Contact</h4>
               <a 

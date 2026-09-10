@@ -173,7 +173,7 @@ const OurServices = ({ data: externalData }) => {
     return parts.map((part, index) => {
       if (part.startsWith('[') && part.endsWith(']')) {
         return (
-          <span key={index} className="text-[#3B82F6]">
+          <span key={index} className="text-[#ffc300]">
             {part.slice(1, -1).split(/\\n|\n/).map((line, lIdx, arr) => (
               <React.Fragment key={lIdx}>
                 {line}
@@ -215,7 +215,7 @@ const OurServices = ({ data: externalData }) => {
             </h2>
 
             <div
-              className="text-gray-500 max-w-3xl font-light text-sm md:text-base leading-relaxed prose prose-sm sm:prose-base max-w-none prose-p:m-0 prose-a:text-blue-500 hover:prose-a:text-blue-600 [&_strong]:text-gray-900 [&_strong]:font-semibold [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5"
+              className="text-gray-500 max-w-3xl font-light text-sm md:text-base leading-relaxed prose prose-sm sm:prose-base max-w-none prose-p:m-0 prose-a:text-[#ffc300] hover:prose-a:text-[#e6b000] [&_strong]:text-gray-900 [&_strong]:font-semibold [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5"
               dangerouslySetInnerHTML={{ __html: description }}
             />
           </div>
@@ -251,7 +251,7 @@ const OurServices = ({ data: externalData }) => {
                   <div
                     key={index}
                     className={`group flex items-center justify-between py-4 sm:py-5 lg:py-6 px-1 sm:px-3 border-b border-gray-200 cursor-pointer transition-all duration-300 ${
-                      isActive ? 'bg-blue-50/40' : 'hover:bg-gray-50/60'
+                      isActive ? 'bg-[#ffc300]/10' : 'hover:bg-gray-50/60'
                     }`}
                     onMouseEnter={() => setActiveService(serviceId)}
                     onClick={() => handleServiceClick(service, serviceId)}
@@ -267,7 +267,7 @@ const OurServices = ({ data: externalData }) => {
 
                     <div className="flex items-center justify-end shrink-0 ml-2">
                       {isActive ? (
-                        <div className="w-7 h-7 sm:w-9 sm:h-9 lg:w-10 lg:h-10 rounded-full bg-[#3B82F6] flex items-center justify-center text-white shrink-0 shadow-sm">
+                        <div className="w-7 h-7 sm:w-9 sm:h-9 lg:w-10 lg:h-10 rounded-full bg-[#ffc300] flex items-center justify-center text-black shrink-0 shadow-sm">
                           <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-5 lg:h-5" />
                         </div>
                       ) : (
@@ -287,7 +287,7 @@ const OurServices = ({ data: externalData }) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-6 md:gap-4 mb-16 text-center items-start">
           {statsData.map((stat, index) => (
             <div key={index} className="flex flex-col items-center opal-move-up py-2">
-              <h3 className="text-[36px] sm:text-[40px] md:text-[44px] font-bold text-[#3B82F6] font-helvetica leading-none mb-2">
+              <h3 className="text-[36px] sm:text-[40px] md:text-[44px] font-bold text-[#ffc300] font-helvetica leading-none mb-2">
                 <AnimatedCounter text={stat.value} />
               </h3>
 

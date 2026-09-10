@@ -90,7 +90,7 @@ const Hero = ({ data: externalData }) => {
         <div className="absolute inset-0 bg-black/5"></div>
         <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/10 to-transparent"></div>
         <div className="z-10 flex flex-col items-center">
-          <div className="w-12 h-12 border-4 border-white/20 border-t-primary rounded-full animate-spin mb-4"></div>
+          <div className="w-12 h-12 border-4 border-white/20 border-t-[#ffc300] rounded-full animate-spin mb-4"></div>
           <p className="text-white/70 tracking-widest text-sm uppercase">Loading Slider...</p>
         </div>
       </div>
@@ -167,13 +167,13 @@ const Hero = ({ data: externalData }) => {
                     
                     {/* TipTap Editor HTML Rendering */}
                     <div 
-                      className="text-sm md:text-lg text-gray-200 mb-8 md:mb-10 lg:max-w-[430px] font-light leading-relaxed ml-2 [&_p]:m-0 [&_a]:text-blue-400 hover:[&_a]:text-blue-300 [&_strong]:text-white [&_strong]:font-semibold [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5"
+                      className="text-sm md:text-lg text-gray-200 mb-8 md:mb-10 lg:max-w-[430px] font-light leading-relaxed ml-2 [&_p]:m-0 [&_a]:text-[#ffc300] hover:[&_a]:text-[#e6b000] [&_strong]:text-white [&_strong]:font-semibold [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5"
                       dangerouslySetInnerHTML={{ __html: slide.data?.subtitle || slide.fallback.subtitle }}
                     />
                     
                     <Link to="/contact" className="group inline-flex items-center space-x-4 md:space-x-6 rounded-full border border-white/40 hover:border-white transition-all pl-5 md:pl-6 pr-2 py-2 ml-2">
                       <span className="text-xs md:text-sm font-medium tracking-wide">{slide.data?.buttonText || slide.fallback.buttonText}</span>
-                      <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-primary flex items-center justify-center text-white transition-transform group-hover:scale-105">
+                      <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#ffc300] flex items-center justify-center text-black transition-transform group-hover:scale-105">
                         <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5" />
                       </div>
                     </Link>
@@ -213,7 +213,7 @@ const Hero = ({ data: externalData }) => {
           onClick={handleScrollDown}
           className="w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer animate-bounce"
         >
-          <ArrowDown className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+          <ArrowDown className="w-5 h-5 sm:w-6 sm:h-6 text-[#ffc300]" />
         </button>
       </div>
     </div>

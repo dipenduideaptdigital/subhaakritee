@@ -241,7 +241,7 @@ const Testimonials = ({ data: externalData }) => {
     return parts.map((part, index) => {
       if (part.startsWith('[') && part.endsWith(']')) {
         return (
-          <span key={index} className="text-[#3B82F6]">
+          <span key={index} className="text-[#ffc300]">
             {part.slice(1, -1).split(/\\n|\n/).map((line, lIdx, arr) => (
               <React.Fragment key={lIdx}>
                 {line}
@@ -319,7 +319,7 @@ const Testimonials = ({ data: externalData }) => {
                   <div className="text-4xl sm:text-6xl font-bold text-gray-900 tracking-tighter shrink-0">{ratingValue}</div>
                   
                   <div className="flex flex-col items-start gap-1 shrink-0">
-                    <div className="bg-[#3B82F6] text-white flex space-x-1 px-2.5 sm:px-3 py-1 rounded-full shadow-md">
+                    <div className="bg-[#ffc300] text-black flex space-x-1 px-2.5 sm:px-3 py-1 rounded-full shadow-md">
                       {[...Array(5)].map((_, i) => (
                         <Star key={i} className="w-3 sm:w-3.5 h-3 sm:h-3.5 fill-white text-white" />
                       ))}
@@ -371,7 +371,7 @@ const Testimonials = ({ data: externalData }) => {
                       key={idx}
                       onClick={() => setActiveIdx(idx)}
                       className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                        activeIdx === idx ? 'w-6 bg-[#3B82F6]' : 'w-2 bg-gray-300 hover:bg-gray-400'
+                        activeIdx === idx ? 'w-6 bg-[#ffc300]' : 'w-2 bg-gray-300 hover:bg-gray-400'
                       }`}
                       aria-label={`Go to testimonial ${idx + 1}`}
                     />

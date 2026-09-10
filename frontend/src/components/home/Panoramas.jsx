@@ -88,8 +88,8 @@ const Panoramas = ({ data: externalData }) => {
     return parts.map((part, index) => {
       if (part.startsWith('[') && part.endsWith(']')) {
         return (
-          // Adjusted color to match Figma's bright blue
-          <span key={index} className="text-[#1388FF]">
+          // Adjusted color to match Figma's bright yellow
+          <span key={index} className="text-[#ffc300]">
             {part.slice(1, -1).split(/\\n|\n/).map((line, lIdx, arr) => (
               <React.Fragment key={lIdx}>
                 {line}

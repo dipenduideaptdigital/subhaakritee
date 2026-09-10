@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ArrowUpRight, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import about_img from "../../assets/homepage/about_img.png";
-import tick from "../../assets/logos/tick.png";
+import tick from "../../assets/logos/tick2.png";
 import apiClient from '../../api/client';
 
 const AboutSection = ({ data: externalData }) => {
@@ -115,7 +115,7 @@ const AboutSection = ({ data: externalData }) => {
             </div>
 
             <div
-              className="text-[#FFFFFF] mb-10 max-w-md [&_p]:mb-2 last:[&_p]:mb-0 [&_a]:text-blue-400 hover:[&_a]:text-blue-300 [&_strong]:text-white [&_strong]:font-semibold [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5"
+              className="text-[#FFFFFF] mb-10 max-w-md [&_p]:mb-2 last:[&_p]:mb-0 [&_a]:text-[#ffc300] hover:[&_a]:text-[#e6b000] [&_strong]:text-white [&_strong]:font-semibold [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5"
               style={{ fontFamily: 'Helvetica, Arial, sans-serif', fontSize: '20px', lineHeight: '25px', fontWeight: 400 }}
               dangerouslySetInnerHTML={{ __html: description }}
             />
@@ -129,7 +129,7 @@ const AboutSection = ({ data: externalData }) => {
               className="group inline-flex items-center space-x-6 rounded-full border border-gray-500 hover:border-white transition-all pl-6 pr-2 py-2"
             >
               <span className="text-sm font-medium tracking-wide">{buttonText}</span>
-              <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white transition-transform group-hover:scale-105 shadow-lg">
+              <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-black transition-transform group-hover:scale-105 shadow-lg">
                 {isArrowClicked ? <ArrowRight className="w-5 h-5" /> : <ArrowUpRight className="w-5 h-5" />}
               </div>
             </button>

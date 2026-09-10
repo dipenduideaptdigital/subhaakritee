@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronDown, Phone, Search, Menu, X } from 'lucide-react';
+import { ChevronDown, Phone, Menu, X } from 'lucide-react';
 import { pagesApi } from '../../api/pages';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../assets/logos/logo2.svg'; 
@@ -201,9 +201,6 @@ const Navbar = () => {
           Get A Quote!
         </button>
 
-        <button className="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm flex items-center justify-center transition-all">
-          <Search className="w-4 h-4" />
-        </button>
       </div>
 
       {/* Mobile Menu Button */}

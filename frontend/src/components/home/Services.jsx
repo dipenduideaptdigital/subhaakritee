@@ -72,7 +72,7 @@ const Services = ({ data: externalData }) => {
               {renderTitle(title)}
             </h2>
             <div 
-              className="text-gray-500 max-w-2xl font-light text-sm md:text-base leading-relaxed prose prose-sm sm:prose-base max-w-none prose-p:my-2 prose-a:text-blue-500 hover:prose-a:text-blue-600"
+              className="text-gray-500 max-w-2xl font-light text-sm md:text-base leading-relaxed prose prose-sm sm:prose-base max-w-none prose-p:my-2 prose-a:text-[#ffc300] hover:prose-a:text-[#e6b000]"
               dangerouslySetInnerHTML={{ __html: description }}
             />
           </div>
@@ -83,10 +83,10 @@ const Services = ({ data: externalData }) => {
           {servicesList.map((service, index) => (
             <div 
               key={index} 
-              className="group border border-gray-200/90 rounded-3xl p-6 sm:p-8 hover:shadow-xl hover:border-blue-500/40 hover:-translate-y-1.5 transform transition-all duration-300 bg-white flex flex-col justify-start"
+              className="group border border-gray-200/90 rounded-3xl p-6 sm:p-8 hover:shadow-xl hover:border-[#ffc300]/40 hover:-translate-y-1.5 transform transition-all duration-300 bg-white flex flex-col justify-start"
             >
               <div className="flex items-center justify-center min-h-[60px] sm:min-h-[72px] w-full mb-3">
-                <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 text-center whitespace-pre-line leading-snug group-hover:text-[#3B82F6] transition-colors">
+                <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 text-center whitespace-pre-line leading-snug group-hover:text-[#ffc300] transition-colors">
                   {service.title}
                 </h3>
               </div>
@@ -94,7 +94,7 @@ const Services = ({ data: externalData }) => {
               <div className="w-full h-[1px] bg-gray-200 my-4"></div>
               
               <div 
-                className="text-gray-600 text-sm sm:text-base font-normal leading-relaxed prose prose-sm max-w-none prose-p:my-1 prose-a:text-blue-500 hover:prose-a:text-blue-600 [&_p]:text-center sm:[&_p]:text-left"
+                className="text-gray-600 text-sm sm:text-base font-normal leading-relaxed prose prose-sm max-w-none prose-p:my-1 prose-a:text-[#ffc300] hover:prose-a:text-[#e6b000] [&_p]:text-center sm:[&_p]:text-left"
                 dangerouslySetInnerHTML={{ __html: service.description }}
               />
             </div>
@@ -113,7 +113,7 @@ const renderTitle = (titleText) => {
   return parts.map((part, index) => {
     if (part.startsWith('[') && part.endsWith(']')) {
       return (
-        <span key={index} className="text-primary">
+        <span key={index} className="text-[#ffc300]">
           {part.slice(1, -1)}
         </span>
       );

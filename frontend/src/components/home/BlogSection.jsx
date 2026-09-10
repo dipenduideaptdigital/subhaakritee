@@ -57,7 +57,7 @@ const BlogSection = ({ data: externalData }) => {
     return parts.map((part, index) => {
       if (part.startsWith('[') && part.endsWith(']')) {
         return (
-          <span key={index} className="text-[#3B82F6]">
+          <span key={index} className="text-[#ffc300]">
             {part.slice(1, -1).split(/\\n|\n/).map((line, lIdx, arr) => (
               <React.Fragment key={lIdx}>
                 {line}
@@ -126,11 +126,11 @@ const BlogSection = ({ data: externalData }) => {
                 
                 <div className="px-2">
                   <p className="text-xs text-zinc-500 font-medium mb-3 flex items-center gap-2">
-                    <span>By <span className="text-[#3B82F6] hover:underline">{post.author?.name || 'Admin'}</span></span>
+                    <span>By <span className="text-[#ffc300] hover:underline">{post.author?.name || 'Admin'}</span></span>
                     <span>•</span>
                     <span>{new Date(post.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
                   </p>
-                  <h3 className="text-xl font-bold text-zinc-900 mb-3 group-hover:text-[#3B82F6] transition-colors line-clamp-2 leading-tight">
+                  <h3 className="text-xl font-bold text-zinc-900 mb-3 group-hover:text-[#ffc300] transition-colors line-clamp-2 leading-tight">
                     {post.title}
                   </h3>
                   <p className="text-sm text-zinc-500 font-light leading-relaxed line-clamp-3">

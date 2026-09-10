@@ -128,7 +128,7 @@ const HowWeWork = ({ data: externalData }) => {
     return parts.map((part, index) => {
       if (part.startsWith('[') && part.endsWith(']')) {
         return (
-          <span key={index} className="text-[#3B82F6]">
+          <span key={index} className="text-[#ffc300]">
             {part.slice(1, -1).split(/\\n|\n/).map((line, lIdx, arr) => (
               <React.Fragment key={lIdx}>
                 {line}
@@ -235,7 +235,7 @@ const HowWeWork = ({ data: externalData }) => {
         {/* Bottom Text */}
         <div className="text-center">
           <p className="text-gray-900 font-medium">
-            {bottomText} <a href={bottomLinkUrl} className="text-[#3B82F6] hover:underline font-bold">{bottomLinkText}</a>
+            {bottomText} <a href={bottomLinkUrl} className="text-[#ffc300] hover:underline font-bold">{bottomLinkText}</a>
           </p>
         </div>
 
