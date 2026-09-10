@@ -45,10 +45,10 @@ const Footer = () => {
   const phone = footerData?.phone || "+91 9831-637-409";
   const email = footerData?.email || "Subhaakritee@Hotmail.Com";
   
-  const instagram = footerData?.instagram || "#";
-  const twitter = footerData?.twitter || "#";
-  const facebook = footerData?.facebook || "#";
-  const linkedin = footerData?.linkedin || "#";
+  const instagram = footerData?.instagram || "https://www.instagram.com/subhaakritee_design";
+  const twitter = footerData?.twitter || "https://x.com/subhaakrite";
+  const facebook = footerData?.facebook || "https://www.facebook.com/subhaakritee";
+  const linkedin = footerData?.linkedin || "https://www.linkedin.com/company/subhaakritee/";
 
   const linksTitle1 = footerData?.linksTitle1 || "Support";
   const linksTitle2 = footerData?.linksTitle2 || "Company";

@@ -196,7 +196,7 @@ const Navbar = () => {
             e.preventDefault();
             window.dispatchEvent(new Event('open-consultation-modal'));
           }}
-          className="bg-primary hover:bg-blue-600 text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all shadow-lg hover:shadow-blue-500/30 cursor-pointer"
+          className="bg-[#ffc300] hover:bg-[#e6b000] text-black px-6 py-2.5 rounded-full text-sm font-bold transition-all shadow-lg hover:shadow-[#ffc300]/40 cursor-pointer"
         >
           Get A Quote!
         </button>
@@ -326,7 +326,7 @@ const Navbar = () => {
               setIsOpen(false);
               window.dispatchEvent(new Event('open-consultation-modal'));
             }}
-            className="w-full bg-primary hover:bg-blue-600 text-white py-3 rounded-xl text-[15px] font-semibold transition-all shadow-lg hover:shadow-blue-500/20 cursor-pointer text-center"
+            className="w-full bg-[#ffc300] hover:bg-[#e6b000] text-black py-3 rounded-xl text-[15px] font-bold transition-all shadow-lg hover:shadow-[#ffc300]/40 cursor-pointer text-center"
           >
             Get A Quote!
           </button>
