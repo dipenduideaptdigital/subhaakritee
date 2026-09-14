@@ -165,7 +165,7 @@ const ProjectList = () => {
                       <Can permission="project.edit">
                         <Link 
                           to={`/admin/projects/edit/${project.id}`} 
-                          className="p-2 text-zinc-400 dark:text-zinc-500 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-500/10 rounded-lg transition-colors"
+                          className="p-2 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-500/10 rounded-lg transition-colors"
                           title="Edit Project"
                         >
                           <Edit3 className="w-4 h-4" />
@@ -176,7 +176,7 @@ const ProjectList = () => {
                         <button 
                           onClick={() => handleDelete(project.id)} 
                           disabled={isDeleting === project.id}
-                          className="p-2 text-zinc-400 dark:text-zinc-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-lg transition-colors cursor-pointer disabled:opacity-50"
+                          className="p-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-lg transition-colors cursor-pointer disabled:opacity-50"
                           title="Delete Project"
                         >
                           {isDeleting === project.id ? (

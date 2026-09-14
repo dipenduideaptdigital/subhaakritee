@@ -338,7 +338,7 @@ const UsersList = () => {
                       </td>
 
                       <td className="px-6 py-4 text-right">
-                        <div className="flex items-center justify-end gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="flex items-center justify-end gap-1.5 group-hover:opacity-100 transition-opacity">
                           
                           {/* Cancel Invite Button (Only for Pending) */}
                           {activeTab === 'pending' && (

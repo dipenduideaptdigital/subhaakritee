@@ -253,19 +253,19 @@ const BlogList = () => {
                     <div className="flex items-center justify-end gap-2">
                       
                       <Can permission="blog.preview">
-                        <a href={`/blog/${blog.slug}`} target="_blank" rel="noopener noreferrer" className="p-2 text-zinc-400 dark:text-zinc-500 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-500/10 rounded-lg transition-colors" title="Preview Article">
+                        <a href={`/blog/${blog.slug}`} target="_blank" rel="noopener noreferrer" className="p-2 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-500/10 rounded-lg transition-colors" title="Preview Article">
                           <ExternalLink className="w-4 h-4" />
                         </a>
                       </Can>
 
                       <Can permission="blog.edit">
-                        <Link to={`/admin/blogs/edit/${blog.id}`} className="p-2 text-zinc-400 dark:text-zinc-500 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-500/10 rounded-lg transition-colors" title="Edit Article">
+                        <Link to={`/admin/blogs/edit/${blog.id}`} className="p-2 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-500/10 rounded-lg transition-colors" title="Edit Article">
                           <Edit3 className="w-4 h-4" />
                         </Link>
                       </Can>
 
                       <Can permission="blog.delete">
-                        <button onClick={() => handleDelete(blog.id)} disabled={isDeleting === blog.id} className="p-2 text-zinc-400 dark:text-zinc-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-lg transition-colors disabled:opacity-50" title="Delete Article">
+                        <button onClick={() => handleDelete(blog.id)} disabled={isDeleting === blog.id} className="p-2 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-lg transition-colors disabled:opacity-50" title="Delete Article">
                           {isDeleting === blog.id ? <div className="w-4 h-4 border-2 border-red-600 dark:border-red-400 border-t-transparent rounded-full animate-spin"></div> : <Trash2 className="w-4 h-4" />}
                         </button>
                       </Can>
