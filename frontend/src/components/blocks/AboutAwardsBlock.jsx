@@ -10,7 +10,7 @@ const AboutAwardsBlock = ({ badgeText, title, mainImage, awards = [] }) => {
     { year: '2022', title: 'Interior Design Consultation', link: '/services/interior-design-consultation' },
     { year: '2023', title: 'Commercial Interior Design', link: '/services/commercial-interior-design' },
     { year: '2024', title: 'Renovation And Remodeling', link: '/services/renovation-and-remodeling' },
-    { year: '2025', title: 'Interior 2D/3D Layouts', link: '/services/interior-2d-3d-layouts' },
+    { year: '2025', title: 'Interior 2D/3D Layout', link: '/services/interior-2d/3d-layout' },
   ];
 
   const [activeAward, setActiveAward] = useState(awardsList[0].year);
