@@ -107,12 +107,12 @@ const Navbar = () => {
         </Link>
         
         <div className="relative group">
-          <Link 
-            to="/services" 
-            className="flex items-center hover:text-gray-300 transition-colors py-2"
+          <button 
+            type="button"
+            className="flex items-center hover:text-gray-300 transition-colors py-2 outline-none cursor-default"
           >
             Services <ChevronDown className="w-4 h-4 ml-1 opacity-70" />
-          </Link>
+          </button>
           
           <div className="absolute left-0 mt-2 w-56 rounded-xl bg-white shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 border border-gray-100 overflow-hidden text-gray-800 font-normal">
             {servicePages.length > 0 ? (
