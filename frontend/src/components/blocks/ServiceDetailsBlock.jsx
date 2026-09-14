@@ -129,11 +129,14 @@ const ServiceDetailsBlock = ({
                       <Link
                         to={service.fullPath}
                         key={service.id}
-                        className={`group flex items-center justify-between py-[16px] lg:py-[20px] cursor-pointer transition-colors border-t ${isActive ? 'border-t-[2px] border-[#3B82F6]' : 'border-t border-gray-200'
-                          } ${isLast ? 'border-b border-gray-200' : ''}`}
+                        className={`group flex items-center justify-between py-[16px] lg:py-[20px] cursor-pointer transition-colors border-t border-gray-200 hover:bg-[#ffc300]/10 ${
+                         isActive ? 'bg-[#ffc300]/10' : ''
+                        } ${isLast ? 'border-b border-gray-200' : ''}`}
                       >
-                        <div className="flex items-center space-x-4 md:space-x-5 transform group-hover:translate-x-2 transition-transform duration-300 pr-4 pl-4 lg:pl-6">
-                          <span className={`text-[17px] lg:text-[19px] font-base leading-[1.2] capitalize font-helvetica transition-colors ${isActive ? 'text-[#ffc300]' : 'text-gray-900 group-hover:text-[#ffc300]'}`}>
+                        <div className="flex items-center space-x-4 md:space-x-5 pr-4 pl-4 lg:pl-6">
+                          <span className={`text-[17px] lg:text-[19px] font-base leading-[1.2] capitalize font-helvetica ${
+                            isActive ? 'text-gray-900 font-bold' : 'text-gray-900'
+                          }`}>
                             {service.title}
                           </span>
                         </div>

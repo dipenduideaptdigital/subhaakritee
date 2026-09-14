@@ -180,16 +180,16 @@ const Hero = ({ data: externalData }) => {
                   </div>
 
                   {/* CARDS CONTAINER */}
-                  <div className="flex flex-row items-end justify-center lg:justify-end gap-6 shrink-0 w-full lg:w-auto mt-2 sm:mt-4 lg:mt-10 pb-1">
-                    <div className="w-[200px] h-[200px] md:w-[240px] md:h-[240px] bg-[#3a3532]/40 backdrop-blur-[28px] border border-white/10 rounded-[24px] p-6 shadow-2xl z-20 flex flex-col justify-between shrink-0">
+                  <div className="flex flex-row items-end justify-center lg:justify-end gap-3 sm:gap-6 shrink-0 w-full lg:w-auto mt-2 sm:mt-4 lg:mt-10 pb-1">
+                    <div className="w-[170px] h-[170px] sm:w-[200px] sm:h-[200px] md:w-[240px] md:h-[240px] bg-[#3a3532]/40 backdrop-blur-[28px] border border-white/10 rounded-[16px] sm:rounded-[24px] p-5 sm:p-6 shadow-2xl z-20 flex flex-col justify-between shrink-0">
                       <div>
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">{slide.data?.glassCardNumber || slide.fallback.glassCardNumber}</h2>
-                        <p className="text-xs text-gray-200 font-normal leading-relaxed">{slide.data?.glassCardText1 || slide.fallback.glassCardText1}</p>
+                        <h2 className="text-3xl sm:text-3xl md:text-4xl font-bold text-white mb-2 leading-none">{slide.data?.glassCardNumber || slide.fallback.glassCardNumber}</h2>
+                        <p className="text-[11px] sm:text-xs text-gray-200 font-normal leading-snug line-clamp-2 mt-1">{slide.data?.glassCardText1 || slide.fallback.glassCardText1}</p>
                       </div>
-                      <p className="text-sm text-white font-medium">{slide.data?.glassCardText2 || slide.fallback.glassCardText2}</p>
+                      <p className="text-xs sm:text-sm text-white font-medium line-clamp-2">{slide.data?.glassCardText2 || slide.fallback.glassCardText2}</p>
                     </div>
 
-                    <div className="w-[200px] h-[200px] md:w-[240px] md:h-[240px] rounded-[24px] overflow-hidden shadow-2xl z-10 border-2 border-white/10 shrink-0">
+                    <div className="w-[170px] h-[170px] sm:w-[200px] sm:h-[200px] md:w-[240px] md:h-[240px] rounded-[16px] sm:rounded-[24px] overflow-hidden shadow-2xl z-10 border-2 border-white/10 shrink-0">
                       <img 
                         src={frontImage} 
                         alt="Hero Foreground" 
@@ -208,12 +208,12 @@ const Hero = ({ data: externalData }) => {
         );
       })}
 
-      <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 lg:bottom-40 left-1/2 -translate-x-1/2 z-20">
+      <div className="absolute bottom-1 sm:bottom-6 md:bottom-8 lg:bottom-40 left-1/2 -translate-x-1/2 z-20">
         <button 
           onClick={handleScrollDown}
-          className="w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer animate-bounce"
+          className="w-[46px] h-[46px] sm:w-14 sm:h-14 bg-white rounded-full flex items-center justify-center shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer animate-bounce"
         >
-          <ArrowDown className="w-5 h-5 sm:w-6 sm:h-6 text-[#ffc300]" />
+          <ArrowDown className="w-4 h-4 sm:w-6 sm:h-6 text-[#ffc300]" />
         </button>
       </div>
     </div>

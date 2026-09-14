@@ -49,7 +49,7 @@ const Team = ({ data: externalData }) => {
     return parts.map((part, index) => {
       if (part.startsWith('[') && part.endsWith(']')) {
         return (
-          <span key={index} className="text-[#3B82F6]">
+          <span key={index} className="text-[#ffc300]">
             {part.slice(1, -1).split(/\\n|\n/).map((line, lIdx, arr) => (
               <React.Fragment key={lIdx}>
                 {line}
@@ -142,7 +142,7 @@ const Team = ({ data: externalData }) => {
                     key={index}
                     className={`group flex items-center justify-between py-4 md:py-6 border-b-2 cursor-pointer transition-colors duration-300 ${
                       isActive
-                        ? 'border-[#3B82F6] z-10' 
+                        ? 'border-[#ffc300] z-10' 
                         : 'border-black hover:bg-gray-50/50'
                     }`}
                     onMouseEnter={() => setActiveMember(memberId)}
@@ -151,7 +151,7 @@ const Team = ({ data: externalData }) => {
                       <span className="text-base font-medium text-gray-900 w-8">
                         {memberId}
                       </span>
-                      <span className={`text-xl sm:text-2xl font-bold flex-1 transition-colors duration-300 ${isActive ? 'text-[#3B82F6]' : 'text-gray-900'}`}>
+                      <span className={`text-xl sm:text-2xl font-bold flex-1 transition-colors duration-300 ${isActive ? 'text-[#ffc300]' : 'text-gray-900'}`}>
                         {member.name}
                       </span>
                       <span className="text-sm text-gray-500 font-normal hidden sm:block w-48 text-left">
@@ -160,7 +160,7 @@ const Team = ({ data: externalData }) => {
                     </div>
                     
                     {isActive ? (
-                      <div className="w-12 h-12 rounded-full bg-[#3B82F6] flex items-center justify-center text-white shrink-0">
+                      <div className="w-12 h-12 rounded-full bg-[#ffc300] flex items-center justify-center text-white shrink-0">
                         <ArrowRight strokeWidth={2.5} className="w-7 h-7" /> 
                       </div>
                     ) : (

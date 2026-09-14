@@ -71,7 +71,7 @@ const Footer = () => {
             href={link.url} 
             target="_blank" 
             rel="noopener noreferrer" 
-            className="hover:text-blue-500 hover:translate-x-1 inline-block transition-all"
+            className="hover:text-[#ffc300] hover:text-[14px] sm:hover:text-[16px] inline-block transition-all duration-300 ease-in-out"
           >
             {link.label}
           </a>
@@ -79,7 +79,7 @@ const Footer = () => {
           <Link 
             to={link.url} 
             onClick={handleLinkClick}
-            className="hover:text-blue-500 hover:translate-x-1 inline-block transition-all"
+            className="hover:text-[#ffc300] hover:text-[14px] sm:hover:text-[16px] inline-block transition-all duration-300 ease-in-out"
           >
             {link.label}
           </Link>
@@ -138,13 +138,13 @@ const Footer = () => {
               <h4 className="text-xs sm:text-sm font-semibold tracking-wider text-gray-200 uppercase mb-2">Contact</h4>
               <a 
                 href={`tel:${phone.replace(/[^0-9+]/g, '')}`} 
-                className="block text-base sm:text-sm lg:text-xl font-medium text-white hover:text-blue-400 transition-colors cursor-pointer whitespace-nowrap mb-1"
+                className="block text-base sm:text-sm lg:text-xl font-medium text-white hover:text-[#ffc300] transition-colors cursor-pointer whitespace-nowrap mb-1"
               >
                 {phone}
               </a>
               <a 
                 href={`mailto:${email}`} 
-                className="text-blue-400 text-xs sm:text-sm font-light hover:text-blue-300 transition-colors break-all"
+                className="text-[#ffc300] text-xs sm:text-sm font-light hover:text-[#ffcb00] transition-colors break-all"
               >
                 {email}
               </a>
@@ -152,16 +152,16 @@ const Footer = () => {
             
             <div className="flex justify-center lg:justify-start">
               <div className="flex space-x-3 sm:space-x-4">
-                <a href={instagram} target="_blank" rel="noopener noreferrer" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 transition-all hover:-translate-y-1 group" aria-label="Instagram">
+                <a href={instagram} target="_blank" rel="noopener noreferrer" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center hover:bg-[#ffc300] hover:border-[#ffc300] transition-all hover:-translate-y-1 group" aria-label="Instagram">
                   <FaInstagram className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 group-hover:text-white transition-colors" />
                 </a>
-                <a href={twitter} target="_blank" rel="noopener noreferrer" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 transition-all hover:-translate-y-1 group" aria-label="Twitter">
+                <a href={twitter} target="_blank" rel="noopener noreferrer" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center hover:bg-[#ffc300] hover:border-[#ffc300] transition-all hover:-translate-y-1 group" aria-label="Twitter">
                   <FaTwitter className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 group-hover:text-white transition-colors" />
                 </a>
-                <a href={facebook} target="_blank" rel="noopener noreferrer" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 transition-all hover:-translate-y-1 group" aria-label="Facebook">
+                <a href={facebook} target="_blank" rel="noopener noreferrer" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center hover:bg-[#ffc300] hover:border-[#ffc300] transition-all hover:-translate-y-1 group" aria-label="Facebook">
                   <FaFacebookF className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 group-hover:text-white transition-colors" />
                 </a>
-                <a href={linkedin} target="_blank" rel="noopener noreferrer" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 transition-all hover:-translate-y-1 group" aria-label="LinkedIn">
+                <a href={linkedin} target="_blank" rel="noopener noreferrer" className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center hover:bg-[#ffc300] hover:border-[#ffc300] transition-all hover:-translate-y-1 group" aria-label="LinkedIn">
                   <FaLinkedinIn className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-gray-400 group-hover:text-white transition-colors" />
                 </a>
               </div>
