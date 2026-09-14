@@ -86,7 +86,7 @@ const HappySpaces = ({ data }) => {
           <div className="w-full text-center">
             <h2 className="text-4xl md:text-[70px] font-bold text-gray-950 tracking-[0em] leading-tight md:leading-[74px] font-sans">
               {data?.titleLine1 || 'Happy Spaces by'}<br />
-              <span className="text-[#3b82f6]">{data?.titleLine2 || 'subhAAkritee'}</span>
+              <span className="text-[#ffc300]">{data?.titleLine2 || 'subhAAkritee'}</span>
             </h2>
           </div>
         </div>
@@ -123,12 +123,11 @@ const HappySpaces = ({ data }) => {
 
               {/* Text Info */}
               <div className="px-1">
-                <h3 className="text-[19px] md:text-[20px] font-bold text-gray-950 mb-3.5 leading-snug group-hover:text-[#3b82f6] transition-colors duration-300">
+                <h3 className="text-[19px] md:text-[20px] font-bold text-gray-950 mb-3.5 leading-snug group-hover:text-[#ffc300] transition-colors duration-300">
                   {item.title}
                 </h3>
-                {/* 👉 UPDATED: Now uses dangerouslySetInnerHTML to render Tiptap content */}
                 <div 
-                  className="text-gray-500 text-[13.5px] md:text-[14px] leading-relaxed font-normal prose prose-sm max-w-none prose-p:my-1 prose-a:text-blue-500 hover:prose-a:text-blue-600 [&_strong]:text-gray-900 [&_strong]:font-semibold"
+                  className="text-gray-500 text-[13.5px] md:text-[14px] leading-relaxed font-normal prose prose-sm max-w-none prose-p:my-1 prose-a:text-[#ffc300] hover:prose-a:text-[#e6b000] [&_strong]:text-gray-900 [&_strong]:font-semibold"
                   dangerouslySetInnerHTML={{ __html: item.desc }}
                 />
               </div>

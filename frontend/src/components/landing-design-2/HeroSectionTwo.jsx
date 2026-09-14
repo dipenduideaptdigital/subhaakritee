@@ -28,7 +28,7 @@ const HeroSectionTwo = ({ data, onScrollDown }) => {
         <div className="max-w-3xl text-left">
           {/* Tagline / Badge */}
           <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm mb-6 animate-fade-in-down">
-            <span className="w-2 h-2 rounded-full bg-[#f97316]"></span>
+            <span className="w-2 h-2 rounded-full bg-[#ffc300]"></span>
             <span className="text-[10px] md:text-xs font-semibold tracking-widest uppercase text-white/90">
               {data?.badgeText || 'FAST AND RELIABLE'}
             </span>
@@ -36,7 +36,7 @@ const HeroSectionTwo = ({ data, onScrollDown }) => {
 
           {/* Heading */}
           <h1 className="text-4xl md:text-6xl lg:text-[70px] font-bold text-white tracking-tight leading-[1.08] mb-6 font-helvetica">
-            {renderTitle(data?.title || 'Find Your [Inspired]\n[Interior] Design')}
+            {renderTitle(data?.title || 'Find Your [Inspired]\n[Interior] Design', 'text-[#ffc300]')}
           </h1>
 
           <div 
@@ -59,10 +59,10 @@ const HeroSectionTwo = ({ data, onScrollDown }) => {
           {/* Start Project Circle Button */}
           <div className="relative z-20">
             <div 
-              className="w-32 h-32 md:w-36 md:h-36 lg:w-[150px] lg:h-[150px] rounded-full border border-white/20 bg-white/10 backdrop-blur-md flex flex-col items-center justify-center text-white cursor-pointer hover:bg-white/20 hover:scale-105 active:scale-95 transition-all duration-300 shadow-xl"
+              className="group w-32 h-32 md:w-36 md:h-36 lg:w-[150px] lg:h-[150px] rounded-full border border-white/20 bg-white/10 backdrop-blur-md flex flex-col items-center justify-center text-white cursor-pointer hover:bg-[#ffc300]/20 hover:border-[#ffc300]/50 hover:scale-105 active:scale-95 transition-all duration-300 shadow-xl"
               onClick={onScrollDown}
             >
-              <div className="font-['Outfit'] text-[24px] md:text-[30px] lg:text-[27px] font-semibold leading-[30px] md:leading-[34px] lg:leading-[39px] text-white text-center tracking-normal select-none">
+              <div className="font-['Outfit'] text-[24px] md:text-[30px] lg:text-[27px] font-semibold leading-[30px] md:leading-[34px] lg:leading-[39px] text-white group-hover:text-[#ffc300] text-center tracking-normal select-none transition-colors duration-300">
                 Start<br />Project
               </div>
             </div>

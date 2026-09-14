@@ -61,7 +61,7 @@ const ServicesSectionTwo = ({ data }) => {
           {/* Tagline Badge */}
           <div className="shrink-0">
             <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm">
-              <span className="w-2 h-2 rounded-full bg-[#f97316]"></span>
+              <span className="w-2 h-2 rounded-full bg-[#ffc300]"></span>
               <span className="text-[10px] md:text-xs font-bold tracking-widest uppercase text-white/90">
                 {data?.badgeText || 'OUR SERVICES'}
               </span>
@@ -71,7 +71,7 @@ const ServicesSectionTwo = ({ data }) => {
           {/* Main Title */}
           <div className="max-w-4xl">
             <h2 className="text-4xl md:text-5xl lg:text-[48px] font-bold leading-[1.15] tracking-tight font-helvetica text-white">
-              {renderTitle(data?.title || 'Explore Our [Comprehensive]\n[Interior Design] Services')}
+              {renderTitle(data?.title || 'Explore Our [Comprehensive]\n[Interior Design] Services', 'text-[#ffc300]')}
             </h2>
           </div>
         </div>
@@ -103,13 +103,13 @@ const ServicesSectionTwo = ({ data }) => {
                       <h3 className="text-xs sm:text-lg md:text-2xl font-bold text-gray-900 leading-[1.2]">
                         {service.title}
                       </h3>
-                      <span className="text-2xl sm:text-3xl md:text-[44px] font-extrabold text-[#3b82f6] leading-none shrink-0 ml-2 md:ml-4">
+                      <span className="text-2xl sm:text-3xl md:text-[44px] font-extrabold text-[#ffc300] leading-none shrink-0 ml-2 md:ml-4">
                         {service.num}
                       </span>
                     </div>
                     {/*Rich Text Rendering */}
                     <div 
-                      className="text-gray-500 text-[10px] sm:text-xs md:text-[14px] leading-relaxed font-normal prose prose-sm max-w-none prose-p:m-0 prose-strong:font-bold prose-a:text-blue-500"
+                      className="text-gray-500 text-[10px] sm:text-xs md:text-[14px] leading-relaxed font-normal prose prose-sm max-w-none prose-p:m-0 prose-strong:font-bold prose-a:text-[#ffc300] hover:prose-a:text-[#e6b000]"
                       dangerouslySetInnerHTML={{ __html: service.desc }}
                     />
                   </div>
@@ -122,12 +122,12 @@ const ServicesSectionTwo = ({ data }) => {
                       <h3 className="text-xs sm:text-lg md:text-2xl font-bold text-gray-900 leading-[1.2]">
                         {service.title}
                       </h3>
-                      <span className="text-2xl sm:text-3xl md:text-[44px] font-extrabold text-[#3b82f6] leading-none shrink-0 ml-2 md:ml-4">
+                      <span className="text-2xl sm:text-3xl md:text-[44px] font-extrabold text-[#ffc300] leading-none shrink-0 ml-2 md:ml-4">
                         {service.num}
                       </span>
                     </div>
                     <div 
-                      className="text-gray-500 text-[10px] sm:text-xs md:text-[14px] leading-relaxed font-normal prose prose-sm max-w-none prose-p:m-0 prose-strong:font-bold prose-a:text-blue-500"
+                      className="text-gray-500 text-[10px] sm:text-xs md:text-[14px] leading-relaxed font-normal prose prose-sm max-w-none prose-p:m-0 prose-strong:font-bold prose-a:text-[#ffc300] hover:prose-a:text-[#e6b000]"
                       dangerouslySetInnerHTML={{ __html: service.desc }}
                     />
                   </div>

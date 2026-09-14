@@ -109,12 +109,12 @@ const AboutSectionTwo = ({ data, onCtaClick }) => {
 
             {/* Heading */}
             <h2 className="text-3xl sm:text-4xl md:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight mb-8">
-              {renderTitle(data?.title || 'Architecture\n[And Interiors, Our Dual]\nExpertise', 'text-blue-500')}
+              {renderTitle(data?.title || 'Architecture\n[And Interiors, Our Dual]\nExpertise', 'text-[#ffc300]')}
             </h2>
 
             {/* Paragraph 1*/}
             <div 
-              className="font-['Outfit',sans-serif] text-gray-600 text-base leading-relaxed mb-6 prose prose-sm max-w-none prose-p:my-2 prose-strong:font-bold prose-a:text-blue-500"
+              className="font-['Outfit',sans-serif] text-gray-600 text-base leading-relaxed mb-6 prose prose-sm max-w-none prose-p:my-2 prose-strong:font-bold prose-a:text-[#ffc300] hover:prose-a:text-[#e6b000]"
               dangerouslySetInnerHTML={{ 
                 __html: data?.paragraph1 || '<p>We believe that every space has the power to inspire, and that great design brings that inspiration to life. Our mission is to craft environments that stir creativity, evoke emotion, and reflect the essence of those who inhabit them.</p>' 
               }}
@@ -122,7 +122,7 @@ const AboutSectionTwo = ({ data, onCtaClick }) => {
 
             {/* Paragraph 2  */}
             <div 
-              className="font-['Outfit',sans-serif] text-gray-600 text-base leading-relaxed mb-10 prose prose-sm max-w-none prose-p:my-2 prose-strong:font-bold prose-a:text-blue-500"
+              className="font-['Outfit',sans-serif] text-gray-600 text-base leading-relaxed mb-10 prose prose-sm max-w-none prose-p:my-2 prose-strong:font-bold prose-a:text-[#ffc300] hover:prose-a:text-[#e6b000]"
               dangerouslySetInnerHTML={{ 
                 __html: data?.paragraph2 || '<p>With a strong presence in Kolkata, Bhubaneswar, and Ranchi, our turnkey office interiors are thoughtfully crafted to enhance productivity, reflect your brand identity, and support the way your team works every day.</p>' 
               }}
@@ -155,7 +155,7 @@ const AboutSectionTwo = ({ data, onCtaClick }) => {
                 {data?.buttonText || "Let's Get Started"}
               </span>
 
-              <div className="w-9 h-9 rounded-full bg-blue-500 flex items-center justify-center text-white transition-transform duration-300 group-hover:scale-110">
+              <div className="w-9 h-9 rounded-full bg-[#ffc300] flex items-center justify-center text-black shadow-sm transition-transform duration-300 group-hover:scale-110">
                 <ArrowRight size={18} />
               </div>
             </button>

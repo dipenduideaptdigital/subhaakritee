@@ -39,7 +39,7 @@ const TrustedPartners = ({ data }) => {
           </div>
           <div className="relative bg-white px-8 md:px-12">
             <h2 className="text-sm md:text-[15px] font-bold tracking-[0.25em] text-gray-900 font-helvetica flex items-center gap-1.5 uppercase leading-none">
-              {renderTitle(data?.title || 'OUR [TRUSTED PARTNERS]')}
+              {renderTitle(data?.title || 'OUR [TRUSTED PARTNERS]', 'text-[#ffc300]')}
             </h2>
           </div>
         </div>

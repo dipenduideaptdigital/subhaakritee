@@ -36,7 +36,7 @@ const StatsSectionTwo = ({ data, onCtaClick }) => {
         <div className="flex flex-col items-start mb-16 md:mb-20 max-w-3xl">
           {/* Badge */}
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm mb-10">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#f97316]"></span>
+            <span className="w-1.5 h-1.5 rounded-full bg-[#ffc300]"></span>
             <span className="text-[10px] md:text-[11px] font-bold tracking-widest text-white/95 uppercase">
               {data?.badgeText || 'TRUSTED EXPERIENCE'}
             </span>
@@ -44,7 +44,7 @@ const StatsSectionTwo = ({ data, onCtaClick }) => {
 
           {/* Heading */}
           <h2 className="text-4xl md:text-5xl lg:text-[60px] font-bold leading-[1.12] tracking-tight font-helvetica text-white mb-2">
-            {renderTitle(data?.title || 'Behind [Every Statistic]\n[Pulses] A Human Story')}
+            {renderTitle(data?.title || 'Behind [Every Statistic]\n[Pulses] A Human Story', 'text-[#ffc300]')}
           </h2>
         </div>
 
@@ -52,7 +52,7 @@ const StatsSectionTwo = ({ data, onCtaClick }) => {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12 mb-16 md:mb-20 mt-10">
           {stats.map((stat, index) => (
             <div key={index} className="flex flex-col items-start animate-fade-in-down">
-              <span className="text-4xl md:text-5xl lg:text-[44px] font-bold text-white mb-4 leading-none tracking-tight">
+              <span className="text-4xl md:text-5xl lg:text-[44px] font-bold text-[#ffc300] mb-4 leading-none tracking-tight">
                 {stat.value}
               </span>
               <h4 className="text-[11px] md:text-xs font-bold tracking-widest text-white/90 uppercase mb-2.5">
@@ -72,7 +72,7 @@ const StatsSectionTwo = ({ data, onCtaClick }) => {
             className="group inline-flex items-center space-x-4 pl-6 pr-2 py-2 border border-white/30 hover:border-white rounded-full text-xs md:text-sm font-semibold text-white bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 shadow-xl"
           >
             <span>{data?.buttonText || "BOOK A FREE CONSULTATION"}</span>
-            <div className="w-8 h-8 rounded-full bg-[#3b82f6] flex items-center justify-center text-white transition-transform group-hover:scale-110">
+            <div className="w-8 h-8 rounded-full bg-[#ffc300] flex items-center justify-center text-black transition-transform group-hover:scale-110">
               <ArrowUpRight className="w-4.5 h-4.5" />
             </div>
           </button>

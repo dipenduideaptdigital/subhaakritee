@@ -46,7 +46,7 @@ const ProcessSectionTwo = ({ data }) => {
           {/* Left: Tagline Badge */}
           <div className="shrink-0">
             <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-gray-300 bg-white">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#f97316]"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#ffc300]"></span>
               <span className="text-[10px] md:text-[11px] font-bold tracking-widest text-gray-600 uppercase">
                 {data?.badgeText || 'GET IN TOUCH'}
               </span>
@@ -56,11 +56,11 @@ const ProcessSectionTwo = ({ data }) => {
           {/* Right: Main Title & Description */}
           <div className="max-w-4xl">
             <h2 className="text-4xl md:text-5xl lg:text-[48px] font-bold text-gray-900 leading-[1.15] tracking-tight mb-6 font-helvetica">
-              {renderTitle(data?.title || 'Description [Architecture]\n[Process] For Exceptional Results.')}
+              {renderTitle(data?.title || 'Description [Architecture]\n[Process] For Exceptional Results.', 'text-[#ffc300]')}
             </h2>
             
             <div 
-              className="text-gray-500 text-sm md:text-base font-normal leading-relaxed max-w-2xl prose prose-sm prose-p:my-2 prose-strong:font-bold prose-a:text-blue-500"
+              className="text-gray-500 text-sm md:text-base font-normal leading-relaxed max-w-2xl prose prose-sm prose-p:my-2 prose-strong:font-bold prose-a:text-[#ffc300] hover:prose-a:text-[#e6b000]"
               dangerouslySetInnerHTML={{ 
                 __html: data?.description || '<p>We specialize in transforming visions into reality. Explore our portfolio of innovative architectural and interior design projects crafted with precision.</p>' 
               }}
@@ -90,19 +90,19 @@ const ProcessSectionTwo = ({ data }) => {
                 key={idx} 
                 className="bg-white rounded-2xl md:rounded-[28px] p-4 sm:p-6 md:p-8 flex flex-col items-start text-left shadow-[0_10px_30px_rgba(0,0,0,0.03)] border border-gray-100/50 hover:shadow-[0_15px_45px_rgba(0,0,0,0.06)] transition-all duration-500 group"
               >
-                {/* Large soft-blue gradient number */}
-                <span className="text-5xl md:text-7xl font-extrabold bg-gradient-to-b from-[#3b82f6]/35 to-[#3b82f6]/5 bg-clip-text text-transparent leading-none mb-4 md:mb-5 select-none tracking-tighter shrink-0 font-helvetica">
+                <span className="text-5xl md:text-7xl font-extrabold bg-gradient-to-b from-[#ffc300]/45 to-[#ffc300]/10 bg-clip-text text-transparent leading-none mb-4 md:mb-5 select-none tracking-tighter shrink-0 font-helvetica">
                   {step.num}
                 </span>
                 
                 {/* Title */}
-                <h3 className="text-xs sm:text-base md:text-xl font-bold text-gray-900 mb-2 md:mb-3 tracking-tight group-hover:text-[#3b82f6] transition-colors duration-300 font-helvetica">
+                <h3 className="text-xs sm:text-base md:text-xl font-bold text-gray-900 mb-2 md:mb-3 tracking-tight group-hover:text-[#ffc300] transition-colors duration-300 font-helvetica">
                   {step.title}
                 </h3>
                 
-                <p className="text-gray-500 text-[10px] sm:text-xs md:text-[14px] leading-relaxed font-normal">
-                  {step.desc}
-                </p>
+                <div 
+                  className="text-gray-500 text-[10px] sm:text-xs md:text-[14px] leading-relaxed font-normal [&>p]:mb-1 last:[&>p]:mb-0 [&_strong]:font-semibold"
+                  dangerouslySetInnerHTML={{ __html: step.desc }}
+                />
               </div>
             ))}
           </div>

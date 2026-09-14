@@ -16,7 +16,7 @@ const CtaSectionTwo = ({ data, onCtaClick }) => {
           {/* Left Column: Badge */}
           <div className="shrink-0">
             <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-gray-300 bg-white">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#f97316]"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#ffc300]"></span>
               <span className="text-[10px] md:text-[11px] font-bold tracking-widest text-gray-700 uppercase font-['Helvetica',sans-serif]">
                 {badgeText}
               </span>
@@ -27,7 +27,7 @@ const CtaSectionTwo = ({ data, onCtaClick }) => {
           <div className="flex flex-col items-start max-w-4xl font-['Helvetica',sans-serif]">
             {/* Double Line Heading */}
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-bold text-gray-950 tracking-tight leading-[1.12] mb-10 font-['Helvetica',sans-serif]">
-              {renderTitle(data?.title || 'Have A Project In [Mind?] Let’s\n[Make] It Happen')}
+              {renderTitle(data?.title || 'Have A Project In [Mind?] Let’s\n[Make] It Happen', 'text-[#ffc300]')}
             </h2>
 
             {/* CTA Button */}

@@ -33,7 +33,7 @@ const TestimonialsTwo = ({ data }) => {
           {/* Left Column: Badge */}
           <div className="shrink-0">
             <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-gray-300 bg-white">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#f97316]"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#ffc300]"></span>
               <span className="text-[10px] md:text-[11px] font-bold tracking-widest text-gray-700 uppercase">
                 {badgeText}
               </span>
@@ -43,10 +43,10 @@ const TestimonialsTwo = ({ data }) => {
           {/* Right Column: Title and Subtitle */}
           <div className="flex flex-col items-start max-w-4xl">
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-bold text-gray-950 tracking-tight leading-[1.1] mb-6 font-helvetica">
-              {renderTitle(data?.title || 'Here’s What [Warm Words]\n[Our Clients] Say')}
+              {renderTitle(data?.title || 'Here’s What [Warm Words]\n[Our Clients] Say', 'text-[#ffc300]')}
             </h2>
             <div 
-              className="text-gray-500 text-sm md:text-base leading-relaxed font-normal max-w-3xl prose prose-sm max-w-none prose-p:my-1 prose-a:text-blue-500"
+              className="text-gray-500 text-sm md:text-base leading-relaxed font-normal max-w-3xl prose prose-sm max-w-none prose-p:my-1 prose-a:text-[#ffc300] hover:prose-a:text-[#e6b000]"
               dangerouslySetInnerHTML={{ __html: subtitle }}
             />
           </div>
