@@ -3,17 +3,27 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { resolveAssetUrl } from '../../utils/assetResolver';
 
 const AboutGalleryBlock = ({ backgroundImage, badgeText, title, description, galleryItems = [] }) => {
-  const [currentIndex, setCurrentIndex] = useState(4); 
-  const [isTransitioning, setIsTransitioning] = useState(true);
-
   const items = galleryItems.length > 0 ? galleryItems : [
     { title: 'Title', image: '' },
     { title: 'Title', image: '' },
     { title: 'Title', image: '' },
     { title: 'Title', image: '' },
   ];
+  const total = items.length;
 
-  const tripledData = [...items, ...items, ...items];
+  // We use 21 copies of the array. This creates a massive buffer on both sides.
+  // 10 copies on the left, 1 original in the middle, 10 copies on the right.
+  // Even if a user clicks 40 times in rapid succession, they won't reach the end before the reset triggers.
+  const extendedData = Array(21).fill(items).flat();
+
+  // Start exactly in the middle block (the 10th copy)
+  const [currentIndex, setCurrentIndex] = useState(total * 10); 
+  const [isTransitioning, setIsTransitioning] = useState(true);
+
+  // Sync index if total items change
+  useEffect(() => {
+    setCurrentIndex(total * 10);
+  }, [total]);
 
   const renderTitle = (titleText) => {
     if (!titleText) return null;
@@ -35,33 +45,32 @@ const AboutGalleryBlock = ({ backgroundImage, badgeText, title, description, gal
   };
 
   const handleNext = () => {
-    if (!isTransitioning) return;
+    setIsTransitioning(true);
     setCurrentIndex((prev) => prev + 1);
   };
 
   const handlePrev = () => {
-    if (!isTransitioning) return;
+    setIsTransitioning(true);
     setCurrentIndex((prev) => prev - 1);
   };
 
   useEffect(() => {
-    const total = items.length;
     if (total === 0) return;
     
-    if (currentIndex >= total * 2) {
+    // Calculate boundaries. We reset if they drift 3 blocks away from the center.
+    const minBound = total * 7;
+    const maxBound = total * 13;
+    
+    if (currentIndex >= maxBound || currentIndex <= minBound) {
       const timer = setTimeout(() => {
         setIsTransitioning(false);
-        setCurrentIndex(currentIndex - total);
-      }, 700); 
-      return () => clearTimeout(timer);
-    } else if (currentIndex < total) {
-      const timer = setTimeout(() => {
-        setIsTransitioning(false);
-        setCurrentIndex(currentIndex + total);
-      }, 700);
+        // Snap perfectly back to the center block, keeping their exact relative position
+        const offset = currentIndex % total;
+        setCurrentIndex(total * 10 + offset);
+      }, 700); // Wait for the CSS transition to finish before snapping
       return () => clearTimeout(timer);
     }
-  }, [currentIndex, items.length]);
+  }, [currentIndex, total]);
 
   useEffect(() => {
     if (!isTransitioning) {
@@ -123,7 +132,7 @@ const AboutGalleryBlock = ({ backgroundImage, badgeText, title, description, gal
                 transition: isTransitioning ? 'transform 700ms cubic-bezier(0.25, 0.46, 0.45, 0.94)' : 'none',
               }}
             >
-              {tripledData.map((item, index) => (
+              {extendedData.map((item, index) => (
                 <div
                   key={`${index}`}
                   className="flex-shrink-0 flex flex-col group cursor-pointer w-[180px]"
