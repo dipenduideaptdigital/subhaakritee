@@ -49,7 +49,7 @@ const RolesList = () => {
   if (loading) {
     return (
       <div className="h-72 flex flex-col justify-center items-center gap-3">
-        <div className="w-8 h-8 border-2 border-zinc-200 dark:border-zinc-700 border-t-[#3F5C73] dark:border-t-blue-500 rounded-full animate-spin"></div>
+        <div className="w-8 h-8 border-2 border-zinc-200 dark:border-zinc-700 border-t-blue-600 dark:border-t-blue-500 rounded-full animate-spin"></div>
         <p className="text-sm font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400">Loading roles…</p>
       </div>
     );
@@ -62,7 +62,7 @@ const RolesList = () => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-zinc-900 p-6 rounded-2xl shadow-sm border border-zinc-100 dark:border-zinc-800 transition-colors duration-300">
         <div>
           <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-2">
-            <ShieldCheck className="w-6 h-6 text-zinc-900 dark:text-zinc-100" />
+            <ShieldCheck className="w-6 h-6 text-blue-600 dark:text-blue-500" />
             Access Roles
           </h1>
           <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-1">
@@ -73,7 +73,7 @@ const RolesList = () => {
         <Can permission="role.create">
           <Link
             to="/admin/settings/roles/create"
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 rounded-xl font-medium hover:bg-zinc-800 dark:hover:bg-white transition-colors shadow-sm focus:ring-2 focus:ring-zinc-900/20 dark:focus:ring-zinc-100/20 flex-shrink-0 text-sm"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium transition-colors shadow-sm focus:ring-2 focus:ring-blue-600/20 flex-shrink-0 text-sm"
           >
             <Plus className="w-4 h-4" /> Create Role
           </Link>
@@ -104,7 +104,7 @@ const RolesList = () => {
                 <div className="flex items-start justify-between gap-3 mb-3">
                   <div className="min-w-0">
                     <h3 className="font-bold text-base text-zinc-900 dark:text-zinc-100 truncate">{role.name}</h3>
-                    <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold tracking-wider text-purple-700 dark:text-purple-400 bg-purple-50 dark:bg-purple-500/10 border border-purple-200 dark:border-purple-500/20 rounded-full px-2.5 py-0.5 mt-1.5 transition-colors duration-300">
+                    <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold tracking-wider text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 rounded-full px-2.5 py-0.5 mt-1.5 transition-colors duration-300">
                       <KeyRound className="w-3 h-3" /> {role.slug}
                     </span>
                   </div>

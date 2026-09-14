@@ -204,7 +204,7 @@ const UsersList = () => {
         <Can permission="user.create">
           <button
             onClick={() => setIsInviteModalOpen(true)}
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 rounded-xl font-medium hover:bg-zinc-800 dark:hover:bg-white transition-colors shadow-sm focus:ring-2 focus:ring-zinc-900/20 dark:focus:ring-zinc-100/20 flex-shrink-0 cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700 transition-colors shadow-sm focus:ring-2 focus:ring-blue-600/20 flex-shrink-0 cursor-pointer"
           >
             <UserPlus className="w-4 h-4" /> Invite Staff
           </button>
@@ -222,7 +222,7 @@ const UsersList = () => {
               onClick={() => { setActiveTab(tab.id); setCurrentPage(1); }}
               className={`py-3.5 text-xs font-semibold uppercase tracking-wider border-b-2 transition-all whitespace-nowrap cursor-pointer ${
                 activeTab === tab.id 
-                  ? 'border-zinc-950 dark:border-white text-zinc-950 dark:text-white font-bold' 
+                  ? 'border-blue-600 dark:border-blue-500 text-blue-600 dark:text-blue-500 font-bold' 
                   : 'border-transparent text-zinc-400 dark:text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300'
               }`}
             >
@@ -565,10 +565,10 @@ const UsersList = () => {
                        <label 
                          key={role.id} 
                          className={`flex items-center gap-2 px-3 py-1.5 border rounded-lg cursor-pointer transition-colors ${
-                           inviteData.functionalRoleIds.includes(role.id) 
-                             ? 'bg-zinc-900 dark:bg-zinc-100 border-zinc-900 dark:border-zinc-100 text-white dark:text-zinc-900 shadow-sm' 
-                             : 'bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300'
-                         }`}
+                          inviteData.functionalRoleIds.includes(role.id) 
+                            ? 'bg-blue-600 dark:bg-blue-600 border-blue-600 dark:border-blue-600 text-white shadow-sm' 
+                            : 'bg-white dark:bg-zinc-950 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300'
+                        }`}
                        >
                          <input type="checkbox" className="hidden" checked={inviteData.functionalRoleIds.includes(role.id)} onChange={() => toggleFunctionalRoleArray(inviteData, setInviteData, role.id)} />
                          <span className="text-xs font-semibold">{role.name}</span>
@@ -589,8 +589,8 @@ const UsersList = () => {
                  <button 
                    type="submit" 
                    disabled={inviting} 
-                   className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 rounded-xl font-medium hover:bg-zinc-800 dark:hover:bg-white transition-colors shadow-sm focus:ring-2 focus:ring-zinc-900/20 dark:focus:ring-zinc-100/20 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
-                 >
+                   className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700 transition-colors shadow-sm focus:ring-2 focus:ring-blue-600/20 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                  >
                    {inviting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Mail className="w-4 h-4" />} Send Invite
                  </button>
                </div>

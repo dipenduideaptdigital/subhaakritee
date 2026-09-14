@@ -92,8 +92,6 @@ const SystemStateSettings = () => {
     return <Navigate to="/admin/dashboard" />;
   }
 
-  if (loading) return <div className="p-10 flex justify-center"><Loader2 className="animate-spin text-zinc-500 dark:text-zinc-400 w-8 h-8" /></div>;
-
   const isMaintenance = formData.state !== 'ACTIVE';
 
   return (
@@ -107,9 +105,15 @@ const SystemStateSettings = () => {
         </div>
       </div>
 
-      {message && (
-        <div className={`p-4 rounded-xl flex items-center gap-3 text-sm font-medium transition-colors duration-300 ${message.type === 'success' ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-800 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20' : 'bg-red-50 dark:bg-red-500/10 text-red-800 dark:text-red-400 border border-red-200 dark:border-red-500/20'}`}>
-          {message.type === 'success' ? <CheckCircle className="w-5 h-5" /> : <AlertCircle className="w-5 h-5" />}
+      {loading ? (
+        <div className="flex items-center justify-center min-h-[600px] bg-white dark:bg-zinc-900 rounded-2xl shadow-sm border border-zinc-100 dark:border-zinc-800">
+          <Loader2 className="w-8 h-8 text-red-500 animate-spin" />
+        </div>
+      ) : (
+        <div className="space-y-6">
+          {message && (
+        <div className={`p-4 rounded-xl flex items-center gap-3 text-sm font-medium transition-colors duration-300 ${message.type === 'success' ? 'bg-blue-50 dark:bg-blue-500/10 text-blue-800 dark:text-blue-400 border border-blue-200 dark:border-blue-500/20' : 'bg-red-50 dark:bg-red-500/10 text-red-800 dark:text-red-400 border border-red-200 dark:border-red-500/20'}`}>
+          {message.type === 'success' ? <CheckCircle className="w-5 h-5 text-blue-600 dark:text-blue-400" /> : <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400" />}
           {message.text}
         </div>
       )}
@@ -127,7 +131,7 @@ const SystemStateSettings = () => {
                 onClick={() => handleStateToggle('ACTIVE')}
                 className={`flex-1 sm:px-8 py-2.5 rounded-lg text-sm font-bold transition-all duration-300 ${
                   !isMaintenance 
-                    ? 'bg-white dark:bg-zinc-800 text-emerald-600 dark:text-emerald-400 shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-700' 
+                    ? 'bg-white dark:bg-zinc-800 text-blue-600 dark:text-blue-400 shadow-sm ring-1 ring-zinc-200 dark:ring-zinc-700' 
                     : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300'
                 }`}
               >
@@ -197,11 +201,13 @@ const SystemStateSettings = () => {
         </div>
 
         <div className="p-6 border-t border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800/50 flex justify-start transition-colors duration-300">
-          <button type="submit" disabled={saving} className="w-full sm:w-auto px-8 py-3 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-zinc-800 dark:hover:bg-white disabled:opacity-70 transition-all shadow-sm">
+          <button type="submit" disabled={saving} className="w-full sm:w-auto px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold flex items-center justify-center gap-2 disabled:opacity-70 transition-all shadow-sm shadow-blue-500/20 cursor-pointer">
             {saving ? <Loader2 className="w-5 h-5 animate-spin" /> : <Save className="w-5 h-5" />} Save State & Execute
           </button>
         </div>
       </form>
+      </div>
+      )}
     </div>
   );
 };

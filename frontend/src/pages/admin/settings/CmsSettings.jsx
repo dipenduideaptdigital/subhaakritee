@@ -75,14 +75,6 @@ const CmsSettings = () => {
     }
   };
 
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-[300px]">
-        <Loader2 className="w-8 h-8 text-blue-600 dark:text-blue-500 animate-spin" />
-      </div>
-    );
-  }
-
   return (
     <div className="space-y-8 animate-in fade-in duration-500 text-zinc-900 dark:text-zinc-100 font-sans transition-colors duration-300">
       {/* Header */}
@@ -99,8 +91,8 @@ const CmsSettings = () => {
 
         <button
           onClick={handleSave}
-          disabled={isSaving}
-          className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-emerald-600 dark:bg-emerald-500 hover:bg-emerald-700 dark:hover:bg-emerald-600 disabled:opacity-50 text-white rounded-xl font-semibold transition-colors shadow-sm focus:ring-2 focus:ring-emerald-600/20 flex-shrink-0"
+          disabled={isSaving || isLoading}
+          className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-blue-600 dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 disabled:opacity-50 text-white rounded-xl font-semibold transition-colors shadow-sm focus:ring-2 focus:ring-blue-600/20 flex-shrink-0"
         >
           {isSaving ? (
             <>
@@ -116,16 +108,22 @@ const CmsSettings = () => {
         </button>
       </div>
 
-      {message && (
+      {isLoading ? (
+        <div className="flex items-center justify-center min-h-[600px] bg-white dark:bg-zinc-900 rounded-2xl shadow-sm border border-zinc-100 dark:border-zinc-800">
+          <Loader2 className="w-8 h-8 text-blue-600 dark:text-blue-500 animate-spin" />
+        </div>
+      ) : (
+        <div className="space-y-8">
+          {message && (
         <div
           className={`p-4 rounded-xl flex items-center gap-3 text-sm font-medium border transition-colors duration-300 ${
             message.type === 'success'
-              ? 'bg-emerald-50 dark:bg-emerald-500/10 text-emerald-800 dark:text-emerald-400 border-emerald-200 dark:border-emerald-500/20'
+              ? 'bg-blue-50 dark:bg-blue-500/10 text-blue-800 dark:text-blue-400 border-blue-200 dark:border-blue-500/20'
               : 'bg-red-50 dark:bg-red-500/10 text-red-800 dark:text-red-400 border-red-200 dark:border-red-500/20'
           }`}
         >
           {message.type === 'success' ? (
-            <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
+            <CheckCircle2 className="w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0" />
           ) : (
             <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0" />
           )}
@@ -151,7 +149,7 @@ const CmsSettings = () => {
               <button
                 type="button"
                 onClick={() => setUseLogo(!useLogo)}
-                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none ${useLogo ? 'bg-emerald-500' : 'bg-zinc-300 dark:bg-zinc-600'}`}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none ${useLogo ? 'bg-blue-600' : 'bg-zinc-300 dark:bg-zinc-600'}`}
               >
                 <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${useLogo ? 'translate-x-6' : 'translate-x-1'}`} />
               </button>
@@ -178,7 +176,7 @@ const CmsSettings = () => {
                 value={cmsName}
                 onChange={(e) => setCmsName(e.target.value)}
                 placeholder="e.g. IDPL CMS"
-                className="block w-full px-4 py-3 border border-zinc-200 dark:border-zinc-700 rounded-xl leading-5 bg-white dark:bg-zinc-950 placeholder-zinc-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 dark:focus:ring-emerald-500/20 focus:border-emerald-600 dark:focus:border-emerald-500 transition-colors sm:text-sm font-semibold text-zinc-900 dark:text-zinc-100"
+                className="block w-full px-4 py-3 border border-zinc-200 dark:border-zinc-700 rounded-xl leading-5 bg-white dark:bg-zinc-950 placeholder-zinc-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-600/20 dark:focus:ring-blue-500/20 focus:border-blue-600 dark:focus:border-blue-500 transition-colors sm:text-sm font-semibold text-zinc-900 dark:text-zinc-100"
                 required
               />
               <p className="text-xs text-zinc-400 dark:text-zinc-500 mt-1.5">
@@ -195,7 +193,7 @@ const CmsSettings = () => {
                 value={cmsTagline}
                 onChange={(e) => setCmsTagline(e.target.value)}
                 placeholder="e.g. Content Management System"
-                className="block w-full px-4 py-3 border border-zinc-200 dark:border-zinc-700 rounded-xl leading-5 bg-white dark:bg-zinc-950 placeholder-zinc-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-600/20 dark:focus:ring-emerald-500/20 focus:border-emerald-600 dark:focus:border-emerald-500 transition-colors sm:text-sm font-medium text-zinc-900 dark:text-zinc-100"
+                className="block w-full px-4 py-3 border border-zinc-200 dark:border-zinc-700 rounded-xl leading-5 bg-white dark:bg-zinc-950 placeholder-zinc-400 dark:placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-600/20 dark:focus:ring-blue-500/20 focus:border-blue-600 dark:focus:border-blue-500 transition-colors sm:text-sm font-medium text-zinc-900 dark:text-zinc-100"
               />
             </div>
             </div>
@@ -237,6 +235,8 @@ const CmsSettings = () => {
           </div>
         </div>
       </div>
+      </div>
+      )}
     </div>
   );
 };
