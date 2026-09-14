@@ -106,22 +106,11 @@ const AboutExperience = () => {
               />
             </div>
 
-            <div className="w-full max-w-[460px] lg:ml-auto mt-2 lg:mt-8 flex flex-col items-center lg:items-start">
+            <div className="w-full max-w-[460px] lg:ml-auto mt-10 lg:mt-[45px] flex flex-col items-center lg:items-start">
               
-              {/* Text */}
               <p className="font-['Outfit',sans-serif] text-[#4B5563] leading-relaxed text-[16px] pr-2 text-center lg:text-left">
                 We believe that every space has the power to inspire, and that great design brings that inspiration to life. Our mission is to craft environments that stir creativity, evoke emotion, and reflect the essence of those who inhabit them.
               </p>
-
-              {/* Button */}
-              <button className="mt-8 lg:mt-10 group flex items-center border border-gray-300 rounded-full pl-7 pr-2 py-2 w-max hover:border-[#ffc300] transition-colors duration-300 font-['Outfit',sans-serif]">
-                <span className="font-['Outfit',sans-serif] font-semibold text-[15px] text-[#111827] group-hover:text-[#ffc300] transition-colors">
-                  Learn More
-                </span>
-                <div className="ml-5 w-10 h-10 rounded-full bg-[#ffc300] flex items-center justify-center group-hover:bg-[#e6b000] transition-colors">
-                  <ArrowRight size={16} className="text-white transform group-hover:translate-x-1 transition-transform" />
-                </div>
-              </button>
 
             </div>
 

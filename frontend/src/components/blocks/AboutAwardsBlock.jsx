@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowUpRight, ArrowRight } from 'lucide-react';
 import { resolveAssetUrl } from '../../utils/assetResolver';
 
 const AboutAwardsBlock = ({ badgeText, title, mainImage, awards = [] }) => {
   const awardsList = awards.length > 0 ? awards : [
-    { year: '2020', title: 'Residential Interior Design' },
-    { year: '2021', title: 'Outdoor & Landscape Design' },
-    { year: '2022', title: 'Interior Design Consultation' },
-    { year: '2023', title: 'Commercial Interior Design' },
-    { year: '2024', title: 'Renovation And Remodeling' },
-    { year: '2025', title: 'Interior 2D/3D Layouts' },
+    { year: '2020', title: 'Residential Interior Design', link: '/services/residential-interior-design' },
+    { year: '2021', title: 'Outdoor & Landscape Design', link: '/services/outdoor-landscape-design' },
+    { year: '2022', title: 'Interior Design Consultation', link: '/services/interior-design-consultation' },
+    { year: '2023', title: 'Commercial Interior Design', link: '/services/commercial-interior-design' },
+    { year: '2024', title: 'Renovation And Remodeling', link: '/services/renovation-and-remodeling' },
+    { year: '2025', title: 'Interior 2D/3D Layouts', link: '/services/interior-2d-3d-layouts' },
   ];
 
   const [activeAward, setActiveAward] = useState(awardsList[0].year);
@@ -70,18 +71,22 @@ const AboutAwardsBlock = ({ badgeText, title, mainImage, awards = [] }) => {
           </div>
 
           {/* Awards Compact List (Figma / Second Frame Design) */}
-          <div className="w-full flex flex-col border-t-2 border-[#ffc300] font-['Helvetica',sans-serif]">
+          <div className="w-full flex flex-col border-t border-gray-400/60 font-['Helvetica',sans-serif]">
             {awardsList.map((award, index) => {
               const isActive = activeAward === award.year;
+              
+              // If link is missing (e.g. when data comes from CMS), generate it from the title
+              const generatedLink = award.link || `/services/${award.title.toLowerCase().replace(/ & /g, '-').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`;
 
               return (
-                <div
+                <Link
+                  to={generatedLink}
                   key={index}
-                  className="group flex items-center justify-between py-2 lg:py-2.5 cursor-pointer transition-colors border-b border-gray-400/60 hover:bg-gray-50/50 px-2"
+                  className="group flex items-center justify-between py-2 lg:py-2.5 cursor-pointer transition-colors border-b border-gray-400/60 hover:bg-[#ffc300]/10 px-2"
                   onMouseEnter={() => setActiveAward(award.year)}
                   onClick={() => setActiveAward(award.year)}
                 >
-                  <div className="flex items-center space-x-6 md:space-x-10 transform group-hover:translate-x-1.5 transition-transform duration-300">
+                  <div className="flex items-center space-x-6 md:space-x-10">
                     <span className="text-[13px] sm:text-[15px] font-normal text-gray-700 w-12 sm:w-16 shrink-0 text-left font-['Helvetica',sans-serif]">
                       {award.year}
                     </span>
@@ -95,11 +100,11 @@ const AboutAwardsBlock = ({ badgeText, title, mainImage, awards = [] }) => {
                       <ArrowRight className="w-4 h-4 sm:w-4.5 sm:h-4.5" strokeWidth={2.5} />
                     </div>
                   ) : (
-                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-gray-800 group-hover:bg-gray-100 transition-colors shrink-0">
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center text-gray-800 group-hover:bg-[#ffc300]/10 transition-colors shrink-0">
                       <ArrowUpRight className="w-5 h-5" strokeWidth={2} />
                     </div>
                   )}
-                </div>
+                </Link>
               );
             })}
           </div>
