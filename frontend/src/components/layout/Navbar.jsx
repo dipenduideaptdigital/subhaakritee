@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronDown, Phone, Search, Menu, X } from 'lucide-react';
 import { pagesApi } from '../../api/pages';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../assets/logos/logo2.svg'; 
 
 const Navbar = () => {
@@ -99,17 +99,17 @@ const Navbar = () => {
 
       {/* Navigation Links */}
       <div className="hidden lg:flex items-center space-x-12 text-base font-light">
-        <Link 
+        <NavLink 
           to="/about" 
-          className="flex items-center hover:text-gray-300 transition-colors"
+          className={({ isActive }) => `flex items-center hover:text-[#ffc300] transition-colors ${isActive ? 'text-[#ffc300]' : ''}`}
         >
           About
-        </Link>
+        </NavLink>
         
         <div className="relative group">
           <button 
             type="button"
-            className="flex items-center hover:text-gray-300 transition-colors py-2 outline-none cursor-default"
+            className={`flex items-center hover:text-[#ffc300] transition-colors py-2 outline-none cursor-default ${location.pathname.startsWith('/services') ? 'text-[#ffc300]' : ''}`}
           >
             Services <ChevronDown className="w-4 h-4 ml-1 opacity-70" />
           </button>
@@ -134,12 +134,12 @@ const Navbar = () => {
           </div>
         </div>
 
-        <Link 
+        <NavLink 
           to="/projects" 
-          className="flex items-center hover:text-gray-300 transition-colors"
+          className={({ isActive }) => `flex items-center hover:text-[#ffc300] transition-colors ${isActive ? 'text-[#ffc300]' : ''}`}
         >
           Projects
-        </Link>
+        </NavLink>
         
         {/* Dynamic Pages Dropdown */}
         {/* <div className="relative group">
@@ -167,18 +167,18 @@ const Navbar = () => {
           </div>
         </div> */}
 
-        <Link 
+        <NavLink 
           to="/blog" 
-          className="hover:text-gray-300 transition-colors py-2"
+          className={({ isActive }) => `hover:text-[#ffc300] transition-colors py-2 ${isActive ? 'text-[#ffc300]' : ''}`}
         >
           Blog
-        </Link>
-        <Link 
+        </NavLink>
+        <NavLink 
           to="/contact" 
-          className="flex items-center hover:text-gray-300 transition-colors"
+          className={({ isActive }) => `flex items-center hover:text-[#ffc300] transition-colors ${isActive ? 'text-[#ffc300]' : ''}`}
         >
           Contact Us
-        </Link>
+        </NavLink>
       </div>
 
       {/* Right Actions */}
@@ -239,26 +239,26 @@ const Navbar = () => {
 
           {/* Navigation Links */}
           <div className="flex flex-col space-y-4">
-            <Link 
+            <NavLink 
               to="/" 
               onClick={() => setIsOpen(false)} 
-              className="text-[17px] font-semibold text-white/90 hover:text-white hover:translate-x-1 transition-all py-1 animate-in fade-in slide-in-from-right-3 duration-200"
+              className={({ isActive }) => `text-[17px] font-semibold hover:translate-x-1 transition-all py-1 animate-in fade-in slide-in-from-right-3 duration-200 ${isActive ? 'text-[#ffc300]' : 'text-white/90 hover:text-[#ffc300]'}`}
             >
               Home
-            </Link>
-            <Link 
+            </NavLink>
+            <NavLink 
               to="/about" 
               onClick={() => setIsOpen(false)} 
-              className="text-[17px] font-semibold text-white/90 hover:text-white hover:translate-x-1 transition-all py-1 animate-in fade-in slide-in-from-right-3 duration-250"
+              className={({ isActive }) => `text-[17px] font-semibold hover:translate-x-1 transition-all py-1 animate-in fade-in slide-in-from-right-3 duration-250 ${isActive ? 'text-[#ffc300]' : 'text-white/90 hover:text-[#ffc300]'}`}
             >
               About
-            </Link>
+            </NavLink>
 
             {/* Collapsible Services */}
             <div className="flex flex-col">
               <button 
                 onClick={() => setIsServicesMobileOpen(!isServicesMobileOpen)}
-                className="flex items-center justify-between text-[17px] font-semibold text-white/90 hover:text-white py-1 focus:outline-none w-full text-left animate-in fade-in slide-in-from-right-3 duration-300"
+                className={`flex items-center justify-between text-[17px] font-semibold py-1 focus:outline-none w-full text-left animate-in fade-in slide-in-from-right-3 duration-300 ${location.pathname.startsWith('/services') ? 'text-[#ffc300]' : 'text-white/90 hover:text-[#ffc300]'}`}
               >
                 <span>Services</span>
                 <ChevronDown className={`w-4 h-4 ml-1 opacity-70 transition-transform duration-200 ${isServicesMobileOpen ? 'rotate-180 text-blue-400' : ''}`} />
@@ -269,7 +269,7 @@ const Navbar = () => {
                   <Link 
                     to="/services" 
                     onClick={() => setIsOpen(false)} 
-                    className="text-sm font-medium text-gray-300 hover:text-white"
+                    className="text-sm font-medium text-gray-300 hover:text-[#ffc300]"
                   >
                     All Services
                   </Link>
@@ -279,7 +279,7 @@ const Navbar = () => {
                         key={page.id}
                         to={page.fullPath ? (page.fullPath.startsWith('/') ? page.fullPath : `/${page.fullPath}`) : `/${page.slug}`}
                         onClick={() => setIsOpen(false)}
-                        className="text-sm font-medium text-gray-300 hover:text-white capitalize"
+                        className="text-sm font-medium text-gray-300 hover:text-[#ffc300] capitalize"
                       >
                         {page.title}
                       </Link>
@@ -291,27 +291,27 @@ const Navbar = () => {
               )}
             </div>
 
-            <Link 
+            <NavLink 
               to="/projects" 
               onClick={() => setIsOpen(false)} 
-              className="text-[17px] font-semibold text-white/90 hover:text-white hover:translate-x-1 transition-all py-1 animate-in fade-in slide-in-from-right-3 duration-350"
+              className={({ isActive }) => `text-[17px] font-semibold hover:translate-x-1 transition-all py-1 animate-in fade-in slide-in-from-right-3 duration-350 ${isActive ? 'text-[#ffc300]' : 'text-white/90 hover:text-[#ffc300]'}`}
             >
               Projects
-            </Link>
-            <Link 
+            </NavLink>
+            <NavLink 
               to="/blog" 
               onClick={() => setIsOpen(false)} 
-              className="text-[17px] font-semibold text-white/90 hover:text-white hover:translate-x-1 transition-all py-1 animate-in fade-in slide-in-from-right-3 duration-400"
+              className={({ isActive }) => `text-[17px] font-semibold hover:translate-x-1 transition-all py-1 animate-in fade-in slide-in-from-right-3 duration-400 ${isActive ? 'text-[#ffc300]' : 'text-white/90 hover:text-[#ffc300]'}`}
             >
               Blog
-            </Link>
-            <Link 
+            </NavLink>
+            <NavLink 
               to="/contact" 
               onClick={() => setIsOpen(false)} 
-              className="text-[17px] font-semibold text-white/90 hover:text-white hover:translate-x-1 transition-all py-1 animate-in fade-in slide-in-from-right-3 duration-450"
+              className={({ isActive }) => `text-[17px] font-semibold hover:translate-x-1 transition-all py-1 animate-in fade-in slide-in-from-right-3 duration-450 ${isActive ? 'text-[#ffc300]' : 'text-white/90 hover:text-[#ffc300]'}`}
             >
               Contact Us
-            </Link>
+            </NavLink>
           </div>
         </div>
 
