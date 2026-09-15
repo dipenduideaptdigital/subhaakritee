@@ -537,6 +537,12 @@ const PageEditor = () => {
         delete payload.slug;
       }
 
+      if (isScheduling && payload.scheduledUpdateAt) {
+        payload.scheduledUpdateAt = new Date(payload.scheduledUpdateAt).toISOString();
+      } else {
+        payload.scheduledUpdateAt = null;
+      }
+
       try {
         setSaving(true);
         setError(null);

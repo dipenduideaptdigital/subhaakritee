@@ -12,8 +12,8 @@ const AWARDS_DATA = [
   { year: '2025', title: 'Interior 2D/3D Layout', link: '/services/interior-2d/3d-layout' },
 ];
 
-const AboutAwards = () => {
-  const [activeAward, setActiveAward] = useState('2020');
+const AboutAwards = ({ awards = AWARDS_DATA }) => {
+  const [activeAward, setActiveAward] = useState(awards.length > 0 ? awards[0].year : '2020');
 
   return (
     <section className="py-20 lg:py-24 bg-white font-['Outfit',sans-serif] overflow-hidden">
@@ -55,7 +55,7 @@ const AboutAwards = () => {
 
           {/* Awards Compact List (Figma / Second Frame Design) */}
           <div className="w-full flex flex-col border-t border-gray-400/60 font-['Helvetica',sans-serif]">
-            {AWARDS_DATA.map((award, index) => {
+            {awards.map((award, index) => {
               const isActive = activeAward === award.year;
               
               // If link is missing, generate it from the title

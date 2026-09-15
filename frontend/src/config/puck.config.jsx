@@ -807,9 +807,10 @@ export const puckConfig = {
           type: "array",
           arrayFields: {
             year: { type: "text" },
-            title: { type: "text" }
+            title: { type: "text" },
+            link: { type: "text" }
           },
-          defaultItemProps: { year: '2025', title: 'Award Title' }
+          defaultItemProps: { year: '2025', title: 'Award Title', link: '' }
         }
       },
       defaultProps: {
@@ -818,8 +819,8 @@ export const puckConfig = {
         title: "Design That [Speaks Our]\n[Industry] Awards",
         mainImage: "",
         awards: [
-          { year: '2020', title: 'Residential Interior Design' },
-          { year: '2021', title: 'Outdoor & Landscape Design' }
+          { year: '2020', title: 'Residential Interior Design', link: '/services/residential-interior-design' },
+          { year: '2021', title: 'Outdoor & Landscape Design', link: '/services/outdoor-landscape-design' }
         ]
       },
       render: (props) => props.isVisible === false ? <div className="p-6 bg-red-50 text-red-500 text-center font-bold border-2 border-red-200 border-dashed rounded-xl">Hidden: Awards Section</div> : <AboutAwardsBlock {...props} />

@@ -54,19 +54,19 @@ const LandingNavbar = () => {
 
       {/* Navigation Links */}
       <div className="hidden lg:flex items-center space-x-12 text-base font-light text-white">
-        <a href="#services" onClick={(e) => handleNavClick(e, 'services')} className="hover:text-gray-300 transition-colors">
+        <a href="#services" onClick={(e) => handleNavClick(e, 'services')} className="hover:text-[#ffc300] transition-colors">
           Services
         </a>
-        <a href="#projects" onClick={(e) => handleNavClick(e, 'projects')} className="hover:text-gray-300 transition-colors">
+        <a href="#projects" onClick={(e) => handleNavClick(e, 'projects')} className="hover:text-[#ffc300] transition-colors">
           Projects
         </a>
-        <a href="#process" onClick={(e) => handleNavClick(e, 'process')} className="hover:text-gray-300 transition-colors">
+        <a href="#process" onClick={(e) => handleNavClick(e, 'process')} className="hover:text-[#ffc300] transition-colors">
           Process
         </a>
-        <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="hover:text-gray-300 transition-colors">
+        <a href="#about" onClick={(e) => handleNavClick(e, 'about')} className="hover:text-[#ffc300] transition-colors">
           About
         </a>
-        <a href="#blog" onClick={(e) => handleNavClick(e, 'blog')} className="hover:text-gray-300 transition-colors">
+        <a href="#blog" onClick={(e) => handleNavClick(e, 'blog')} className="hover:text-[#ffc300] transition-colors">
           Blog
         </a>
       </div>
@@ -120,35 +120,35 @@ const LandingNavbar = () => {
             <a 
               href="#services" 
               onClick={(e) => handleNavClick(e, 'services')} 
-              className="text-[17px] font-semibold text-white/90 hover:text-white hover:translate-x-1 transition-all py-1 animate-in fade-in slide-in-from-right-3 duration-200"
+              className="text-[17px] font-semibold text-white/90 hover:text-[#ffc300] hover:translate-x-1 transition-all py-1 animate-in fade-in slide-in-from-right-3 duration-200"
             >
               Services
             </a>
             <a 
               href="#projects" 
               onClick={(e) => handleNavClick(e, 'projects')} 
-              className="text-[17px] font-semibold text-white/90 hover:text-white hover:translate-x-1 transition-all py-1 animate-in fade-in slide-in-from-right-3 duration-250"
+              className="text-[17px] font-semibold text-white/90 hover:text-[#ffc300] hover:translate-x-1 transition-all py-1 animate-in fade-in slide-in-from-right-3 duration-250"
             >
               Projects
             </a>
             <a 
               href="#process" 
               onClick={(e) => handleNavClick(e, 'process')} 
-              className="text-[17px] font-semibold text-white/90 hover:text-white hover:translate-x-1 transition-all py-1 animate-in fade-in slide-in-from-right-3 duration-300"
+              className="text-[17px] font-semibold text-white/90 hover:text-[#ffc300] hover:translate-x-1 transition-all py-1 animate-in fade-in slide-in-from-right-3 duration-300"
             >
               Process
             </a>
             <a 
               href="#about" 
               onClick={(e) => handleNavClick(e, 'about')} 
-              className="text-[17px] font-semibold text-white/90 hover:text-white hover:translate-x-1 transition-all py-1 animate-in fade-in slide-in-from-right-3 duration-350"
+              className="text-[17px] font-semibold text-white/90 hover:text-[#ffc300] hover:translate-x-1 transition-all py-1 animate-in fade-in slide-in-from-right-3 duration-350"
             >
               About
             </a>
             <a 
               href="#blog" 
               onClick={(e) => handleNavClick(e, 'blog')} 
-              className="text-[17px] font-semibold text-white/90 hover:text-white hover:translate-x-1 transition-all py-1 animate-in fade-in slide-in-from-right-3 duration-400"
+              className="text-[17px] font-semibold text-white/90 hover:text-[#ffc300] hover:translate-x-1 transition-all py-1 animate-in fade-in slide-in-from-right-3 duration-400"
             >
               Blog
             </a>
