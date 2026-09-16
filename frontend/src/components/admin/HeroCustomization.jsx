@@ -24,27 +24,22 @@ const HeroCustomization = ({
         <h3 className="text-sm font-bold tracking-widest text-zinc-400 dark:text-zinc-500 uppercase mb-4">
           Slide Content
         </h3>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4">
           <div>
             <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
-              Title Line 1
+              Title (Use Enter for new line)
             </label>
-            <input 
-              type="text" 
-              value={slideData.titleLine1 || ''} 
-              onChange={(e) => onChange(slideKey, 'titleLine1', e.target.value)} 
-              className="w-full px-4 py-3 rounded-xl bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-blue-500/30 focus:bg-white dark:focus:bg-zinc-950 transition-all placeholder:text-zinc-400 dark:placeholder:text-zinc-600" 
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
-              Title Line 2
-            </label>
-            <input 
-              type="text" 
-              value={slideData.titleLine2 || ''} 
-              onChange={(e) => onChange(slideKey, 'titleLine2', e.target.value)} 
-              className="w-full px-4 py-3 rounded-xl bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-blue-500/30 focus:bg-white dark:focus:bg-zinc-950 transition-all placeholder:text-zinc-400 dark:placeholder:text-zinc-600" 
+            <textarea 
+              value={slideData.title !== undefined ? slideData.title : (slideData.titleLine1 ? `${slideData.titleLine1}${slideData.titleLine2 ? '\n' + slideData.titleLine2 : ''}` : '')}
+              onChange={(e) => {
+                const val = e.target.value;
+                const parts = val.split('\n');
+                onChange(slideKey, 'title', val);
+                onChange(slideKey, 'titleLine1', parts[0] || '');
+                onChange(slideKey, 'titleLine2', parts.slice(1).join('\n') || '');
+              }} 
+              rows={2}
+              className="w-full px-4 py-3 rounded-xl bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 border border-zinc-200 dark:border-zinc-800 focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-blue-500/30 focus:bg-white dark:focus:bg-zinc-950 transition-all placeholder:text-zinc-400 dark:placeholder:text-zinc-600 resize-y" 
             />
           </div>
         </div>

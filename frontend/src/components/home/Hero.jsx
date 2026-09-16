@@ -99,6 +99,7 @@ const Hero = ({ data: externalData }) => {
 
   const defaultFallback = {
     badgeText: "Fast and Reliable",
+    title: "End-to-end\nInteriors",
     titleLine1: "End-to-end",
     titleLine2: "Interiors",
     subtitle: "<p>We specialize in transforming visions into reality. Explore our interior design projects crafted with precision.</p>",
@@ -161,8 +162,15 @@ const Hero = ({ data: externalData }) => {
                     </div>
                     
                     <h1 className="text-3xl md:text-4xl lg:text-[48px] xl:text-[62px] 2xl:text-[76px] font-bold leading-tight lg:leading-[54px] xl:leading-[68px] 2xl:leading-[82px] mb-4 md:mb-6 drop-shadow-lg font-helvetica">
-                      <span className="tracking-normal block whitespace-nowrap">{slide.data?.titleLine1 || slide.fallback.titleLine1}</span>
-                      <span className="tracking-normal block whitespace-nowrap">{slide.data?.titleLine2 || slide.fallback.titleLine2}</span>
+                      {(slide.data?.title !== undefined 
+                        ? slide.data.title 
+                        : (slide.data?.titleLine1 
+                            ? `${slide.data.titleLine1}\n${slide.data.titleLine2 || ''}` 
+                            : slide.fallback.title
+                          )
+                      ).split('\n').map((line, i) => (
+                        <span key={i} className="tracking-normal block whitespace-nowrap">{line}</span>
+                      ))}
                     </h1>
                     
                     {/* TipTap Editor HTML Rendering */}

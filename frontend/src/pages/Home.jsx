@@ -27,43 +27,10 @@ const SectionFallback = () => (
 const Home = () => {
   useScrollAnimation();
   const location = useLocation();
-  const [showTopBtn, setShowTopBtn] = useState(false);
-  const [isBackToTopEnabled, setIsBackToTopEnabled] = useState(true);
-
-  useEffect(() => {
-    const fetchSettings = async () => {
-      try {
-        const res = await apiClient.get('/cms/section/global_general_settings');
-        const content = res.data?.data?.content || res.data?.content;
-        if (content) {
-          setIsBackToTopEnabled(content.showBackToTop === false || content.showBackToTop === 'false' ? false : true);
-        }
-      } catch (error) {
-        console.error('Failed to load general settings:', error);
-      }
-    };
-    fetchSettings();
-  }, []);
-
-  // Scroll Track Logic
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 1000) {
-        setShowTopBtn(true);
-      } else {
-        setShowTopBtn(false);
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   useEffect(() => {
     if (location.hash) {
+
       const id = location.hash.replace('#', '');
       setTimeout(() => {
         const element = document.getElementById(id);
@@ -117,23 +84,6 @@ const Home = () => {
         <Gallery />
         <CtaSection />
       </Suspense>
-
-      {/* Back to Top Button */}
-      {isBackToTopEnabled && (
-        <div
-          className={`fixed bottom-28 right-6 z-[90] transition-all duration-500 ${
-            showTopBtn ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-10 invisible'
-          }`}
-        >
-        <button
-          onClick={scrollToTop}
-          className="flex items-center justify-center p-3 rounded-full bg-white/10 backdrop-blur-lg border border-white/40 text-[#ffc300] shadow-[0_0_20px_rgba(255,195,0,0.4)] hover:shadow-[0_0_30px_rgba(255,195,0,0.6)] hover:bg-white/20 transition-all duration-300 cursor-pointer"
-          aria-label="Back to top"
-        >
-          <ArrowUp className="w-5 h-5" strokeWidth={2.5} />
-        </button>
-      </div>
-      )}
     </>
   );
 };
