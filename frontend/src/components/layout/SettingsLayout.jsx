@@ -2,11 +2,13 @@ import React from 'react';
 import { NavLink, Outlet, Navigate, useLocation } from 'react-router-dom';
 import { Settings, Users, Shield, SlidersHorizontal, Layout, MessageSquare, ShieldAlert } from 'lucide-react';
 import { usePermission } from '../../hooks/usePermission';
-import { useAuth } from '../../context/AuthContext';
+// import { useAuth } from '../../context/AuthContext';
+import { useSelector } from 'react-redux';
 
 const SettingsLayout = () => {
   const { hasPermission } = usePermission();
-  const { user } = useAuth();
+  // const { user } = useAuth();
+  const user = useSelector((state) => state.auth.user);
   const location = useLocation();
 
   const tabs = [

@@ -6,7 +6,8 @@ import {
   Trash2, Mail, X, Loader2, AlertTriangle, Eye, Clock, Key, Activity 
 } from 'lucide-react';
 import { Can } from '../../../components/shared/Can';
-import { useAuth } from '../../../context/AuthContext';
+// import { useAuth } from '../../../context/AuthContext';
+import { useSelector } from 'react-redux';
 
 const TABS = [
   { id: 'team', label: 'Staff & Team', filter: { systemRole: 'ADMIN' } },
@@ -15,7 +16,8 @@ const TABS = [
 ];
 
 const UsersList = () => {
-  const { user: currentUser } = useAuth();
+  // const { user: currentUser } = useAuth();
+  const currentUser = useSelector((state) => state.auth.user);
   
   // Data States
   const [users, setUsers] = useState([]);

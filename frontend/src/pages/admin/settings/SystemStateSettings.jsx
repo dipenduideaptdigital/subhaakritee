@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { ShieldAlert, Save, Loader2, AlertCircle, CheckCircle, ExternalLink } from 'lucide-react';
 import apiClient from '../../../api/client';
-import { useAuth } from '../../../context/AuthContext';
+// import { useAuth } from '../../../context/AuthContext';
+import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import ImageField from '../../../components/admin/ImageField';
 
 const SystemStateSettings = () => {
-  const { user } = useAuth();
+  // const { user } = useAuth();
+  const user = useSelector((state) => state.auth.user);
   
   const [formData, setFormData] = useState({
     state: 'ACTIVE',

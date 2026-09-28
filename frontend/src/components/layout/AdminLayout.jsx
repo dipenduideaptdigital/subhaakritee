@@ -4,17 +4,24 @@ import {
   LayoutDashboard, Image as ImageIcon, Settings, LogOut, FileText, Sun, Moon,
   Globe, Inbox, Menu, X, BookOpen, Tag, Layers, Briefcase, Wrench, ChevronDown, FolderOpen, AlertTriangle
 } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext'; 
+// import { useAuth } from '../../context/AuthContext'; 
+// import { useTheme } from '../../context/ThemeContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../store/slices/authSlice';
+import { toggleTheme } from '../../store/slices/themeSlice';
 import { usePermission } from '../../hooks/usePermission'; 
-import { useTheme } from '../../context/ThemeContext';
 import apiClient from '../../api/client';
 
 const AdminLayout = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { user, isAuthenticated, logoutContext } = useAuth(); 
+  // const { user, isAuthenticated, logoutContext } = useAuth(); 
+  // const { isDarkMode, toggleTheme: toggleThemeContext } = useTheme();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const isDarkMode = useSelector((state) => state.theme.isDarkMode);
   const { hasPermission } = usePermission(); 
-  const { isDarkMode, toggleTheme } = useTheme();
   
   const roleSlug = user?.systemRole?.slug?.toUpperCase();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -133,7 +140,8 @@ const AdminLayout = () => {
   }
 
   const handleLogout = async () => {
-    await logoutContext(); 
+    // await logoutContext(); 
+    await dispatch(logout());
     navigate('/login?mode=admin');
   };
 
@@ -388,7 +396,8 @@ const AdminLayout = () => {
             <div className="flex items-center gap-4">
               {/* Theme Toggle Button */}
               <button 
-                onClick={toggleTheme}
+                // onClick={toggleTheme}
+                onClick={() => dispatch(toggleTheme())}
                 className="p-2 rounded-xl text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
                 title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
               >

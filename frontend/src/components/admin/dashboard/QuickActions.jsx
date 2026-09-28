@@ -2,10 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { PlusCircle, FileText, PenTool, LayoutTemplate, MessageSquare, ShieldAlert } from 'lucide-react';
 import Can from '../../shared/Can';
-import { useAuth } from '../../../context/AuthContext';
+// import { useAuth } from '../../../context/AuthContext';
+import { useSelector } from 'react-redux';
 
 const QuickActions = () => {
-  const { user } = useAuth();
+  // const { user } = useAuth();
+  const user = useSelector((state) => state.auth.user);
   
   const isSuperAdmin = typeof user?.systemRole === 'string' 
     ? user.systemRole === 'SUPER_ADMIN' 
