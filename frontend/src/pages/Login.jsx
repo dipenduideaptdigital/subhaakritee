@@ -5,7 +5,9 @@ import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import heroback from '../assets/homepage/banner_back.png';
 import logo from '../assets/logos/logo2.svg';
 import apiClient from '../api/client';
-import { useAuth } from '../context/AuthContext';
+// import { useAuth } from '../context/AuthContext';
+import { useDispatch } from 'react-redux';
+import { setCredentials } from '../store/slices/authSlice';
 
 const getAssetUrl = (path) => {
   if (!path) return '';
@@ -20,7 +22,8 @@ const getAssetUrl = (path) => {
 
 const Login = () => {
   const navigate = useNavigate();
-  const { loginContext } = useAuth();
+  // const { loginContext } = useAuth();
+  const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const isAdminMode = searchParams.get('mode') === 'admin';
   const { executeRecaptcha } = useGoogleReCaptcha();
@@ -76,13 +79,14 @@ const Login = () => {
 
       setSuccess('Login successful! Redirecting...');
       
-      const tokenPayload = JSON.parse(atob(data.data.accessToken.split('.')[1]));
-      const userPermissions = tokenPayload.permissions || [];
+      // const tokenPayload = JSON.parse(atob(data.data.accessToken.split('.')[1]));
+      // const userPermissions = tokenPayload.permissions || [];
       const loggedInUser = data.data.user;
       const roleSlug = loggedInUser?.systemRole?.slug?.toUpperCase();
       const isAdmin = roleSlug === 'SUPER_ADMIN' || roleSlug === 'ADMIN';
 
-      loginContext(loggedInUser, data.data.accessToken);
+      // loginContext(loggedInUser, data.data.accessToken);
+      dispatch(setCredentials({ user: loggedInUser, token: data.data.accessToken }));
 
       setTimeout(() => {
         if (isAdmin) {

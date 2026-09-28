@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Loader2 } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
+// import { useAuth } from '../../context/AuthContext';
+import { useSelector } from 'react-redux';
 
 // APIs
 import { dashboardApi } from '../../api/dashboard';
@@ -16,7 +17,8 @@ import ActivityTimeline from '../../components/admin/dashboard/ActivityTimeline'
 import QuickActions from '../../components/admin/dashboard/QuickActions';
 
 const Dashboard = () => {
-  const { user } = useAuth();
+  // const { user } = useAuth();
+  const user = useSelector((state) => state.auth.user);
   
   const [loading, setLoading] = useState(true);
   const [dashboardData, setDashboardData] = useState({

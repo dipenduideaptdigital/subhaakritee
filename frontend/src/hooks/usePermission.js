@@ -1,7 +1,9 @@
-import { useAuth } from '../context/AuthContext';
-
+// import { useAuth } from '../context/AuthContext';
+import { useSelector } from 'react-redux';
 export const usePermission = () => {
-  const { user } = useAuth();
+  // const { user } = useAuth();
+const user = useSelector((state) => state.auth.user);
+
 
   const hasPermission = (requiredPermission) => {
     if (!user) return false;
